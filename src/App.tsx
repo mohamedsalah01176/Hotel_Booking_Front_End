@@ -7,7 +7,7 @@ import { initReactI18next } from 'react-i18next';
 import transitionAR from "./transition/ar.json";
 import transitionEn from "./transition/en.json";
 
-const NotFound=lazy(()=>import("./component/NotFound/NotFound"));
+const NotFound=lazy(()=>import("./pages/NotFound/NotFound"));
 
 
 
