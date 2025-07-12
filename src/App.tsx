@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import './App.css';
 import i18n from "i18next";;
-import Home from './component/Home/Home';
+import Home from './pages/Home/Home';
 import { lazy } from 'react';
 import { initReactI18next } from 'react-i18next';
 import transitionAR from "./transition/ar.json";
