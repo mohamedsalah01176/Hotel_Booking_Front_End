@@ -1,12 +1,10 @@
-import { useTranslation } from "react-i18next"
 
 const Home = () => {
 
-  const {t}=useTranslation()
   return (
     <div>
       <h1 className="text-3xl font-bold underline">
-        {t('navbar')}
+        Home
     </h1>
     </div>
   )
