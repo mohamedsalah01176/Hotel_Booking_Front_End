@@ -1,3 +1,67 @@
+
 {
-  "navbar":"Navbar222222222222222222"
+  "register": {
+    "title": "Register",
+    "labels": {
+      "fullName": "Full Name",
+      "phone": "Phone",
+      "email": "Email",
+      "password": "Password",
+      "role": "Role",
+      "user": "User",
+      "admin": "Admin"
+    },
+    "placeholders": {
+      "fullName": "Please Enter Your Name",
+      "phone": "+20********",
+      "email": "Please Enter Your Email",
+      "password": "************"
+    },
+    "buttons": {
+      "submit": "Submit"
+    },
+    "messages": {
+      "codeSentSuccess": "Code sent successfully ✅",
+      "somethingWentWrong": "Something went wrong"
+    },
+    "errors": {
+      "nameRequired": "Name is Required",
+      "nameMin": "The Name must contain two characters or more",
+      "phoneRequired": "Phone is Required",
+      "phoneInvalid": "Invalid phone number",
+      "emailInvalid": "Email is not valid",
+      "emailRequired": "Email is Required",
+      "passwordRequired": "Password is Required",
+      "passwordPattern": "Password must be at least 8 characters and include uppercase, lowercase, and a number"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "forgetPassword":"Forget Password?",
+    "labels": {
+      "emailOrPhone": "Email / Phone",
+      "password": "Password",
+      "email": "Email"
+    },
+    "placeholders": {
+      "emailOrPhone": "Enter your email or phone",
+      "email": "Please Enter Your Email",
+      "password": "Enter your password"
+    },
+    "buttons": {
+      "submit": "Submit",
+      "send":"Send"
+    },
+    "messages": {
+      "loginSuccess": "Logged in successfully ✅",
+      "somethingWentWrong": "Something went wrong"
+    },
+    "errors": {
+      "emailOrPhoneRequired": "This field is required",
+      "emailOrPhoneInvalid": "Invalid phone number or email",
+      "passwordRequired": "Password is required",
+      "passwordPattern": "Password must be at least 8 characters and include uppercase, lowercase, and a number"
+    }
+  }
 }
+

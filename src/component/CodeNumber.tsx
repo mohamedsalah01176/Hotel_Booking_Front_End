@@ -37,13 +37,13 @@ const CodeNumber = ({setOpenCode,phone}:{setOpenCode:(d:boolean)=>void,phone:str
   return (
     <div className="fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] h-full w-full bg-gray-800/20 flex justify-center items-center animate-fade-in">
       <ToastContainer/>
-      <div className="relative bg-white py-5 rounded-xl w-[300px] sm:w-[500px] min-h-[260px] ">
-        <div onClick={()=>setOpenCode(false)} className="border-b border-gray-800 px-4 pb-2">
+      <div className="relative bg-white pt-5 pb-1 rounded-xl w-[300px] sm:w-[500px] min-h-[250px] ">
+        <div onClick={()=>setOpenCode(false)} className="border-b border-gray-800 px-4 pb-4">
           <FaArrowLeftLong  className=" cursor-pointer hover:text-red-700  hover:-translate-x-2 transition-all duration-300 text-2xl "/>
         </div>
-        <div className="px-4 pt-4">
+        <div className="px-4 py-7">
           <p className="mb-4 text-[18px]">Enter the code we sent over SMS to {phone}:</p>
-          <input type="text" onChange={(e)=>{setCodeValue(e.target.value);setrrorMessage("")}} placeholder="--- ---" style={{ letterSpacing: '0.65em' }}  className="border-[1px] tracking-widest border-gray-800 px-4 py-3 rounded-xl  w-[150px] "/>
+          <input maxLength={6} type="text" onChange={(e)=>{setCodeValue(e.target.value);setrrorMessage("")}} placeholder="--- ---" style={{ letterSpacing: '0.65em' }}  className="border-[1px] tracking-widest border-gray-800 px-4 py-3 rounded-xl  w-[150px] "/>
           <p className="text-red-500 text-sm">{errorMessage}</p>
         </div>
         <div className="flex justify-between items-center h-[75px] border-t px-5 border-gray-300 mt-5">

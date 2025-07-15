@@ -6,6 +6,7 @@ import { lazy } from 'react';
 import { initReactI18next } from 'react-i18next';
 import transitionAR from "./transition/ar.json";
 import transitionEn from "./transition/en.json";
+import { ToastContainer } from 'react-toastify';
 
 const NotFound=lazy(()=>import("./pages/NotFound/NotFound"));
 const Register=lazy(()=>import("./pages/Register/Register"));
@@ -50,6 +51,7 @@ function App() {
   
   return (
     <div dir={i18n.language === "en" ?"ltr":"rtl"} lang={i18n.language === "en" ?"en":"ar"}>
+      <ToastContainer  position={i18n.language === "ar"?`top-left`:"top-right"}  />
       <RouterProvider router={router}/>
     </div>
   )
