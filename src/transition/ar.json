@@ -1,3 +1,65 @@
 {
-  "navbar":"البار العلوي"
+  "register": {
+    "title": "إنشاء حساب",
+    "labels": {
+      "fullName": "الاسم الكامل",
+      "phone": "رقم الهاتف",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "role": "الدور",
+      "user": "مستخدم",
+      "admin": "مشرف"
+    },
+    "placeholders": {
+      "fullName": "أدخل اسمك",
+      "phone": "+20********",
+      "email": "أدخل بريدك الإلكتروني",
+      "password": "************"
+    },
+    "buttons": {
+      "submit": "تسجيل"
+    },
+    "messages": {
+      "codeSentSuccess": "تم إرسال الكود بنجاح ✅",
+      "somethingWentWrong": "حدث خطأ ما"
+    },
+    "errors": {
+      "nameRequired": "الاسم مطلوب",
+      "nameMin": "يجب أن يحتوي الاسم على حرفين أو أكثر",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phoneInvalid": "رقم الهاتف غير صالح",
+      "emailInvalid": "البريد الإلكتروني غير صالح",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "passwordRequired": "كلمة المرور مطلوبة",
+      "passwordPattern": "يجب أن تكون كلمة المرور 8 أحرف على الأقل وتشمل حروفًا كبيرة وصغيرة ورقمًا"
+    }
+  },
+  "login": {
+    "title": "تسجيل الدخول",
+    "forgetPassword":"نسيت كلمه السر؟",
+    "labels": {
+      "emailOrPhone": "البريد / الهاتف",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور"
+    },
+    "placeholders": {
+      "emailOrPhone": "أدخل بريدك أو هاتفك",
+      "email": "أدخل بريدك الإلكتروني",
+      "password": "أدخل كلمة المرور"
+    },
+    "buttons": {
+      "submit": "دخول",
+      "send":"ارسال"
+    },
+    "messages": {
+      "loginSuccess": "تم تسجيل الدخول بنجاح ✅",
+      "somethingWentWrong": "حدث خطأ ما"
+    },
+    "errors": {
+      "emailOrPhoneRequired": "هذا الحقل مطلوب",
+      "emailOrPhoneInvalid": "رقم الهاتف أو البريد غير صالح",
+      "passwordRequired": "كلمة المرور مطلوبة",
+      "passwordPattern": "يجب أن تتكوّن كلمة المرور من 8 أحرف على الأقل وتشمل حرفًا كبيرًا وصغيرًا ورقمًا"
+    }
+  }
 }
