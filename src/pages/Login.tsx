@@ -1,5 +1,5 @@
 import { useFormik } from "formik"
-import image from "../../assets/regiter.webp";
+import image from "../assets/regiter.webp"
 import * as yup from "yup"
 import Spinner from "../component/Spinner";
 import axios from "axios";

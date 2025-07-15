@@ -1,4 +1,4 @@
-import image from "../../assets/regiter.webp"
+import image from "../assets/regiter.webp"
 import {useFormik} from "formik"
 import * as yup from "yup"
 import CodeNumber from "../component/CodeNumber"
