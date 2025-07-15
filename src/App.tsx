@@ -1,16 +1,16 @@
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import './App.css';
 import i18n from "i18next";;
-import Home from './pages/Home/Home';
+import Home from './pages/Home';
 import { lazy } from 'react';
 import { initReactI18next } from 'react-i18next';
 import transitionAR from "./transition/ar.json";
 import transitionEn from "./transition/en.json";
 import { ToastContainer } from 'react-toastify';
 
-const NotFound=lazy(()=>import("./pages/NotFound/NotFound"));
-const Register=lazy(()=>import("./pages/Register/Register"));
-const Login=lazy(()=>import("./pages/Login/Login"));
+const NotFound=lazy(()=>import("./pages/NotFound"));
+const Register=lazy(()=>import("./pages/Register"));
+const Login=lazy(()=>import("./pages/Login"));
 
 
 

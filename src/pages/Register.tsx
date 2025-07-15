@@ -1,13 +1,13 @@
 import image from "../../assets/regiter.webp"
 import {useFormik} from "formik"
 import * as yup from "yup"
-import CodeNumber from "../../component/CodeNumber"
+import CodeNumber from "../component/CodeNumber"
 import { useState } from "react"
 import  axios  from "axios"
 // import Spinner from "../../component/spinner"
 import { toast } from 'react-toastify';
 import Cookies  from "js-cookie"
-import Spinner from "../../component/Spinner"
+import Spinner from "../component/Spinner"
 import { useTranslation } from "react-i18next"
 
 
