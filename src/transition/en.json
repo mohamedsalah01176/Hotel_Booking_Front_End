@@ -1,3 +1,18 @@
 {
-  "navbar":"Navbar"
+  "navbar": {
+    "homes": "Homes",
+    "experiences": "Experiences",
+    "services": "Services",
+    "become_host": "Become a host",
+    "new": "New"
+  },
+  "search": {
+    "where": "Where",
+    "destination": "Search destinations",
+    "check_in": "Check in",
+    "check_out": "Check out",
+    "add_dates": "Add Dates",
+    "who": "Who",
+    "guests": "Add guests"
+  }
 }
