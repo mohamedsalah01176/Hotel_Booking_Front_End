@@ -1,4 +1,4 @@
-import HorizontalCardSlider, { CardItem } from "../../component/Shared/HorizontalCardSlider";
+import HorizontalCardSlider, { CardItem } from "../component/Shared/HorizontalCardSlider";
 
 const hurghadaHomes: CardItem[] = [
    {

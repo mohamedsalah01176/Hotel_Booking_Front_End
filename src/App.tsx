@@ -5,13 +5,14 @@ import { useTranslation, initReactI18next } from "react-i18next";
 import transitionAR from "./transition/ar.json";
 import transitionEN from "./transition/en.json";
 import Layout from "./Layout/Layout.tsx";
-import Home from "./pages/Home/Home";
+import Home from "./pages/Home";
 import "./App.css";
 import { lazy } from "react";
+import { ToastContainer } from "react-toastify";
 
-const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
-const Register = lazy(() => import("./pages/Register/Register"));
-const Login = lazy(() => import("./pages/Login/Login"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Register = lazy(() => import("./pages/Register"));
+const Login = lazy(() => import("./pages/Login"));
 
 const router = createBrowserRouter([
   {
@@ -49,7 +50,14 @@ function App() {
     document.documentElement.lang = lang;
   }, [i18n.language]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <div dir={i18n.language === "ar" ? "rtl" : "ltr"} lang={i18n.language}>
+      <ToastContainer
+        position={i18n.language === "ar" ? "top-left" : "top-right"}
+      />
+      <RouterProvider router={router} />
+    </div>
+  );
 }
 
 export default App;
