@@ -1,7 +1,6 @@
 import Slider from "react-slick";
 import { Heart } from "lucide-react";
-import { CardItem } from "../../interface/CardItem";
-import { HorizontalCardSliderProps } from "../../interface/HorizontalCardSliderProps";
+import type { HorizontalCardSliderProps } from "../../interface/HorizontalCardSliderProps";
 
 const HorizontalCardSlider = ({ title, items }: HorizontalCardSliderProps) => {
   const settings = {

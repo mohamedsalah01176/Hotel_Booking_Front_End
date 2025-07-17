@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { NavbarItemProps } from "../../interface/NavbarItem";
+import type { NavbarItemProps } from "../../interface/NavbarItem";
 
 const NavbarItem = ({ label, icon, active, badge }: NavbarItemProps) => {
   const { t } = useTranslation();
