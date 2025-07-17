@@ -1,5 +1,21 @@
 {
   "NotFoundNumber":"\"الرقم غير موجود\"",
+  "navbar": {
+    "homes": "البيوت",
+    "experiences": "تجارب السفر",
+    "services": "الخدمات",
+    "become_host": "انضم كمضيف",
+    "new": "جديد"
+  },
+  "search": {
+    "where": "المكان",
+    "destination": "البحث عن وجهات",
+    "check_in": "تسجيل الوصول",
+    "check_out": "تسجيل المغادرة",
+    "add_dates": "إضافة التواريخ",
+    "who": "من",
+    "guests": "إضافة الضيوف"
+  },
   "register": {
     "title": "إنشاء حساب",
     "haveAccount":"هل لديك حساب؟ ",
