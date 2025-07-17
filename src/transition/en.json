@@ -1,6 +1,5 @@
-
-
 {
+  "NotFoundNumber":"\"The Phone is Not Found\"",
   "navbar": {
     "homes": "Homes",
     "experiences": "Experiences",
@@ -19,6 +18,7 @@
   },
   "register": {
     "title": "Register",
+    "haveAccount":"If you have account?",
     "labels": {
       "fullName": "Full Name",
       "phone": "Phone",
@@ -50,11 +50,23 @@
       "emailRequired": "Email is Required",
       "passwordRequired": "Password is Required",
       "passwordPattern": "Password must be at least 8 characters and include uppercase, lowercase, and a number"
+    },
+    "verify": {
+      "enter_code": "Enter the code we sent over SMS to:",
+      "choose_option": "Choose a different option",
+      "continue": "Continue"
+    },
+    "toast": {
+      "welcome": "Welcome to Our Site",
+      "invalid_code": "Please make sure you input the right mobile number and code."
+    },
+    "error": {
+      "invalid_code": "Sorry, we are not able to verify the code. Please make sure you input the right mobile number and code."
     }
   },
   "login": {
     "title": "Login",
-    "forgetPassword":"Forget Password?",
+    "hoveNotAccount":"If you have not account?",
     "labels": {
       "emailOrPhone": "Email / Phone",
       "password": "Password",
@@ -79,6 +91,37 @@
       "passwordRequired": "Password is required",
       "passwordPattern": "Password must be at least 8 characters and include uppercase, lowercase, and a number"
     }
+  },
+  "resetPassword":{
+    "title":"Change Passowrd",
+    "forget":"Forget Password?",
+    "reset":"Reset Password",
+    "confirm":"Confirm Password",
+    "newpassword":"New Password",
+    "placeholders":{
+      "newPassword":"Enter your new password",
+      "confirmPassword":"Enter your password again"
+    }
+  },
+  "more_options": {
+    "title": "More options",
+    "subtitle": "Choose another way to get a verification code at",
+    "turn_on_notifications": "Make sure your notifications are turned on.",
+    "methods": {
+      "sms": {
+        "title": "Text message (SMS)",
+        "description": "We'll text you a code."
+      },
+      "whatsapp": {
+        "title": "WhatsApp",
+        "description": "We'll send a code over wifi."
+      },
+      "call": {
+        "title": "Phone call",
+        "description": "We'll call you with a code."
+      }
+    },
+    "resend_code": "Resend code"
   }
 }
 
