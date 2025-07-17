@@ -13,7 +13,7 @@ const Navbar = () => {
   const { t, i18n } = useTranslation();
 
   return (
-    <header className="border-b-1 border-gray-300 sticky top-0 z-50  p-0 md:p-2 pb-0 md:pb-8 bg-[#fbfbfb]">
+    <header className="border-b-1 border-gray-300 sticky top-0 z-50  p-0 md:p-2 pb-0 md:pb-8 bg-[#fbfbfb] ">
       <div className="flex flex-col md:flex-row items-center justify-center md:justify-between px-4 py-3">
         <div className="text-sm font-semibold hidden lg:block">
           <img
@@ -46,20 +46,22 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <button className="hidden lg:flex p-2 cursor-pointer transition-all duration-200 hover:bg-gray-100 hover:rounded-full">
-            {t("navbar.become_host")}
+          <button
+            aria-label={t("navbar.menu")}
+            className="hidden md:flex bg-gray-100 p-2 rounded-full cursor-pointer"
+          >
+            <Menu size={20} />
           </button>
 
           <button
+            aria-label={t("navbar.language_toggle")}
             className="hidden md:flex bg-gray-100 p-2 rounded-full cursor-pointer"
-            onClick={() =>
-              i18n.changeLanguage(i18n.language === "en" ? "ar" : "en")
-            }
+            onClick={() => i18n.changeLanguage(i18n.language === "en" ? "ar" : "en")}
           >
             <Globe size={20} />
           </button>
 
-          <button className="hidden md:flex bg-gray-100 p-2 rounded-full cursor-pointer">
+          <button title="btn" className="hidden md:flex bg-gray-100 p-2 rounded-full cursor-pointer">
             <Menu size={20} />
           </button>
         </div>
