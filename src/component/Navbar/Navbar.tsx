@@ -1,76 +1,89 @@
 import SearchBar from "./SearchBar";
-import NavbarItem from "./NavbarItem";
-import SearchBarMobile from "./SearchBarMobile";
-import { Globe, Menu } from "lucide-react";
-import Logo from "../../assets/Airbnb_Logo.png";
-import logo from "../../assets/airbnb-logo.png";
-import homeIcon from "../../assets/Home.png";
-import experienceIcon from "../../assets/experiences.png";
-import serviceIcon from "../../assets/services.png";
+
+import { MdTranslate } from "react-icons/md";
+import { FaBars } from "react-icons/fa6";
+import Cookie from "js-cookie"
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
+import Menue from "../Menue";
+import homeImage from "../../assets/Home.png"
+import departmentImage from "../../assets/experiences.png"
 
 const Navbar = () => {
-  const { t, i18n } = useTranslation();
+  const [contentPage,setContentPage]=useState("homes");
+  const [language,setLanguage]=useState<string>("");
+  const {i18n}=useTranslation()
+  const [openMenue,setOpentMenue]=useState<boolean>(false);
+  const [token,setToken]=useState("");
+  
+  useEffect(() => {
+    const saved = localStorage.getItem("lang") || "en";
+    setLanguage(saved);
+    i18n.changeLanguage(saved);
 
+  }, [i18n,language]);
+  useEffect(()=>{
+    const tokenCookie=Cookie.get("token");
+    console.log(tokenCookie)
+    if(tokenCookie){
+      setToken(tokenCookie);
+    }
+  },[])
+  console.log(language)
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "ar" : "en";
+    i18n.changeLanguage(newLang);
+    localStorage.setItem("lang", newLang);
+    setLanguage(newLang);
+  };
   return (
-    <header className="border-b-1 border-gray-300 sticky top-0 z-50  p-0 md:p-2 pb-0 md:pb-8 bg-[#fbfbfb] ">
-      <div className="flex flex-col md:flex-row items-center justify-center md:justify-between px-4 py-3">
-        <div className="text-sm font-semibold hidden lg:block">
-          <img
-            src={Logo}
-            alt="Airbnb logo"
-            className="h-5 md:h-8 object-contain"
-          />
+
+    <div className="sticky top-0 left-0 w-full py-4 bg-[#f7f7f7] pt-7  z-10">
+      <section className="flex justify-between items-start md:items-center w-[98%] md:w-[90%] mx-auto">
+        <Link to={'/home'} className="text-xl sm:text-3xl font-semibold hover:scale-110 transition-all duration-300">HT</Link>
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-7 md:gap-16">
+          <div  className="flex items-center justify-center sm:justify-end gap-2 sm:gap-7 cursor-pointer sm:w-[350px] ">
+            <div onClick={()=>setContentPage("homes")} className="flex items-center gap-1 relative overflow-hidden group">
+              <img loading="lazy" src={homeImage} alt="Homes" width={35} height={35} className="group-hover:scale-110 pb-2  transition-all duration-300"/>
+              <h2 className="font-medium text-[12px] sm:text-[17px]">Homes</h2>
+              <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${contentPage === "homes" ?"left-0":"-left-32"}  group-hover:left-0 transition-all duration-300`}></div>
+            </div>
+            <div onClick={()=>setContentPage("departments")} className="flex  items-center gap-1 relative overflow-hidden group cursor-pointer ">
+              <img loading="lazy" src={departmentImage} alt="Homes" width={35} height={35} className="group-hover:scale-110 pb-2 h transition-all duration-300" />
+              <h2 className="font-medium text-[12px] sm:text-[17px]">Departments</h2>
+              <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${contentPage === "departments" ?"left-0":"-left-44"} group-hover:left-0 transition-all duration-300`}></div>
+            </div>
+          </div>  
+          {!token?
+            <div className="flex items-center ">
+              <Link to={"/register"} className="text-black font-medium px-2  hover:scale-105 transition-all duration-300">
+                Register
+              </Link>
+              <div className="h-[25px] w-[3px] bg-black"></div>
+              <Link to={"/login"} className="text-black font-medium px-2  hover:scale-105 transition-all duration-300 ">
+                Login
+              </Link>
+            </div>
+            :
+            null
+          }
         </div>
-
-        <div className="text-sm font-semibold  hidden md:flex  lg:hidden">
-          <img
-            src={logo}
-            alt="Airbnb logo"
-            className="h-5 md:h-8 object-contain"
-          />
+        <div className="flex items-center gap-2 sm:gap-7 ">
+          <MdTranslate className="text-2xl cursor-pointer w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] rounded-full bg-[#f2f2f2] p-[7px] hover:scale-105 transition-all duration-300 " onClick={()=>toggleLanguage()}/>
+            <div className="relative">
+              <FaBars className="text-2xl cursor-pointer w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] rounded-full bg-[#f2f2f2] p-[7px] hover:scale-105 transition-all duration-300 "  onClick={()=>setOpentMenue(!openMenue)}/>
+              {openMenue && <Menue i18n={i18n} setOpentMenue={setOpentMenue} token={token}/> }
+            </div>
+          
         </div>
-
-        <div className="block md:hidden px-6 py-2 w-full mb-4">
-          <SearchBarMobile />
-        </div>
-
-        <div className="flex  gap-15 md:gap-10 text-sm font-medium">
-          <NavbarItem label={t("navbar.homes")} icon={homeIcon} active />
-          <NavbarItem
-            label={t("navbar.experiences")}
-            icon={experienceIcon}
-            badge
-          />
-          <NavbarItem label={t("navbar.services")} icon={serviceIcon} badge />
-        </div>
-
-        <div className="flex items-center gap-4">
-          <button
-            aria-label={t("navbar.menu")}
-            className="hidden md:flex bg-gray-100 p-2 rounded-full cursor-pointer"
-          >
-            <Menu size={20} />
-          </button>
-
-          <button
-            aria-label={t("navbar.language_toggle")}
-            className="hidden md:flex bg-gray-100 p-2 rounded-full cursor-pointer"
-            onClick={() => i18n.changeLanguage(i18n.language === "en" ? "ar" : "en")}
-          >
-            <Globe size={20} />
-          </button>
-
-          <button title="btn" className="hidden md:flex bg-gray-100 p-2 rounded-full cursor-pointer">
-            <Menu size={20} />
-          </button>
-        </div>
-      </div>
-
-      <div className="hidden md:block px-6 py-2">
+        
+      </section>
+      <div className="block px-6 py-2 mt-2">
         <SearchBar />
       </div>
-    </header>
+    </div>
+
   );
 };
 
