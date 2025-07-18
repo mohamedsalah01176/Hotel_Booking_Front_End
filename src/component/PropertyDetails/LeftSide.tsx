@@ -1,5 +1,5 @@
 import image from "../../assets/R (1).jpg";
-import PlaceOffer from "./placeOffer";
+import PlaceOffer from "./PlaceOffer";
 
 const LeftSide = () => {
   return (

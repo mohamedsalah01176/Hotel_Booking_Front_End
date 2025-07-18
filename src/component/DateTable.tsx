@@ -1,23 +1,23 @@
-import { DateRange } from "react-date-range";
+import { DateRange ,type RangeKeyDict, type Range } from "react-date-range";
 import { format } from "date-fns";
 
-interface IProps{
-  range:{startDate:Date,endDate:Date,key:string}[],
-  setRange:(val:{startDate:Date,endDate:Date,key:string}[])=>void,
-  isMobile:boolean,
-  setOpen:(val:boolean)=>void
+interface IProps {
+  range: Range[];
+  setRange: (val: Range[]) => void;
+  isMobile: boolean;
+  setOpen: (val: boolean) => void;
 }
 const DateTable = ({range,setRange,isMobile,setOpen}:IProps) => {
   return (
     <div className="border rounded-xl p-4 shadow-lg bg-white z-50 absolute top-16 -right-7 md:right-0">
       <p className="text-sm font-medium mb-2">
-        {format(range[0].startDate, "MMM dd, yyyy")} →{" "}
-        {format(range[0].endDate, "MMM dd, yyyy")}
+        {format(range[0].startDate!, "MMM dd, yyyy")} →{" "}
+        {format(range[0].endDate!, "MMM dd, yyyy")}
       </p>
 
       <DateRange
         editableDateInputs={true}
-        onChange={(item) => setRange([item.selection])}
+        onChange={(item: RangeKeyDict) => setRange([item.selection])}
         moveRangeOnFirstSelection={false}
         ranges={range}
         rangeColors={["#000"]}
