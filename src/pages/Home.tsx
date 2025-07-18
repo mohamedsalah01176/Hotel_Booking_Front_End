@@ -94,6 +94,8 @@ const Home = () => {
     <div>
       <HorizontalCardSlider title="Popular homes in Hurghada" items={hurghadaHomes} />
       <HorizontalCardSlider title="Available in New Cairo" items={hurghadaHomes} />
+      <HorizontalCardSlider title="Available in New Cairo" items={hurghadaHomes} />
+      <HorizontalCardSlider title="Available in New Cairo" items={hurghadaHomes} />
     </div>
   );
 };
