@@ -3,13 +3,14 @@ import { format } from "date-fns";
 import DateTable from '../DateTable';
 import { IoDiamond } from "react-icons/io5";
 import { useTranslation } from 'react-i18next';
+import type { Range } from "react-date-range";
 
 
 const RightSide = () => {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const {i18n}=useTranslation()
-  const [range,setRange]=useState([{
+  const [range,setRange]=useState<Range[]>([{
     startDate:new Date(),
     endDate:new Date(new Date().setDate(new Date().getDate() + 2)),
     key:"selection"
@@ -35,11 +36,11 @@ const RightSide = () => {
         <div className="flex justify-center relative">
           <div onClick={() => setOpen(true)} className={`w-[140px] border p-2 ${i18n.language === "en"?"rounded-tl-xl rounded-bl-xl":"rounded-tr-xl rounded-br-xl"}  cursor-pointer `}>
             <p className="text-sm font-semibold uppercase">Check-In</p>
-            <input title="checkin" type="text" readOnly value={format(range[0].startDate,"yyyy-MM-dd")} className=" rounded-md  w-full outline-0" onClick={() => setOpen(true)} />
+            <input title="checkin" type="text" readOnly value={format(range[0].startDate!,"yyyy-MM-dd")} className=" rounded-md  w-full outline-0" onClick={() => setOpen(true)} />
           </div>
           <div onClick={() => setOpen(true)} className={`w-[140px] border p-2 ${i18n.language === "en"?"rounded-tr-xl rounded-br-xl":"rounded-tl-xl rounded-bl-xl"}  cursor-pointer `}>
             <p className="text-sm font-semibold uppercase">Checkout</p>
-            <input title="checkin" type="text" readOnly value={format(range[0].startDate,"yyyy-MM-dd")} className=" rounded-md w-full outline-0" onClick={() => setOpen(true)} />
+            <input title="checkin" type="text" readOnly value={format(range[0].startDate!,"yyyy-MM-dd")} className=" rounded-md w-full outline-0" onClick={() => setOpen(true)} />
           </div>
           {open && (
             <DateTable setOpen={setOpen} isMobile={isMobile} range={range} setRange={setRange}/>
