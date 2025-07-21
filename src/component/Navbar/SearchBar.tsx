@@ -1,5 +1,5 @@
-import { Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { IoSearch } from "react-icons/io5";
 
 const SearchBar = () => {
   const { t, i18n } = useTranslation();
@@ -14,8 +14,8 @@ const SearchBar = () => {
             <div className="text-gray-500">{t("search.destination")}</div>
           </div>
         </div>
-        <div className="bg-rose-500 text-white p-3 rounded-full ml-2 transition-all duration-300">
-          <Search size={20} />
+        <div className="bg-[#f67808] text-white p-3 rounded-full ml-2 transition-all duration-300 hover:bg-[#02717e]">
+          <IoSearch size={20} />
         </div>
       </div>
     </div>

@@ -4,6 +4,8 @@ import RightSide from "../component/PropertyDetails/RightSide";
 import LeftSide from "../component/PropertyDetails/LeftSide";
 import ImagesContainer from "../component/PropertyDetails/ImagesContainer";
 import Reviews from "../component/PropertyDetails/Reviews";
+import HotalLocation from "../component/PropertyDetails/HotalLocation";
+import ShowHost from "../component/PropertyDetails/ShowHost";
 // import image from "../assets/R (1).jpg";
 
 
@@ -17,10 +19,17 @@ const PropertyDetails = () => {
         <ImagesContainer/>
         <section className="flex flex-col md:flex-row justify-between gap-14 ">
           <LeftSide/>
-          <RightSide/>
+          <div className="sticky">
+            <RightSide />
+          </div>
+
         </section>
         <div className="bg-gray-300 w-full h-[2px] my-10"></div>
         <Reviews/>
+        <div className="bg-gray-300 w-full h-[2px] my-10"></div>
+        <HotalLocation/>
+        <div className="bg-gray-300 w-full h-[2px] my-10"></div>
+        <ShowHost/>
       </div>
     </section>
   )

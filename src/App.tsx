@@ -6,7 +6,7 @@ import { lazy } from 'react';
 import { initReactI18next } from 'react-i18next';
 import transitionAR from "./transition/ar.json";
 import transitionEn from "./transition/en.json";
-import Layout from './pages/Layout';
+import Layout from './Layout/Layout';
 import PropertyDetails from './pages/PropertyDetails';
 
 const NotFound=lazy(()=>import("./pages/NotFound"));

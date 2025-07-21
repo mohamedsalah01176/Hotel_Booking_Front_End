@@ -1,3 +1,14 @@
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
+*::selection{
+  background-color: #02717e;
+  color: #e77008;
+}
+@font-face {
+  font-family: "slick";
+  src: url("/fonts/slick.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
