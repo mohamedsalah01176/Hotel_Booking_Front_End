@@ -1,6 +1,7 @@
-import HorizontalCardSlider from "../component/Shared/HorizontalCardSlider";
-import type { CardItem } from "../interface/CardItem";
-const hurghadaHomes: CardItem[] = [
+import { useEffect } from "react";
+import HorizontalCardSlider from "../component/Slider/HorizontalCardSlider";
+import type { HorizontalCardSliderProps } from "../interface/HorizontalCardSliderProps";
+const hurghadaHomes: HorizontalCardSliderProps[] = [
    {
     id: 1,
     title: "Hotel in Hurghada 2",
@@ -90,6 +91,13 @@ const hurghadaHomes: CardItem[] = [
 
 
 const Home = () => {
+  useEffect(() => {
+  const socket = new WebSocket("ws://localhost:3000");
+
+  return () => {
+    socket.close();
+  };
+}, []);
   return (
     <div>
       <HorizontalCardSlider title="Popular homes in Hurghada" items={hurghadaHomes} />

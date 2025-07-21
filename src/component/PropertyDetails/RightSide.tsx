@@ -25,9 +25,9 @@ const RightSide = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   return (
-    <div className="sticky">
+    <div className="sticky top-38 left-0">
       <div className="bg-white p-7 shadow-xl rounded-xl flex gap-3 ">
-        <IoDiamond className="text-xl text-[#e7457b] "/>
+        <IoDiamond className="text-xl text-[#f67808] "/>
         <p>Rare find! This place is usually booked</p>
       </div>
       <div className="p-5 bg-white mt-7 rounded-2xl shadow-xl max-w-[350px] mx-auto">
@@ -46,7 +46,7 @@ const RightSide = () => {
             <DateTable setOpen={setOpen} isMobile={isMobile} range={range} setRange={setRange}/>
           )}
         </div>
-        <button className="w-[260px] block mx-auto mt-5 p-3 text-xl font-medium bg-[#e51d55] text-white rounded-xl cursor-pointer">Reserve</button>
+        <button className="w-[260px] block mx-auto mt-5 p-3 text-xl font-medium bg-gradient-to-r from-[#f67808] to-[#c65f05]  text-white rounded-xl cursor-pointer">Reserve</button>
         <p className="text-center mt-2 text-gray-600">You won't be charged yet</p>
       </div>
     </div>

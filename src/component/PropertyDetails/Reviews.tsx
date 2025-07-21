@@ -2,7 +2,7 @@ import image from "../../assets/R (1).jpg";
 
 const Reviews = () => {
   return (
-    <div className="grid grid-cols-2 my-12 gap-14 bg-white p-7 rounded-xl">
+    <div className="grid grid-cols-2 py-12 gap-14 bg-white p-7 rounded-xl">
           <div>
             <div className="flex gap-3 items-start">
               <img loading="lazy" src={image} alt="image" className="w-[50px] h-[50px] rounded-full" />

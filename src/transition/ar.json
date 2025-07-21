@@ -2,10 +2,26 @@
   "NotFoundNumber":"\"الرقم غير موجود\"",
   "navbar": {
     "homes": "البيوت",
-    "experiences": "تجارب السفر",
-    "services": "الخدمات",
+    "departments": "الشقق",
     "become_host": "انضم كمضيف",
-    "new": "جديد"
+    "contactUs": "اتصل بنا / الأسئلة الشائعة",
+    "setting": "الإعدادات",
+    "term": "الشروط والخصوصية",
+    "logout": "تسجيل الخروج",
+    "home":"الصفحه الرئسيه"
+  },
+  "footer": {
+    "brandTitle": "فندقي",
+    "brandDescription": "أثاث أنيق ومستدام لحياة عصرية.",
+    "quickLinksTitle": "روابط سريعة",
+    "home": "الرئيسية",
+    "contact": "اتصل بنا / الأسئلة الشائعة",
+    "term": "الشروط والخصوصية",
+    "socialTitle": "تابعنا",
+    "newsletterTitle": "النشرة البريدية",
+    "newsletterDescription": "احصل على عروض خاصة وتحديثات.",
+    "placeholder": "بريدك الإلكتروني",
+    "subscribe": "اشترك"
   },
   "search": {
     "where": "المكان",

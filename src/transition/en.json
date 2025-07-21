@@ -2,10 +2,25 @@
   "NotFoundNumber":"\"The Phone is Not Found\"",
   "navbar": {
     "homes": "Homes",
-    "experiences": "Experiences",
-    "services": "Services",
-    "become_host": "Become a host",
-    "new": "New"
+    "departments": "Deparments",
+    "contactUs":"Contact Us/FAQ",
+    "setting":"Setting",
+    "term":"Term&Privacy",
+    "logout":"Logout",
+    "home":"Home"
+  },
+  "footer": {
+    "brandTitle": "My Hotel",
+    "brandDescription": "Stylish, sustainable furniture for modern living.",
+    "quickLinksTitle": "Quick Links",
+    "home": "Home",
+    "contact": "Contact Us/FAQ",
+    "term": "Term & Privacy",
+    "socialTitle": "Follow Us",
+    "newsletterTitle": "Newsletter",
+    "newsletterDescription": "Get special offers & updates.",
+    "placeholder": "Your Email",
+    "subscribe": "Subscribe"
   },
   "search": {
     "where": "Where",
