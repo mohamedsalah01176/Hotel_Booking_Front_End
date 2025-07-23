@@ -1,41 +1,88 @@
-import Slider from "react-slick";
 import PropertyCard from "../PropertyCard";
-import type { HorizontalCardSliderProps } from "../../interface/HorizontalCardSliderProps";
+import type { IProperty } from "../../interface/property";
+import axios, { type AxiosResponse } from "axios";
+import { useQuery } from "@tanstack/react-query";
+import SliderLoader from "../SliderLoader";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import "swiper/css"; 
+import 'swiper/css/navigation';
+import "swiper/css/autoplay";
+import { Navigation } from 'swiper/modules';
+import "./style.css"
+import { useTranslation } from "react-i18next";
+import { Autoplay } from 'swiper/modules';
 
-const HorizontalCardSlider = ({ title, items }: {title:string,items:HorizontalCardSliderProps[]}) => {
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 1,
-    arrows: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-    ],
-  };
+
+const HorizontalCardSlider = ({ nameEn,nameAr }: { nameEn: string,nameAr:string }) => {
+  const {t,i18n}= useTranslation()
+  function getProperties() {
+    return axios.get(`${import.meta.env.VITE_BASE_URL}/api/property`);
+  }
+
+  const propertyResponse = useQuery<
+    AxiosResponse<{ properties: IProperty[] }>,
+    Error
+  >({
+    queryKey: ["allProperties"],
+    queryFn: getProperties,
+    staleTime: 240000,
+  });
+
+  const property =
+    propertyResponse.data?.data.properties.filter(
+      (item) => item.location.cityEn.toLowerCase() === nameEn
+    ) || [];
+
+  if (propertyResponse.isLoading) {
+    return <SliderLoader name={nameEn.charAt(0).toUpperCase()} />;
+  }
 
   return (
-    <div className="px-4 md:px-8 my-10 cursor-pointer">
+    <div className="px-4 md:px-8 my-10">
       <h2 className="text-xl font-bold mb-4">
-        {title} <span className="text-rose-500">›</span>
+        {t("home.popularHomes",{name:i18n.language === "en"?nameEn.charAt(0).toUpperCase()+nameEn.slice(1):nameAr})} <span className="text-rose-500">›</span>
       </h2>
-      <Slider {...settings}>
-        {items.map((item) => (
-          <PropertyCard item={item}/>
+      <Swiper
+      key={i18n.language}
+      spaceBetween={3}
+      slidesPerView={5}
+      modules={[Navigation,Autoplay]} 
+      autoplay={{
+        delay:3000,
+        pauseOnMouseEnter:true
+      }}
+      dir={i18n.language === "ar"?"rtl":"ltr"}
+      navigation
+      breakpoints={{
+        140: {
+          slidesPerView: 1,
+          spaceBetween: 10,
+        },
+        450: {
+          slidesPerView: 2,
+          spaceBetween: 10,
+        },
+        600: {
+          slidesPerView: 3,
+          spaceBetween: 10,
+        },
+        900: {
+          slidesPerView: 4,
+          spaceBetween: 10,
+        },
+        1010: {
+          slidesPerView: 5,
+          spaceBetween: 10,
+        },
+        
+      }}
+      >
+        {property.map((item) => (
+          <SwiperSlide key={item._id}>
+            <PropertyCard item={item} />
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
     </div>
   );
 };

@@ -1,0 +1,24 @@
+.swiper-button-next,
+.swiper-button-prev {
+  color: #e77008; /* لون السهم */
+  font-size: 18px;
+  background-color: #fff;
+  border-radius: 999px;
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  top: 40%; /* موضع رأسي */
+  width: 40px;
+  height: 40px;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: #02717e;
+  color: #fff;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px;
+  font-weight: bold;
+}
