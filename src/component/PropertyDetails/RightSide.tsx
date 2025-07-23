@@ -2,19 +2,57 @@ import  { useEffect, useState } from 'react'
 import { format } from "date-fns";
 import DateTable from '../DateTable';
 import { IoDiamond } from "react-icons/io5";
-import { useTranslation } from 'react-i18next';
 import type { Range } from "react-date-range";
-
-
-const RightSide = () => {
+import type { IProperty } from '../../interface/property';
+import type { i18n as i18nType  } from "i18next";
+import type { TFunction } from "i18next";
+import Cookie from "js-cookie"
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router';
+import axios from 'axios';
+import ChangeStatusCode from '../ChangeStatusCode';
+import CodeNumber from '../CodeNumber';
+const RightSide = ({i18n,property,t}:{property:IProperty,i18n:i18nType,t:TFunction}) => {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const {i18n}=useTranslation()
+  const [openSendCode,setOpenSendCode]=useState<string>("")
+  const nav=useNavigate();
   const [range,setRange]=useState<Range[]>([{
     startDate:new Date(),
     endDate:new Date(new Date().setDate(new Date().getDate() + 2)),
     key:"selection"
   }]);
+  const formattedPrice = new Intl.NumberFormat(i18n.language === "ar" ? "ar-EG" : "en-US").format(property?.nightPrice);
+
+  const handleReserve=async()=>{
+    const token=Cookie.get("token");
+    if(token){
+      if(property.admin.phoneVerfy){
+        // handle Booking
+      }else{
+        toast.error(t("propertyDetails.mustVerifyPhone"));
+        const res=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/sendCode`,
+          {phone:property.admin.phone},
+          {
+            headers:{
+              'Content-Type':'application/json',
+            }
+          }
+        )
+        if(res.data.status === 'success'){
+          toast.success(t("register.messages.codeSentSuccess"));
+          setTimeout(()=>{
+            setOpenSendCode("sendCode");
+          },2000)
+        }
+      }
+    }else{
+      toast.error(t("propertyDetails.mustRegister"));
+      setTimeout(()=>{
+        nav("/login")
+      },1500)
+    }
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,28 +64,34 @@ const RightSide = () => {
   }, []);
   return (
     <div className="sticky top-38 left-0">
+      {openSendCode === "sendCode"?
+        <CodeNumber setOpenCode={setOpenSendCode} phone={property.admin.phone} />:
+        openSendCode === "changeStatus"?
+        <ChangeStatusCode setOpenCode={setOpenSendCode} phone={property.admin.phone} />:
+        null
+        }
       <div className="bg-white p-7 shadow-xl rounded-xl flex gap-3 ">
         <IoDiamond className="text-xl text-[#f67808] "/>
-        <p>Rare find! This place is usually booked</p>
+        <p>{t("propertyDetails.rareFind")}</p>
       </div>
       <div className="p-5 bg-white mt-7 rounded-2xl shadow-xl max-w-[350px] mx-auto">
-        <p className="underline text-2xl font-medium">2,869 EG</p>
-        <p className="text-gray-700">for 2 nights</p>
+        <p className="underline text-2xl font-medium">{t("propertyDetails.price",{price:formattedPrice})}</p>
+        <p className="text-gray-700 pb-2">{t("propertyDetails.forNights")}</p>
         <div className="flex justify-center relative">
           <div onClick={() => setOpen(true)} className={`w-[140px] border p-2 ${i18n.language === "en"?"rounded-tl-xl rounded-bl-xl":"rounded-tr-xl rounded-br-xl"}  cursor-pointer `}>
-            <p className="text-sm font-semibold uppercase">Check-In</p>
+            <p className="text-sm font-semibold uppercase">{t("propertyDetails.checkin")}</p>
             <input title="checkin" type="text" readOnly value={format(range[0].startDate!,"yyyy-MM-dd")} className=" rounded-md  w-full outline-0" onClick={() => setOpen(true)} />
           </div>
           <div onClick={() => setOpen(true)} className={`w-[140px] border p-2 ${i18n.language === "en"?"rounded-tr-xl rounded-br-xl":"rounded-tl-xl rounded-bl-xl"}  cursor-pointer `}>
-            <p className="text-sm font-semibold uppercase">Checkout</p>
+            <p className="text-sm font-semibold uppercase">{t("propertyDetails.checkout")}</p>
             <input title="checkin" type="text" readOnly value={format(range[0].startDate!,"yyyy-MM-dd")} className=" rounded-md w-full outline-0" onClick={() => setOpen(true)} />
           </div>
           {open && (
             <DateTable setOpen={setOpen} isMobile={isMobile} range={range} setRange={setRange}/>
           )}
         </div>
-        <button className="w-[260px] block mx-auto mt-5 p-3 text-xl font-medium bg-gradient-to-r from-[#f67808] to-[#c65f05]  text-white rounded-xl cursor-pointer">Reserve</button>
-        <p className="text-center mt-2 text-gray-600">You won't be charged yet</p>
+        <button onClick={handleReserve} className="w-[260px] block mx-auto mt-5 p-3 text-xl font-medium bg-gradient-to-r from-[#f67808] to-[#c65f05]  text-white rounded-xl cursor-pointer hover:scale-110 transition-all duration-300">{t("propertyDetails.reserve")}</button>
+        <p className="text-center mt-2 text-gray-600">{t("propertyDetails.notChargedYet")}</p>
       </div>
     </div>
   )

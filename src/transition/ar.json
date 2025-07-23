@@ -140,5 +140,46 @@
       }
     },
     "resend_code": "إعادة إرسال الرمز"
-  }
+  },
+  "home":{
+    "price_summary": "{{price}} ل.س / الليلة • ★ {{rate}}",
+    "popularHomes": "أشهر الأماكن للإقامة في {{name}}"
+  },
+  "propertyDetails": {
+    "subTitle": "{{guest}} ضيف - 1 غرفة نوم - 2 سرير - 1 حمام ",
+    "hostedBy":"يستضيفك {{name}}",
+    "superhostWithDuration": "مضيف مميز · يستضيف منذ {{years}} سنوات",
+    "whatPlaceOffers": "ما الذي يقدمه هذا المكان",
+    "rareFind": "فرصة نادرة! هذا المكان محجوز عادةً",
+    "price": "{{price}} ل.س",
+    "forNights": "لمدة ليلة واحدة",
+    "reserve": "احجز الآن",
+    "notChargedYet": "لن يتم خصم أي مبلغ الآن",
+    "checkout": "تسجيل المغادرة",
+    "checkin": "تسجيل الوصول",
+    "addReview": "إضافة تقييم",
+    "notReview": "لا توجد تقييمات.",
+    "showAll": "عرض كل {{count}} تقييم",
+    "where": "أين ستكون",
+    "mustRegister":"يجب عليك التسجيل أولًا",
+    "mustVerifyPhone": "يجب عليك تفعيل رقم هاتفك أولاً.",
+    "host": {
+      "meetHost": "قابل المُضيف",
+      "superhost": " يكون مُضيف مميز" ,
+      "superhostDescription": "المُضيفون المميزون هم مُضيفون ذوو خبرة وتقييمات عالية، ملتزمون بتقديم تجارب إقامة رائعة للضيوف.",
+      "hostDetails": "تفاصيل المُضيف",
+      "responseRate": "معدل الاستجابة",
+      "responseTime": "يستجيب خلال ساعة",
+      "contactDetails": "بيانات التواصل",
+      "whatsapp": "واتساب",
+      "email": "البريد الإلكتروني"
+    },
+    "reviews": {
+      "title": "المراجعات",
+      "rating": "التقييم",
+      "monthsHosting": "عدد الأشهر في الاستضافة"
+    }
+
+
+}
 }

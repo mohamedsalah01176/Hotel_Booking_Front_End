@@ -1,13 +1,15 @@
 import { Link } from "react-router"
-import type { HorizontalCardSliderProps } from "../interface/HorizontalCardSliderProps"
+import type { IProperty } from "../interface/property"
+import { useTranslation } from "react-i18next"
 
-const PropertyCard = ({item}:{item:HorizontalCardSliderProps}) => {
+const PropertyCard = ({item}:{item:IProperty}) => {
+  const {t,i18n}=useTranslation();
   return (
-    <Link to={"/propertyDetails/1"} key={item.id} className="pr-3 block">
+    <Link to={`/propertyDetails/${item._id}`} key={item._id} className="pr-3 block ">
       <div className="relative rounded-xl overflow-hidden">
         <img
           loading="lazy"
-          src={item.image}
+          src={item.images[0]}
           alt={item.title}
           className="w-full h-45 object-cover rounded-2xl"
           width={170}
@@ -17,10 +19,10 @@ const PropertyCard = ({item}:{item:HorizontalCardSliderProps}) => {
           Guest favorite
         </span> */}
       </div>
-      <div className="mt-2 text-sm">
-        <h3 className="font-medium">{item.title}</h3>
+      <div className="mt-2  text-sm ">
+        <h3 className="font-medium ">{i18n.language === "en"?item?.titleEn:item?.titleAr}</h3>
         <p className="text-gray-500">
-          ج.م  {item.price} ل 2 ليالٍ  • ★  {item.rating}
+          {t("home.price_summary",{price:item?.nightPrice,rate:item?.rate})}
         </p>
       </div>
     </Link>

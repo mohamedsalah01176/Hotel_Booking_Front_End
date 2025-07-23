@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar";
 import { MdTranslate } from "react-icons/md";
 import { FaBars } from "react-icons/fa6";
 import Cookie from "js-cookie"
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router";
 import Menue from "./Menue";
@@ -18,7 +18,14 @@ const Navbar = () => {
   const [openMenue,setOpentMenue]=useState<boolean>(false);
   const [token,setToken]=useState("");
   const {t}=useTranslation()
-    const url =useLocation();
+  const url =useLocation();
+
+  const handleLogout =useCallback(()=>{
+    Cookie.remove("token")
+    setToken("")
+    setOpentMenue(false)
+  },[setToken])
+
 
   useEffect(() => {
     const saved = localStorage.getItem("lang") || "en";
@@ -32,7 +39,7 @@ const Navbar = () => {
     if(tokenCookie){
       setToken(tokenCookie);
     }
-  },[])
+  },[Cookie.get("token")])
   console.log(language)
   const toggleLanguage = () => {
     const newLang = i18n.language === "en" ? "ar" : "en";
@@ -40,8 +47,10 @@ const Navbar = () => {
     localStorage.setItem("lang", newLang);
     setLanguage(newLang);
   };
-  return (
 
+
+
+  return (
     <div className="sticky top-0 left-0 w-full py-4 bg-[#f7f7f7] pt-7  z-10 border-b-2 border-[#e0dede7a]">
       <section className="flex justify-between items-start md:items-center w-[98%] md:w-[90%] mx-auto">
         <Link to={'/home'} className="text-xl sm:text-3xl font-semibold hover:scale-110 transition-all duration-300 outline-0">
@@ -63,11 +72,11 @@ const Navbar = () => {
           {!token?
             <div className="flex items-center ">
               <Link to={"/register"} className="text-black font-medium px-2  hover:scale-105 transition-all duration-300">
-                Register
+                {t("register.title")}
               </Link>
               <div className="h-[25px] w-[3px] bg-black"></div>
               <Link to={"/login"} className="text-black font-medium px-2  hover:scale-105 transition-all duration-300 ">
-                Login
+                {t("login.title")}
               </Link>
             </div>
             :
@@ -78,7 +87,7 @@ const Navbar = () => {
           <MdTranslate className="text-2xl cursor-pointer w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] rounded-full bg-[#f2f2f2] p-[7px] hover:scale-105 transition-all duration-300 " onClick={()=>toggleLanguage()}/>
             <div className="relative">
               <FaBars className="text-2xl cursor-pointer w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] rounded-full bg-[#f2f2f2] p-[7px] hover:scale-105 transition-all duration-300 "  onClick={()=>setOpentMenue(!openMenue)}/>
-              {openMenue && <Menue i18n={i18n} setOpentMenue={setOpentMenue} token={token}/> }
+              {openMenue && <Menue i18n={i18n} setOpentMenue={setOpentMenue} token={token} handleLogout={handleLogout}/> }
             </div>
           
         </div>

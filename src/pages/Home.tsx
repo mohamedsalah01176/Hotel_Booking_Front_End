@@ -1,109 +1,34 @@
-import { useEffect } from "react";
 import HorizontalCardSlider from "../component/Slider/HorizontalCardSlider";
-import type { HorizontalCardSliderProps } from "../interface/HorizontalCardSliderProps";
-const hurghadaHomes: HorizontalCardSliderProps[] = [
-   {
-    id: 1,
-    title: "Hotel in Hurghada 2",
-    image: "/images/home1.avif",
-    price: "1,534",
-    rating: "5.0",
-  },
-  {
-    id: 2,
-    title: "Apartment in Hurghada",
-    image: "/images/home2.avif",
-    price: "8,182",
-    rating: "5.0",
-  },
-  {
-    id: 3,
-    title: "Apartment in Hurghada",
-    image: "/images/home3.avif",
-    price: "4,983",
-    rating: "4.94",
-  },
-  {
-    id: 4,
-    title: "Apartment in Hurghada",
-    image: "/images/home4.avif",
-    price: "3,011",
-    rating: "4.88",
-  },
-  {
-    id: 5,
-    title: "Apartment in Hurghada 2",
-    image: "/images/home5.avif",
-    price: "3,666",
-    rating: "4.82",
-  },
-  {
-    id: 6,
-    title: "Apartment in Hurghada",
-    image: "/images/home6.avif",
-    price: "2,594",
-    rating: "4.84",
-  },
-  {
-    id: 7,
-    title: "Hotel in Hurghada 2",
-    image: "/images/home1.avif",
-    price: "1,534",
-    rating: "5.0",
-  },
-  {
-    id: 8,
-    title: "Apartment in Hurghada",
-    image: "/images/home2.avif",
-    price: "8,182",
-    rating: "5.0",
-  },
-  {
-    id: 9,
-    title: "Apartment in Hurghada",
-    image: "/images/home3.avif",
-    price: "4,983",
-    rating: "4.94",
-  },
-  {
-    id: 10,
-    title: "Apartment in Hurghada",
-    image: "/images/home4.avif",
-    price: "3,011",
-    rating: "4.88",
-  },
-  {
-    id: 11,
-    title: "Apartment in Hurghada 2",
-    image: "/images/home5.avif",
-    price: "3,666",
-    rating: "4.82",
-  },
-  {
-    id: 12,
-    title: "Apartment in Hurghada",
-    image: "/images/home6.avif",
-    price: "2,594",
-    rating: "4.84",
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import axios, { type AxiosResponse } from "axios";
+import type { ICity } from "../interface/city";
+import GeneralLoader from "../component/GeneralLoader/GeneralLoader";
+
 
 
 
 const Home = () => {
-  useEffect(() => {
-  const socket = new WebSocket("ws://localhost:3000");
 
-  return () => {
-    socket.close();
-  };
-}, []);
+  function getCities(){
+    return axios.get(`${import.meta.env.VITE_BASE_URL}/api/city`)
+  }
+
+  const cityResponse=useQuery<AxiosResponse<{ cities: ICity[] }>, Error>({
+    queryKey:["allCities"],
+    queryFn:getCities,
+    staleTime:240000
+  })
+  const cities = cityResponse.data?.data.cities ?? [];
+  if(cityResponse.isLoading){
+    return <GeneralLoader/>
+  }
   return (
     <div>
-      <HorizontalCardSlider title="Popular homes in Hurghada" items={hurghadaHomes} />
-      <HorizontalCardSlider title="Available in New Cairo" items={hurghadaHomes} />
-      <HorizontalCardSlider title="Available in New Cairo" items={hurghadaHomes} />
-      <HorizontalCardSlider title="Available in New Cairo" items={hurghadaHomes} />
+      {cities?.map((item)=>{
+        return(
+          <HorizontalCardSlider nameEn={item.nameEn} nameAr={item.nameAr}  key={item._id}  />
+        )
+      })}
     </div>
   );
 };

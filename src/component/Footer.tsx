@@ -35,11 +35,11 @@ const Footer = () => {
           <p className="mb-3 text-[17px]">{t("footer.newsletterDescription")}</p>
           <div className="flex border-[1px] border-gray-400 bg-white rounded-xl overflow-hidden">
             <input type="text" placeholder={t("footer.placeholder")} className="outline-0 border-0 w-[65%] px-2"/>
-            <button className="bg-[#e77008] p-3 text-white w-[35%] hover:bg-[#02717e] cursor-pointer transition-all duration-300">{t("footer.subscribe")}</button>
+            <button className="bg-[#e77008] p-3 text-white min-w-[35%] hover:bg-[#02717e] cursor-pointer transition-all duration-300">{t("footer.subscribe")}</button>
           </div>
         </section>
       </div>
-      <div className="bg-white p-3 text-center text-[17px] mt-10"> &copy; 2025 <span className="text-lg font-semibold text-[#e77008]">Khalid Amin,</span> All Rights Reserved</div>
+      <div className="bg-white p-3 text-center text-[17px] mt-10"> &copy; 2025 <span className="text-lg  font-semibold text-[#e77008]">Khalid Amin,</span> All Rights Reserved</div>
     </footer>
   )
 }

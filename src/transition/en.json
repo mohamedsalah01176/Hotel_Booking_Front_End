@@ -137,6 +137,46 @@
       }
     },
     "resend_code": "Resend code"
+  },
+  "home":{
+    "price_summary": "{{price}} 1500 SYP / night • ★ {{rate}}",
+    "popularHomes": "Popular homes in {{name}}"
+  },
+  "propertyDetails":{
+    "subTitle":"{{guest}} guests - 1 bedroom - 2 beds - 1 bath",
+    "hostedBy":"Hosted by {{name}}",
+    "superhostWithDuration": "Superhost · {{years}} years hosting",
+    "whatPlaceOffers": "What this place offers",
+    "rareFind": "Rare find! This place is usually booked",
+    "price": "{{price}} SYP",
+    "forNights": "for 1 night",
+    "reserve": "Reserve",
+    "notChargedYet": "You won't be charged yet",
+    "checkout": "Checkout",
+    "checkin": "Check-In",
+    "addReview": "Add Review",
+    "notReview": "No reviews found.",
+    "showAll": "Show all {{count}} reviews",
+    "where":"Where you’ll be",
+    "mustRegister":"You must register first",
+    "mustVerifyPhone": "You must verify your phone number first.",         
+    "host": {
+      "meetHost": "Meet your host",
+      "superhost": "is a Superhost",
+      "superhostDescription": "Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.",
+      "hostDetails": "Host details",
+      "responseRate": "Response rate",
+      "responseTime": "Responds within an hour",
+      "contactDetails": "Contact details",
+      "whatsapp": "WhatsApp",
+      "email": "Email"
+    },
+    "reviews": {
+      "title": "Reviews",
+      "rating": "Rating",
+      "monthsHosting": "Months hosting"
+    }
+
   }
 }
 
