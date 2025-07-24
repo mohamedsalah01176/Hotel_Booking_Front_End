@@ -1,16 +1,13 @@
+
 import PropertyCard from "../PropertyCard";
 import type { IProperty } from "../../interface/property";
 import axios, { type AxiosResponse } from "axios";
 import { useQuery } from "@tanstack/react-query";
 import SliderLoader from "../SliderLoader";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import "swiper/css"; 
-import 'swiper/css/navigation';
-import "swiper/css/autoplay";
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import "./style.css"
 import { useTranslation } from "react-i18next";
-import { Autoplay } from 'swiper/modules';
 
 
 const HorizontalCardSlider = ({ nameEn,nameAr }: { nameEn: string,nameAr:string }) => {
