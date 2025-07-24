@@ -27,17 +27,17 @@ const HorizontalCardSlider = ({ nameEn,nameAr }: { nameEn: string,nameAr:string 
 
   const property =
     propertyResponse.data?.data.properties.filter(
-      (item) => item.location.cityEn.toLowerCase() === nameEn
+      (item) => item?.location?.cityEn?.toLowerCase() === nameEn
     ) || [];
 
   if (propertyResponse.isLoading) {
-    return <SliderLoader name={nameEn.charAt(0).toUpperCase()} />;
+    return <SliderLoader name={nameEn?.charAt(0).toUpperCase()} />;
   }
 
   return (
     <div className="px-4 md:px-8 my-10">
       <h2 className="text-xl font-bold mb-4">
-        {t("home.popularHomes",{name:i18n.language === "en"?nameEn.charAt(0).toUpperCase()+nameEn.slice(1):nameAr})} <span className="text-rose-500">›</span>
+        {t("home.popularHomes",{name:i18n.language === "en"?nameEn?.charAt(0).toUpperCase()+nameEn?.slice(1):nameAr})} <span className="text-rose-500">›</span>
       </h2>
       <Swiper
       key={i18n.language}
