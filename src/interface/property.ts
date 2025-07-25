@@ -32,12 +32,16 @@ export interface IAdmin {
 }
 
 export interface ILocation {
-  city: string;
-  address: string;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
+    city: string;
+    cityEn?: string;
+    cityAr?: string;
+    address: string;
+    addressEn?: string;
+    addressAr?: string;
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
 }
 
 export interface IProperty {
