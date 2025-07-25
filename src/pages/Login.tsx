@@ -97,7 +97,7 @@ const Login = () => {
   }
   return (
     <>
-    <div className="min-h-[80vh] flex justify-center items-center px-10 bg-[#ffffff]  ">
+    <div className="min-h-[50vh] flex justify-center items-center px-10 bg-[#ffffff]  ">
       {/* <ToastContainer /> */}
       <form onSubmit={formik.handleSubmit} className="w-[300px] md:w-[400px] mt-[120px] md:mt-0 ">
         <h1 className="text-4xl font-semibold text-center mb-5 ">{t("login.title")}</h1>

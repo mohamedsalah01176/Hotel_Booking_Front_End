@@ -4,10 +4,10 @@ import type { IAdmin } from "../../interface/property";
 
 const ShowHost = ({admin,t}:{admin:IAdmin,t:TFunction}) => {
   return (
-      <div className=" pb-24">
+      <div className=" pb-24 ">
         <h2 className="text-2xl font-semibold">{t("propertyDetails.host.meetHost")}</h2>
         <div className="flex flex-col md:flex-row justify-between items-center gap-7 md:gap-16">
-          <section className="p-7 px-14 bg-white shadow-xl flex items-center gap-16 rounded-xl mt-5">
+          <section className="p-7 px-14 bg-white shadow-xl flex items-center flex-col sm:flex-row gap-16 rounded-xl mt-5 ">
             <div className="text-center" >
               <img src={image} alt="host" className="w-[70px] h-[70px] rounded-full mx-auto " />
               <h2 className="text-3xl font-medium">{admin?.name?admin.name:"UnKnown"}</h2>
@@ -36,8 +36,8 @@ const ShowHost = ({admin,t}:{admin:IAdmin,t:TFunction}) => {
             <p className="mt-3 text-gray-700">{t("propertyDetails.host.responseRate")}: 100%</p>
             <p className="text-gray-700 mb-7">{t("propertyDetails.host.responseTime")}</p>
             <h2 className="text-lg font-medium">{t("propertyDetails.host.contactDetails")}</h2>
-            <p className="mt-3 text-gray-700">{t("propertyDetails.host.whatsapp")}: <span className="text-[#02717e] font-medium">{admin?.phone}</span></p>
-            <p className="mt-3 text-gray-700">{t("propertyDetails.host.email")}: <span className="text-[#02717e] font-medium">{admin?.name}</span></p>
+            <p className="mt-3 text-gray-700">{t("propertyDetails.host.whatsapp")}: <span className="text-[#02717e] font-medium">{admin?.phone?admin?.phone:t("notFound",{name:"phone"})}</span></p>
+            <p className="mt-3 text-gray-700">{t("propertyDetails.host.email")}: <span className="text-[#02717e] font-medium">{admin?.email?admin?.email:t("notFound",{name:"email"})}</span></p>
           </section>
         </div>
       </div>

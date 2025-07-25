@@ -1,5 +1,6 @@
 {
   "NotFoundNumber":"\"الرقم غير موجود\"",
+  "notFound":"لا توجد {{name}} متاحة حاليًا",
   "navbar": {
     "homes": "البيوت",
     "departments": "الشقق",

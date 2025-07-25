@@ -1,5 +1,6 @@
 {
   "NotFoundNumber":"\"The Phone is Not Found\"",
+  "notFound":"No {{name}} Found",
   "navbar": {
     "homes": "Homes",
     "departments": "Deparments",

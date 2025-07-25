@@ -15,6 +15,7 @@ const Login=lazy(()=>import("./pages/Login"));
 const ResetPassword=lazy(()=>import("./pages/ResetPassword"));
 
 import {QueryClient , QueryClientProvider} from "@tanstack/react-query"
+import ProviderContext from './context/ProviderContext';
 
 
 
@@ -58,9 +59,11 @@ function App() {
   
   return (
     <div>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router}/>
-      </QueryClientProvider>
+      <ProviderContext>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router}/>
+        </QueryClientProvider>
+      </ProviderContext>
     </div>
   )
 }
