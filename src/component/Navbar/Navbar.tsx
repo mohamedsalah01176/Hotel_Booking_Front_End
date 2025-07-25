@@ -3,23 +3,24 @@ import SearchBar from "./SearchBar";
 import { MdTranslate } from "react-icons/md";
 import { FaBars } from "react-icons/fa6";
 import Cookie from "js-cookie"
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router";
 import Menue from "./Menue";
 import homeImage from "../../assets/Home.webp"
 import departmentImage from "../../assets/experiences.webp"
 import logoImage from "../../assets/logo.webp"
+import { GeneralContext } from "../../util/GeneralContext";
+import { TokenContext } from "../../util/TokenContext";
 
 const Navbar = () => {
-  const [contentPage,setContentPage]=useState("homes");
   const [language,setLanguage]=useState<string>("");
   const {i18n}=useTranslation()
   const [openMenue,setOpentMenue]=useState<boolean>(false);
-  const [token,setToken]=useState("");
   const {t}=useTranslation()
   const url =useLocation();
-
+  const {currentSection,setCurrentSection}=useContext(GeneralContext)
+  const {token,setToken}=useContext(TokenContext)
   const handleLogout =useCallback(()=>{
     Cookie.remove("token")
     setToken("")
@@ -58,15 +59,15 @@ const Navbar = () => {
         </Link>
         <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-7 md:gap-16">
           <div  className="flex items-center justify-center sm:justify-end gap-2 sm:gap-7 cursor-pointer sm:w-[350px] ">
-            <div onClick={()=>setContentPage("homes")} className="flex items-center gap-1 relative overflow-hidden group">
+            <div onClick={()=>setCurrentSection("home")} className="flex items-center gap-1 relative overflow-hidden group">
               <img loading="lazy" src={homeImage} alt="Homes" width={35} height={35} className="group-hover:scale-110 pb-2  transition-all duration-300"/>
               <h2 className="font-medium text-[12px] sm:text-[17px]">{t('navbar.homes')}</h2>
-              <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${contentPage === "homes" ?"left-0":"-left-32"}  group-hover:left-0 transition-all duration-300`}></div>
+              <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${currentSection === "home" ?"left-0":"-left-32"}  group-hover:left-0 transition-all duration-300`}></div>
             </div>
-            <div onClick={()=>setContentPage("departments")} className="flex  items-center gap-1 relative overflow-hidden group cursor-pointer ">
+            <div onClick={()=>setCurrentSection("department")} className="flex  items-center gap-1 relative overflow-hidden group cursor-pointer ">
               <img loading="lazy" src={departmentImage} alt="Homes" width={35} height={35} className="group-hover:scale-110 pb-2 h transition-all duration-300" />
               <h2 className="font-medium text-[12px] sm:text-[17px]">{t("navbar.departments")}</h2>
-              <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${contentPage === "departments" ?"left-0":"-left-44"} group-hover:left-0 transition-all duration-300`}></div>
+              <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${currentSection === "department" ?"left-0":"-left-44"} group-hover:left-0 transition-all duration-300`}></div>
             </div>
           </div>  
           {!token?

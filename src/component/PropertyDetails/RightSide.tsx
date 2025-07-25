@@ -27,7 +27,7 @@ const RightSide = ({i18n,property,t}:{property:IProperty,i18n:i18nType,t:TFuncti
   const handleReserve=async()=>{
     const token=Cookie.get("token");
     if(token){
-      if(property.admin.phoneVerfy){
+      if(property.admin.email =="dd"){
         // handle Booking
       }else{
         toast.error(t("propertyDetails.mustVerifyPhone"));
@@ -84,7 +84,7 @@ const RightSide = ({i18n,property,t}:{property:IProperty,i18n:i18nType,t:TFuncti
           </div>
           <div onClick={() => setOpen(true)} className={`w-[140px] border p-2 ${i18n.language === "en"?"rounded-tr-xl rounded-br-xl":"rounded-tl-xl rounded-bl-xl"}  cursor-pointer `}>
             <p className="text-sm font-semibold uppercase">{t("propertyDetails.checkout")}</p>
-            <input title="checkin" type="text" readOnly value={format(range[0].startDate!,"yyyy-MM-dd")} className=" rounded-md w-full outline-0" onClick={() => setOpen(true)} />
+            <input title="checkin" type="text" readOnly value={format(range[0].endDate!,"yyyy-MM-dd")} className=" rounded-md w-full outline-0" onClick={() => setOpen(true)} />
           </div>
           {open && (
             <DateTable setOpen={setOpen} isMobile={isMobile} range={range} setRange={setRange}/>

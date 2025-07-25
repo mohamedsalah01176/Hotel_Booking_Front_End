@@ -22,10 +22,8 @@ const LeftSide = ({i18n,property,t}:{property:IProperty,i18n:i18nType,t:TFunctio
         <div className="bg-gray-300 w-full h-[2px] my-10"></div>
         <h2 className="text-3xl font-semibold">{t("propertyDetails.whatPlaceOffers")}</h2>
         <div className="grid grid-cols-2"> 
-          {i18n.language === "en"?
-            property?.servicesEn.map((servece:string ,index :number)=><PlaceOffer title={servece} key={index}/>)
-            :
-            property?.servicesAr.map((servece:string ,index :number)=><PlaceOffer title={servece} key={index}/>)
+          {
+            property?.services.map((service ,index :number)=><PlaceOffer title={i18n.language === "ar" ? service.serviceAr : service.serviceEn} key={index}/>)
           }
         </div>
       </div>

@@ -72,7 +72,7 @@ const Register = () => {
   })
 
   return (
-    <div className="min-h-[90vh] flex flex-col md:flex-row justify-center items-center gap-14 px-10">
+    <div className="min-h-[90vh] flex flex-col md:flex-row justify-center items-center gap-14 px-10 pb-20">
       {openCode === "sendCode"?
         <CodeNumber setOpenCode={setOpenCode} phone={formik.values.phone} />:
         openCode === "changeStatus"?

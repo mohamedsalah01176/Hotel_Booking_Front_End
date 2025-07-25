@@ -1,30 +1,39 @@
 
 export interface IReview {
-  user:{
-    name:string;
-    image:string;
-    createdAt:Date
-  },
-  date:string;
-  comment:string,
-  createdAt:Date
+  _id: string;
+  user: {
+    name: string;
+    image: string;
+    role: string;
+    email: string;
+  };
+  data: string;
+  dataEn: string;
+  dataAr: string;
+  rating: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+export interface IReviewBody {
+  data: string;
+  dataAr?: string;
+  dataEn?: string;
+  rating: number;
 }
 
 export interface IAdmin {
+  _id?: string;
   name: string;
   email: string;
   phone: string;
-  image?: string;
-  phoneVerfy:boolean
+  image: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface ILocation {
   city: string;
-  cityEn: string;
-  cityAr: string;
   address: string;
-  addressEn: string;
-  addressAr: string;
   coordinates: {
     lat: number;
     lng: number;
@@ -32,35 +41,36 @@ export interface ILocation {
 }
 
 export interface IProperty {
-  _id:string;
+  _id?: string;
   title: string;
   titleEn?: string;
   titleAr?: string;
   description: string;
   descriptionEn?: string;
   descriptionAr?: string;
-  category: string;
-  rate:number;
+  category: "home" | "department";
+  rate: number;
+  reviews: IReview[];
+  admin: IAdmin;
+  images: string[];
+  nightPrice: number;
   guestNumber: number;
+  services: {
+    service: string;
+    serviceEn?: string;
+    serviceAr?: string;
+  }[];
+  ordersNumbers?: number;
   location: {
     city: string;
-    cityEn: string;
-    cityAr: string;
+    cityEn?: string;
+    cityAr?: string;
     address: string;
-    addressEn: string;
-    addressAr: string;
+    addressEn?: string;
+    addressAr?: string;
     coordinates: {
       lat: number;
       lng: number;
     };
   };
-  images: string[];
-  reviews: IReview
-  reviewsEn: IReview[];
-  reviewsAr: IReview[];
-  services: string[];
-  servicesEn: string[];
-  servicesAr: string[];
-  admin: IAdmin;
-  nightPrice: number;
 }
