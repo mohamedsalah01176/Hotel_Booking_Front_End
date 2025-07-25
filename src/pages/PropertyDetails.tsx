@@ -15,6 +15,7 @@ import type { IProperty } from "../interface/property";
 import AddReview from "../component/PropertyDetails/AddReview";
 import { toast } from "react-toastify";
 import { TokenContext } from "../util/TokenContext";
+import ConfirmMessage from "../component/PropertyDetails/ConfirmMessage";
 
 const PropertyDetails = () => {
   const {t,i18n}=useTranslation()
@@ -65,7 +66,7 @@ const PropertyDetails = () => {
   return (
     <section className="bg-[#f7f7f7] min-h-[190vh]">
       {openAddReview && <AddReview setOpenAddReview={setOpenAddReview} handleAddReview={handleAddReview}/>}
-      
+      <ConfirmMessage/>
       <div className="w-[95%] md:w-[90%] mx-auto pt-7 ">
         {/* <h1 className="text-4xl font-semibold">{i18n.language === "en"? property?.titleEn : property?.titleAr}</h1> */}
         <ImagesContainer images={property?.images as string[]}/>
