@@ -8,13 +8,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import "./style.css"
 import { useTranslation } from "react-i18next";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GeneralContext } from "../../util/GeneralContext";
 
 
 const HorizontalCardSlider = ({ nameEn,nameAr }: { nameEn: string,nameAr:string }) => {
   const {t,i18n}= useTranslation();
-  const {currentSection }=useContext(GeneralContext);
+  const {currentSection ,setSharedProperties }=useContext(GeneralContext);
 
   function getProperties() {
     return axios.get(`${import.meta.env.VITE_BASE_URL}/api/property`);
@@ -27,11 +27,13 @@ const HorizontalCardSlider = ({ nameEn,nameAr }: { nameEn: string,nameAr:string 
     queryFn: getProperties,
     staleTime: 240000,
   });
-
+  
+  useEffect(()=>{
+    setSharedProperties(propertyResponse?.data?.data.properties as IProperty[])
+  },[propertyResponse])
   const property = propertyResponse.data?.data.properties.filter(
       (item) => item?.location?.cityEn?.toLowerCase() === nameEn && item?.category?.toLowerCase() === currentSection
     ) || [];
-
 
 
   if (propertyResponse.isLoading) {
