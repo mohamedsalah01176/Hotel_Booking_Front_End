@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { toast } from 'react-toastify';
 import Cookie from "js-cookie"
 
@@ -10,6 +10,8 @@ const CodeNumber = ({setOpenCode,phone}:{setOpenCode:(d:string)=>void,phone:stri
   const [codeValue,setCodeValue]=useState("");
   const [errorMessage,setrrorMessage]=useState("");
   const {t,i18n}=useTranslation();
+  const {pathname} =useLocation();
+  console.log(pathname)
   const router=useNavigate();
   const verfiyCode=async()=>{
     try{
@@ -26,7 +28,12 @@ const CodeNumber = ({setOpenCode,phone}:{setOpenCode:(d:string)=>void,phone:stri
         toast.success(t("register.toast.welcome"));
         Cookie.set("token",res.data.token)
         setTimeout(()=>{
-          router("/home")
+          if(pathname === "/register"){
+            router("/home")
+          }else{
+            router(pathname)
+          }
+          setOpenCode("")
         },1500)
       }else{
         toast.error(t("register.toast.invalid_code"))

@@ -6,8 +6,10 @@ interface IProps {
   setRange: (val: Range[]) => void;
   isMobile: boolean;
   setOpen: (val: boolean) => void;
+  disableDates:Date[]
 }
-const DateTable = ({range,setRange,isMobile,setOpen}:IProps) => {
+const DateTable = ({range,setRange,isMobile,setOpen,disableDates}:IProps) => {
+  
   return (
     <div className="border rounded-xl p-4 shadow-lg bg-white z-50 absolute top-16 -right-7 md:right-0">
       <p className="text-sm font-medium mb-2">
@@ -24,6 +26,7 @@ const DateTable = ({range,setRange,isMobile,setOpen}:IProps) => {
         minDate={new Date()}
         months={isMobile ? 1 : 2}
         direction={isMobile ? "vertical" : "horizontal"}
+        disabledDates={disableDates}
       />
 
       <div className="flex justify-between mt-4">

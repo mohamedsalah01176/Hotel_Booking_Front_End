@@ -152,6 +152,7 @@
     "price": "{{price}} SYP",
     "forNights": "for 1 night",
     "reserve": "Reserve",
+    "doneReserve": "Reserved Done",
     "notChargedYet": "You won't be charged yet",
     "checkout": "Checkout",
     "checkin": "Check-In",
@@ -160,7 +161,13 @@
     "showAll": "Show all {{count}} reviews",
     "where":"Where you’ll be",
     "mustRegister":"You must register first",
-    "mustVerifyPhone": "You must verify your phone number first.",         
+    "mustVerifyPhone": "You must verify your phone number first.",       
+    "confirm":{
+      "title":"Confirm Reservation",
+      "message":"Your reservation will be confirmed, and you will pay the amount upon delivery. Do you want to proceed?",
+      "btn1":"Confirm",
+      "btn2":"Cancel"
+    },  
     "host": {
       "meetHost": "Meet your host",
       "superhost": "is a Superhost",

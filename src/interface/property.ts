@@ -27,6 +27,7 @@ export interface IAdmin {
   email: string;
   phone: string;
   image: string;
+  phoneVerfy:boolean
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -8,7 +8,7 @@ const Reviews = ({token,i18n,reviews,t,setOpenAddReview}:{token:string,reviews:I
         {t("propertyDetails.notReview")}
       </p>
       {token !== "" &&
-            <button onClick={()=>setOpenAddReview(true)} className="p-3 block bg-[#02717e] text-white rounded-xl text-lg cursor-pointer hover:bg-[#294a4c] transition-all duration-300">{t("propertyDetails.addReview")}</button>
+            <button onClick={()=>setOpenAddReview(true)} className="p-3 block mx-auto mt-7 bg-[#02717e] text-white rounded-xl text-lg cursor-pointer hover:bg-[#294a4c] transition-all duration-300">{t("propertyDetails.addReview")}</button>
           }
     </div>
   }

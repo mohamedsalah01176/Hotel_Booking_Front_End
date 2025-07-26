@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react'
+import  { useContext, useEffect, useState } from 'react'
 import { format } from "date-fns";
 import DateTable from '../DateTable';
 import { IoDiamond } from "react-icons/io5";
@@ -6,29 +6,48 @@ import type { Range } from "react-date-range";
 import type { IProperty } from '../../interface/property';
 import type { i18n as i18nType  } from "i18next";
 import type { TFunction } from "i18next";
-import Cookie from "js-cookie"
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import ChangeStatusCode from '../ChangeStatusCode';
 import CodeNumber from '../CodeNumber';
-const RightSide = ({i18n,property,t}:{property:IProperty,i18n:i18nType,t:TFunction}) => {
+import { TokenContext } from '../../util/TokenContext';
+import { GenerateDatesRange } from '../../util/GenerateDatesRange';
+import { isdateDisable } from '../../util/CkeckDisableDate';
+import { jwtDecode } from "jwt-decode";
+
+interface RightSideProps {
+  property: IProperty;
+  i18n: i18nType;
+  t: TFunction;
+  propertyId: string;
+  setOpenConfirm: (val: boolean) => void;
+  reserved: boolean;
+  range: Range[];
+  setRange: (val: Range[]) => void;
+}
+
+const RightSide = ({i18n,property,t,propertyId,setOpenConfirm,reserved,range,setRange}:RightSideProps) => {
   const [open, setOpen] = useState(false);
+
   const [isMobile, setIsMobile] = useState(false);
-  const [openSendCode,setOpenSendCode]=useState<string>("")
+  const [openSendCode,setOpenSendCode]=useState<string>("");
+  const {token}=useContext(TokenContext)
   const nav=useNavigate();
-  const [range,setRange]=useState<Range[]>([{
-    startDate:new Date(),
-    endDate:new Date(new Date().setDate(new Date().getDate() + 2)),
-    key:"selection"
-  }]);
+  const [disableDates,setDisAbleDates]=useState<Date[]>([])
+  
   const formattedPrice = new Intl.NumberFormat(i18n.language === "ar" ? "ar-EG" : "en-US").format(property?.nightPrice);
 
   const handleReserve=async()=>{
-    const token=Cookie.get("token");
     if(token){
-      if(property.admin.email =="dd"){
-        // handle Booking
+      const userDecode = jwtDecode<{ phoneVerfy: boolean }>(token);
+      console.log(userDecode)   
+      if(userDecode.phoneVerfy === true){
+        if(isdateDisable(range[0].startDate!,disableDates) || isdateDisable(range[0].endDate!,disableDates)){
+          toast.error("This Date is Reserved")
+        }else{
+          setOpenConfirm(true)
+        }
       }else{
         toast.error(t("propertyDetails.mustVerifyPhone"));
         const res=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/sendCode`,
@@ -62,7 +81,21 @@ const RightSide = ({i18n,property,t}:{property:IProperty,i18n:i18nType,t:TFuncti
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  return (
+
+  useEffect(()=>{
+    (async()=>{
+      const response=await fetch(`${import.meta.env.VITE_BASE_URL}/api/reserve/${propertyId}`,{
+        method:"GET",
+        headers:{
+          "Authorization": `Bearer ${token}`
+        }
+      })
+      const data= await response.json();
+      const disableRangeDate:Date[]=GenerateDatesRange(data?.property?.reserveDates || []);
+      setDisAbleDates(disableRangeDate || [])
+    })();
+  },[token,reserved])
+  return (      
     <div className="sticky top-38 left-0">
       {openSendCode === "sendCode"?
         <CodeNumber setOpenCode={setOpenSendCode} phone={property.admin.phone} />:
@@ -87,10 +120,14 @@ const RightSide = ({i18n,property,t}:{property:IProperty,i18n:i18nType,t:TFuncti
             <input title="checkin" type="text" readOnly value={format(range[0].endDate!,"yyyy-MM-dd")} className=" rounded-md w-full outline-0" onClick={() => setOpen(true)} />
           </div>
           {open && (
-            <DateTable setOpen={setOpen} isMobile={isMobile} range={range} setRange={setRange}/>
+            <DateTable setOpen={setOpen} isMobile={isMobile} range={range} setRange={setRange} disableDates={disableDates} />
           )}
         </div>
+        {reserved?
+        <button disabled className="w-[260px] block mx-auto mt-5 p-3 text-xl font-medium bg-gradient-to-r from-[#f67808] to-[#c65f05]  text-white rounded-xl cursor-pointer hover:scale-110 transition-all duration-300">{t("propertyDetails.doneReserve")}</button>
+        :
         <button onClick={handleReserve} className="w-[260px] block mx-auto mt-5 p-3 text-xl font-medium bg-gradient-to-r from-[#f67808] to-[#c65f05]  text-white rounded-xl cursor-pointer hover:scale-110 transition-all duration-300">{t("propertyDetails.reserve")}</button>
+        }
         <p className="text-center mt-2 text-gray-600">{t("propertyDetails.notChargedYet")}</p>
       </div>
     </div>

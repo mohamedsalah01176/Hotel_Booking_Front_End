@@ -16,12 +16,23 @@ import AddReview from "../component/PropertyDetails/AddReview";
 import { toast } from "react-toastify";
 import { TokenContext } from "../util/TokenContext";
 import ConfirmMessage from "../component/PropertyDetails/ConfirmMessage";
+import type { Range } from "react-date-range";
 
 const PropertyDetails = () => {
   const {t,i18n}=useTranslation()
   const {id}=useParams();
   const [openAddReview,setOpenAddReview]=useState(false);
-  const {token}=useContext(TokenContext)
+  const [openConfirm,setOpenConfirm]=useState(false);
+  const {token}=useContext(TokenContext);
+  const [reserved,setReserved]=useState(false)
+  const [range,setRange]=useState<Range[]>([{
+    startDate:new Date(),
+    endDate:new Date(new Date().setDate(new Date().getDate() + 2)),
+    key:"selection"
+  }]);
+
+
+
   const getSpecifcProperty=()=>{
     return axios.get(`${import.meta.env.VITE_BASE_URL}/api/property/${id}`)
   }
@@ -53,7 +64,6 @@ const PropertyDetails = () => {
       }else{
         toast.error(dataRes.message)
       }
-      console.log(dataRes)
     }catch(errors){
       console.log(errors)
     }
@@ -62,18 +72,18 @@ const PropertyDetails = () => {
 
 
   const property=data?.data.property as IProperty;
-
   return (
     <section className="bg-[#f7f7f7] min-h-[190vh]">
       {openAddReview && <AddReview setOpenAddReview={setOpenAddReview} handleAddReview={handleAddReview}/>}
-      <ConfirmMessage/>
+      {openConfirm && <ConfirmMessage t={t} setOpenConfirm={setOpenConfirm} propertyId={id as string} range={range} reserved={reserved} setReserved={setReserved}/>}
+      
       <div className="w-[95%] md:w-[90%] mx-auto pt-7 ">
         {/* <h1 className="text-4xl font-semibold">{i18n.language === "en"? property?.titleEn : property?.titleAr}</h1> */}
         <ImagesContainer images={property?.images as string[]}/>
         <section className="flex flex-col md:flex-row justify-between gap-14 ">
           <LeftSide i18n={i18n} property={property} t={t}/>
           <div className="sticky">
-            <RightSide i18n={i18n} property={property} t={t}/>
+            <RightSide i18n={i18n} range={range} setRange={setRange} property={property} t={t} propertyId={id as string} setOpenConfirm={setOpenConfirm} reserved={reserved}/>
           </div>
 
         </section>
