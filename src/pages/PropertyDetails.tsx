@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import { TokenContext } from "../util/TokenContext";
 import ConfirmMessage from "../component/PropertyDetails/ConfirmMessage";
 import type { Range } from "react-date-range";
+import { GenerateDatesRange } from "../util/GenerateDatesRange";
 
 const PropertyDetails = () => {
   const {t,i18n}=useTranslation()
@@ -70,12 +71,14 @@ const PropertyDetails = () => {
     console.log(data)
   },[])
 
+  const nigthCount=GenerateDatesRange([...range]as { startDate: Date; endDate: Date; }[]).length
+  
 
   const property=data?.data.property as IProperty;
   return (
     <section className="bg-[#f7f7f7] min-h-[190vh]">
       {openAddReview && <AddReview setOpenAddReview={setOpenAddReview} handleAddReview={handleAddReview}/>}
-      {openConfirm && <ConfirmMessage t={t} setOpenConfirm={setOpenConfirm} propertyId={id as string} range={range} reserved={reserved} setReserved={setReserved}/>}
+      {openConfirm && <ConfirmMessage t={t} i18n={i18n} nigthCount={nigthCount} nigthPrice={property.nightPrice} setOpenConfirm={setOpenConfirm} propertyId={id as string} range={range} reserved={reserved} setReserved={setReserved}/>}
       
       <div className="w-[95%] md:w-[90%] mx-auto pt-7 ">
         {/* <h1 className="text-4xl font-semibold">{i18n.language === "en"? property?.titleEn : property?.titleAr}</h1> */}

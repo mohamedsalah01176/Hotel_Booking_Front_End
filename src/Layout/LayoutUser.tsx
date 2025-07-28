@@ -5,9 +5,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify"
 import { useEffect } from "react";
 
-const Layout = () => {
+const LayoutUser = () => {
   const {i18n}=useTranslation();
-  const url =useLocation()
   useEffect(()=>{
 
   },[i18n])
@@ -26,7 +25,7 @@ const Layout = () => {
         <Navbar />
         <ToastContainer  position={i18n.language === "ar"?`top-left`:"top-right"}  />
         <Outlet />
-        {!["/login","/register"].includes(url.pathname)
+        {!["/login","/register"].includes(pathname)
         &&
         <Footer/>
         }
@@ -35,4 +34,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default LayoutUser;

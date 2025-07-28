@@ -8,7 +8,8 @@
     "setting":"Setting",
     "term":"Term&Privacy",
     "logout":"Logout",
-    "home":"Home"
+    "home":"Home",
+    "dashboard":"Dashboard"
   },
   "footer": {
     "brandTitle": "My Hotel",
@@ -161,7 +162,9 @@
     "showAll": "Show all {{count}} reviews",
     "where":"Where you’ll be",
     "mustRegister":"You must register first",
-    "mustVerifyPhone": "You must verify your phone number first.",       
+    "mustVerifyPhone": "You must verify your phone number first.",     
+    "nights": "For {{count}} Night",
+    "total":"Total:",  
     "confirm":{
       "title":"Confirm Reservation",
       "message":"Your reservation will be confirmed, and you will pay the amount upon delivery. Do you want to proceed?",

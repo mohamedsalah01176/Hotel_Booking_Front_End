@@ -6,7 +6,7 @@ import { lazy } from 'react';
 import { initReactI18next } from 'react-i18next';
 import transitionAR from "./transition/ar.json";
 import transitionEn from "./transition/en.json";
-import Layout from './Layout/Layout';
+import LayoutUser from './Layout/LayoutUser';
 import PropertyDetails from './pages/PropertyDetails';
 
 const NotFound=lazy(()=>import("./pages/NotFound"));
@@ -16,20 +16,31 @@ const ResetPassword=lazy(()=>import("./pages/ResetPassword"));
 
 import {QueryClient , QueryClientProvider} from "@tanstack/react-query"
 import ProviderContext from './context/ProviderContext';
+import Dashboar from './pages/Dashboar';
+import LayoutHost from './Layout/LayoutHost';
+import AddListing from './pages/AddListing';
+import Listings from './pages/Listings';
+import Customers from './pages/Customers';
 
 
 
 function App() {
   const queryClient =new QueryClient()
   const router=createBrowserRouter([
-    {path:"",element:<Layout/>,children:[
+    {path:"",element:<LayoutUser/>,children:[
       {path:"",element:<Home/>},
-      {path:"/home",element:<Home/>},
+      {path:"home",element:<Home/>},
       {path:"register",element:<Register/>},
       {path:"login",element:<Login/>},
       {path:"resetPassword",element:<ResetPassword/>},
       {path:"propertyDetails/:id",element:<PropertyDetails/>},
       {path:"*",element:<NotFound/>,}
+    ]},
+    {path:"dashboard",element:<LayoutHost/>,children:[
+      {path:"",element:<Dashboar/>},
+      {path:"addListing",element:<AddListing/>},
+      {path:"listings",element:<Listings/>},
+      {path:"customers",element:<Customers/>},
     ]}
   ])
 
