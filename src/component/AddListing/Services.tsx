@@ -9,7 +9,9 @@ import { FaHouseFloodWater, FaPersonSkiing } from "react-icons/fa6"
 import { GiShower } from "react-icons/gi";
 import { PiFirstAidKitLight } from "react-icons/pi";
 
-const Services = ({service,setService}:{service:string,setService:(val:string)=>void}) => {
+const Services = ({service,setService}:{service:string[],setService:(val:string[])=>void}) => {
+  console.log(service);
+  console.log(setService);
   return (
     <div className="py-10 pb-16 min-h-[70vh] flex flex-col justify-center items-center">
       <div className="md:w-[620px]">

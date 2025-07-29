@@ -11,7 +11,8 @@ const AddListing = () => {
   const [category,setCategory]=useState("")
   const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null);  
   const [placeContain,setPlaceContain]=useState({geust:1,badrooms:1,beds:1,bathrooms:1})
-  const [service,setService]=useState([])
+  const [service,setService]=useState<string[]>([])
+  
   return (
     <div className=" pb-5 min-h-[72vh]">
       <div className=" pb-7">
