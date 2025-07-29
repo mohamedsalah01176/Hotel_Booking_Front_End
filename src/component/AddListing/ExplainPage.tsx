@@ -3,7 +3,7 @@ import image2 from "../../assets/explain2.webp";
 import image3 from "../../assets/explain3.webp";
 const ExplainPage = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center gap-5 mt-14  animate-fade-in">
+    <div className="flex flex-col md:flex-row justify-between items-center gap-5 mt-10  pb-10 animate-fade-in">
       <div>
         <h2 className="text-5xl font-semibold w-[100%] md:w-[80%] leading-14">It<sup>,</sup>s easy to get started on My Hotel</h2>
       </div>
