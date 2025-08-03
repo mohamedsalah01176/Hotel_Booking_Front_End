@@ -58,7 +58,7 @@ const AddListing = () => {
       if(response.data.status === "success"){
         toast.success("Operation completed successfully")
         setTimeout(()=>{
-          // nav("/dashboard/listings")
+          nav("/dashboard/listings")
         },2000)
       }
     }catch(err){
