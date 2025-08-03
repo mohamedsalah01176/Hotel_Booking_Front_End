@@ -5,7 +5,7 @@ const TypeOfPlace = ({category,setCategory}:{category:string,setCategory:(val:st
   return (
     <div className="text-black flex-col flex justify-center items-center translate-y-[-10%]  gap-7 h-[70vh] mt-14 animate-fade-in">
       <h2 className="text-3xl font-semibold">What is type of place will guests have?</h2>
-      <div className="w-[600px]">
+      <div className="md:w-[600px]">
         <div onClick={()=>setCategory("home")} className={`flex  items-center justify-between gap-3 p-5 border-2 border-gray-200 rounded-xl w-full mt-2 hover:bg-gray-100 hover:border-black transition-all duration-300 cursor-pointer ${category === "home" && " bg-gray-100 border-black "}`}>
           <div>
             <h3 className="text-lg font-medium">A home</h3>
