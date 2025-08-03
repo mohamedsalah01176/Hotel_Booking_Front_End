@@ -9,7 +9,7 @@ import { BsCashCoin } from "react-icons/bs";
 const Dashboar = () => {
   return (
     <>
-      <div className=" min-h-[80vh]">
+      <div className=" min-h-[80vh] w-[90%] mx-auto">
         <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-7  border-b border-gray-300 pb-7">
           <div>
             <h2 className="font-semibold text-5xl">Refer a host,</h2>

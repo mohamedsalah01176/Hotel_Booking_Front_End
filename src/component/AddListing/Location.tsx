@@ -1,6 +1,6 @@
 import MapComponenet from "./MapComponenet"
 
-const Location = ({coords,setCoords}:{coords:{ lat: number; lng: number } | null ,setCoords:(val:{ lat: number; lng: number } )=>void}) => {
+const Location = ({coords,setCoords}:{coords:{ lat: number; lng: number,city:string,address:string } | null ,setCoords:(val:{ lat: number; lng: number,city:string,address:string } )=>void}) => {
   return (
     <div className="flex justify-center items-center min-h-[80vh] mb-24  flex-col animate-fade-in ">
       <div>
