@@ -58,7 +58,7 @@ const AddListing = () => {
       if(response.data.status === "success"){
         toast.success("Operation completed successfully")
         setTimeout(()=>{
-          // nav("/dashboard/listings")
+          nav("/dashboard/listings")
         },2000)
       }
     }catch(err){
@@ -109,8 +109,11 @@ const AddListing = () => {
         <div className="absolute left-0 -top-0 w-full h-[3px] bg-gray-300"></div>
         <div className={`absolute  -top-0 w-full h-[3px] left-[-100% bg-black transition-all duration-300 `} style={{ transform: `translateX(-${(100 - currectComponenet * 9.33)}%)` }}></div>
         <div className="flex justify-between items-center h-[82px] relative mx-10">
-          
+          {currectComponenet === 0 ?
+          <button onClick={()=>nav("/dashboard")} className="text-lg border-1  text-black px-7 py-2 rounded-xl hover:bg-red-600 hover:text-white transition-all duration-300 cursor-pointer">Back</button>
+          :
           <button onClick={()=>setCurrectComponenet(val=>val-1)} className="text-lg border-1  text-black px-7 py-2 rounded-xl hover:bg-red-600 hover:text-white transition-all duration-300 cursor-pointer">Back</button>
+          }
           {currectComponenet === 0 || currectComponenet === 4 || currectComponenet === 9?
             <button  onClick={()=>setCurrectComponenet(val=>val+1)} className="text-lg bg-[#e77008] text-white px-7 py-2 rounded-xl hover:bg-[#02717e] transition-all duration-300 cursor-pointer">Get Start</button>
             :

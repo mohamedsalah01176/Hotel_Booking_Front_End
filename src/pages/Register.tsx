@@ -7,7 +7,7 @@ import  axios  from "axios"
 // import Spinner from "../../component/spinner"
 import { toast } from 'react-toastify';
 import Cookies  from "js-cookie"
-import Spinner from "../component/Spinner"
+import Spinner from "../component/Loaders/Spinner"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router"
 import ChangeStatusCode from "../component/ChangeStatusCode"

@@ -3,7 +3,7 @@ import PropertyCard from "../PropertyCard";
 import type { IProperty } from "../../interface/property";
 import axios, { type AxiosResponse } from "axios";
 import { useQuery } from "@tanstack/react-query";
-import SliderLoader from "../SliderLoader";
+import SliderLoader from "../Loaders/SliderLoader";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import "./style.css"
