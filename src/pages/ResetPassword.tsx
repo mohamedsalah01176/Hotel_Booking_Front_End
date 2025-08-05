@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Spinner from "../component/Spinner";
+import Spinner from "../component/Loaders/Spinner";
 import { useTranslation } from "react-i18next";
 import {  useNavigate, useSearchParams } from "react-router";
 import image from "../assets/resetpassword.webp"
