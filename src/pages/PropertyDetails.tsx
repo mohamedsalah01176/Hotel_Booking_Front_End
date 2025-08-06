@@ -44,8 +44,9 @@ const PropertyDetails = () => {
     >({
     queryKey:["SpecificProperty",id],
     queryFn:getSpecifcProperty,
+    staleTime:240000
   });
-
+  console.log(data)
   const handleAddReview=useCallback(async(data:{data:string,rate:number})=>{
     try{
       const res= await fetch(`${import.meta.env.VITE_BASE_URL}/api/review/${id}?lang=${i18n.language}`,{

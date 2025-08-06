@@ -1,5 +1,6 @@
 import React, {  useRef, useState } from "react"
-import { FaCamera, FaTrash } from "react-icons/fa"
+import { FaCamera } from "react-icons/fa"
+import ShowImages from "./ShowImages"
 const AddPhotos = ({images,setImages}:{images:File[],setImages:(val:File[])=>void}) => {
   const [done,setDone]=useState(false)
   const [openImages,setOpenImages]=useState(false)
@@ -40,28 +41,7 @@ const AddPhotos = ({images,setImages}:{images:File[],setImages:(val:File[])=>voi
         <input type="file" accept="image/*" onChange={handleChange} minLength={5} multiple ref={fileInputRef} className="hidden" title="add photos" />
       </div>
       {openImages &&
-      <div className="bg-black/20 fixed top-0 left-0 flex justify-center items-center h-full w-full animate-fade-in">
-        {images.length > 0 && (
-          <div className="mt-10  bg-white p-7 rounded-xl relative ">
-            <h2 className="text-center text-3xl font-medium mb-2 ">All Photos</h2>
-            <div onClick={()=>setOpenImages(false)} className="absolute top-7 right-10 text-2xl text-red-600 font-semibold cursor-pointer hover:rotate-180 transition-all duration-500">X</div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 h-[400px] w-full p-4 overflow-y-scroll">
-              {images.map((file, index) => (
-                <div key={index} className="w-44 h-44 group rounded overflow-hidden relative">
-                  <img
-                    src={URL.createObjectURL(file)}
-                    alt={`preview-${index}`}
-                    className="w-full h-full object-cover rounded hover:scale-110 transition-all duration-300"
-                  />
-                  <div onClick={()=>deleteImage(file.name)} className="absolute inset-0 bg-red-500 bg-opacity-70 flex justify-center items-center opacity-0 group-hover:opacity-70 transition-all duration-300 cursor-pointer">
-                    <FaTrash className="text-white text-2xl" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
+        <ShowImages images={images} setOpenImages={setOpenImages} deleteImage={deleteImage} />
       }
     </div>
   )

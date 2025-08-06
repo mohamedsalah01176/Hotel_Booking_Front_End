@@ -60,6 +60,9 @@ export interface IProperty {
   images: string[];
   nightPrice: number;
   guestNumber: number;
+  bathroomNumber: number;
+  badroomNumber: number;
+  bedNumber: number;
   isActive: boolean;
   services: {
     service: string;
