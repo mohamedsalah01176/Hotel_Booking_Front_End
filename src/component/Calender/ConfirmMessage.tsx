@@ -1,10 +1,10 @@
 import axios from "axios";
 import type { TFunction } from "i18next"
 import { useContext } from "react";
-// import type { Range } from "react-date-range";
 import { toast } from "react-toastify";
 import { TokenContext } from "../../util/TokenContext";
 import type { i18n as i18nType  } from "i18next";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface IProps {
   t: TFunction;
@@ -12,21 +12,21 @@ interface IProps {
   setOpenConfirm: (val: boolean) => void;
   propertyId: string;
   range:Date [] ;
-  reserved: boolean;
-  setReserved: (val: boolean) => void;
   nigthCount:number;
   nigthPrice:number;
 }
-const ConfirmMessage = ({t,i18n,setOpenConfirm,propertyId,range,reserved,setReserved,nigthCount,nigthPrice}:IProps) => {
+const ConfirmMessage = ({i18n,t,setOpenConfirm,propertyId,range,nigthCount,nigthPrice}:IProps) => {
+  const queryClient=useQueryClient()
   const {token}=useContext(TokenContext);
+  console.log(range)
   const formattedPrice = new Intl.NumberFormat(i18n.language === "ar" ? "ar-EG" : "en-US").format(nigthCount*nigthPrice);
-  const confirm=async()=>{
+   const confirm=async()=>{
     try{
       const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/reserve/${propertyId}`,{dates:range},{headers:{Authorization:`Bearer ${token}`}});
         console.log(response)
         if(response.data.status === "success"){
           toast.success(response.data.message);
-          setReserved(!reserved)
+          await queryClient.invalidateQueries({queryKey:["calender"]})
           setOpenConfirm(false)
         }
     }catch(errors){
