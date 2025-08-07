@@ -29,9 +29,12 @@ const ConfirmMessage = ({i18n,t,setOpenConfirm,propertyId,range,nigthCount,nigth
           await queryClient.invalidateQueries({queryKey:["calender"]})
           setOpenConfirm(false)
         }
-    }catch(errors){
-      toast.error(i18n.language == "en"?errors.response.data.messageEn:errors.response.data.message)
-      console.log(errors)
+    }catch(error){
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const err = error as any;
+
+      toast.error(i18n.language == "en"?err.response.data.messageEn:err.response.data.message)
+      console.log(error)
     }
   }
   return (
