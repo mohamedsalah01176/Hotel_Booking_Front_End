@@ -9,7 +9,7 @@ interface IProps {
   disableDates:Date[]
 }
 const DateTable = ({range,setRange,isMobile,setOpen,disableDates}:IProps) => {
-  
+  console.log(disableDates)
   return (
     <div className="border rounded-xl p-4 shadow-lg bg-white z-50 absolute top-16 -right-7 md:right-0">
       <p className="text-sm font-medium mb-2">

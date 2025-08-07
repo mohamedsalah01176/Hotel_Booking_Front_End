@@ -2,7 +2,7 @@ import { FaTrash } from 'react-icons/fa'
 
 const ShowImages = ({images,setOpenImages,deleteImage}:{images:File[] | string [],setOpenImages:(val:boolean)=>void,deleteImage?:(val:string)=>void}) => {
   return (
-     <div className="bg-black/20 fixed top-0 left-0 flex justify-center items-center h-full w-full animate-fade-in">
+     <div className="bg-black/20 fixed top-0 left-0 flex justify-center items-center h-full w-full animate-fade-in z-10">
         {images.length > 0 && (
           <div className="mt-10  bg-white p-7 rounded-xl relative ">
             <h2 className="text-center text-3xl font-medium mb-2 ">All Photos</h2>

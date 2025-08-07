@@ -47,9 +47,17 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
   const formik=useFormik({
     enableReinitialize: true,
     initialValues,
-    validationSchema:yup.object({
-      title:yup.string().required("Title is Required").min(3,"Please Enter more than 2 Char"),
-      description:yup.string().required("Description is Required").min(3,"Please Enter more than 2 Char"),
+    validationSchema: yup.object({
+      title: yup.string().required("Title is required").min(3, "Please enter at least 3 characters"),
+      description: yup.string().required("Description is required").min(3, "Please enter at least 3 characters"),
+      category: yup.string().required("Category is required"),
+      priceNigth: yup.number().required("Price per night is required").min(1, "Minimum value is 1"),
+      guestNumber: yup.number().required("Guest number is required").min(1, "Minimum value is 1"),
+      bathroomNumber: yup.number().required("Bathroom number is required").min(1, "Minimum value is 1"),
+      badroomNumber: yup.number().required("Bedroom number is required").min(1, "Minimum value is 1"),
+      bedNumber: yup.number().required("Bed number is required").min(1, "Minimum value is 1"),
+      images: yup.array().min(5, "You must upload at least 5 images").required("Images are required"),
+      services: yup.array().min(1, "Select at least one service"),
     }),
     onSubmit:async(values)=>{
       try {
@@ -104,7 +112,7 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
     }
   }
   return (
-    <div  className="fixed top-[56%]  left-[50%] py-5 px-10 -translate-[50%] bg-[#f7f7f7] rounded-2xl min-h-[400px] min-w-[90%] md:min-w-[700px] ">
+    <div  className="fixed top-[56%]  left-[50%] py-5 px-10 -translate-[50%] bg-[#f7f7f7] rounded-2xl min-h-[70vh] min-w-[90%] md:min-w-[700px] ">
       <h2 className="text-center text-2xl font-medium text-[#02717e] mb-5">Upadata Property</h2>
       <button title="close" onClick={()=>setUpdateProperty(false)} className="absolute top-5 right-5 text-3xl font-medium text-red-700 transition-all duration-500 hover:rotate-180 cursor-pointer"><IoClose/> </button>
       <form onSubmit={formik.handleSubmit} className="">
@@ -127,25 +135,31 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
         </div>
 
         <div className="flex flex-col gap-1 ">
-            <label htmlFor="select" className="block font-medium">Categories:</label>
-            <select id="select" title="selection" name="category" value={formik.values.category } onChange={formik.handleChange} onBlur={formik.handleBlur}  className="w-full outline-none bg-white border-[1.5px] border-gray-400 focus:border-blue-700 focus:border-[2px] rounded-2xl p-2  transition-all duration-300 "  >
-                <option value="">Select Category</option>
-                    {categories.map((cat) => (
-                        <option key={cat} value={cat}>
-                        {cat}
-                        </option>
-                    ))}
-            </select>
+          <label htmlFor="select" className="block font-medium">Categories:</label>
+          <select id="select" title="selection" name="category" value={formik.values.category } onChange={formik.handleChange} onBlur={formik.handleBlur}  className="w-full outline-none bg-white border-[1.5px] border-gray-400 focus:border-blue-700 focus:border-[2px] rounded-2xl p-2  transition-all duration-300 "  >
+              <option value="">Select Category</option>
+                  {categories.map((cat) => (
+                      <option key={cat} value={cat}>
+                      {cat}
+                      </option>
+                  ))}
+          </select>
+          {(formik.touched.category || formik.submitCount > 0) && formik.errors.category && (
+            <p className="text-red-500 text-sm">{formik.errors.category}</p>
+          )}
         </div>
         
         <div className="flex flex-col gap-1 ">
-            {openImages && <ShowImages images={formik.values.images} setOpenImages={setOpenImages}/>}
-            <div className="flex justify-between itmes-center">
-              <label htmlFor="image" className="block font-medium">Image:</label>
-              {  formik.values.images?.length>0  &&<p className="text-sm text-green-600">you have {formik.values.images?.length} images <span className="cursor-pointer text-gray-700 font-semibold underline" onClick={()=>setOpenImages(true)}>Show Images</span></p>}
-              { formik.values.images?.length<=0 && <p className="text-sm text-red-600">you have not {formik.values.images?.length} images</p>}
-            </div>
-            <input id="image" type="file" name="images" accept="image/*" multiple onChange={handleChangeImages} onBlur={formik.handleBlur}   className="w-full outline-none bg-white border-[1.5px] border-gray-400 focus:border-blue-700 focus:border-[2px] rounded-2xl p-2  transition-all duration-300 "/>
+          {openImages && <ShowImages images={formik.values.images} setOpenImages={setOpenImages}/>}
+          <div className="flex justify-between itmes-center">
+            <label htmlFor="image" className="block font-medium">Image:</label>
+            {  formik.values.images?.length>0  &&<p className="text-sm text-green-600">you have {formik.values.images?.length} images <span className="cursor-pointer text-gray-700 font-semibold underline" onClick={()=>setOpenImages(true)}>Show Images</span></p>}
+            {/* { formik.values.images?.length<=0 && <p className="text-sm text-red-600">you have not {formik.values.images?.length} images</p>} */}
+          </div>
+          <input id="image" type="file" name="images" accept="image/*" multiple onChange={handleChangeImages} onBlur={formik.handleBlur}   className="w-full outline-none bg-white border-[1.5px] border-gray-400 focus:border-blue-700 focus:border-[2px] rounded-2xl p-2  transition-all duration-300 "/>
+          {(formik.touched.images || formik.submitCount > 0) && formik.errors.images && (
+            <p className="text-red-500 text-sm">{formik.errors.images}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-1">
@@ -159,6 +173,9 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
             onBlur={formik.handleBlur}
             className="w-full outline-none bg-white border-[1.5px] border-gray-400 focus:border-blue-700 focus:border-[2px] rounded-2xl p-2  transition-all duration-300 "
           />
+          {(formik.touched.priceNigth || formik.submitCount > 0) && formik.errors.priceNigth && (
+            <p className="text-red-500 text-sm">{formik.errors.priceNigth}</p>
+          )}
         </div>
         <div className="flex flex-col gap-1">
           <label htmlFor="services" className="block font-medium">Services</label>
@@ -171,7 +188,7 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
                     value: service.service,
                     label: service.service
                   }))
-                : [] // ✅ fallback to empty array
+                : [] 
             }
             onChange={(selectedOptions) =>
               formik.setFieldValue(
@@ -185,7 +202,10 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
               styles={{ 
                 menuPortal: base => ({ ...base, zIndex: 9999 }) 
               }}
-            />
+          />
+          {(formik.touched.services || formik.submitCount > 0) && formik.errors.services && (
+            <p className="text-red-500 text-sm">{formik.errors.services}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-1">
@@ -199,6 +219,19 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
             onBlur={formik.handleBlur}
             className="w-full outline-none bg-white border-[1.5px] border-gray-400 focus:border-blue-700 focus:border-[2px] rounded-2xl p-2  transition-all duration-300 "
           />
+          {(formik.touched.services || formik.submitCount > 0) && formik.errors.services && (
+            <>
+              {typeof formik.errors.services === "string" && (
+                <p className="text-red-500 text-sm">{formik.errors.services}</p>
+              )}
+              {Array.isArray(formik.errors.services) &&
+                formik.errors.services.map((err, index) =>
+                  typeof err === "string" ? (
+                    <p key={index} className="text-red-500 text-sm">{err}</p>
+                  ) : null
+                )}
+            </>
+          )}
         </div>
 
         <div className="flex flex-col gap-1">
@@ -212,6 +245,9 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
             onBlur={formik.handleBlur}
             className="w-full outline-none bg-white border-[1.5px] border-gray-400 focus:border-blue-700 focus:border-[2px] rounded-2xl p-2  transition-all duration-300 "
           />
+          {(formik.touched.bathroomNumber || formik.submitCount > 0) && formik.errors.bathroomNumber && (
+            <p className="text-red-500 text-sm">{formik.errors.bathroomNumber}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-1">
@@ -225,6 +261,9 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
             onBlur={formik.handleBlur}
             className="w-full outline-none bg-white border-[1.5px] border-gray-400 focus:border-blue-700 focus:border-[2px] rounded-2xl p-2  transition-all duration-300 "
           />
+          {(formik.touched.badroomNumber || formik.submitCount > 0) && formik.errors.badroomNumber && (
+            <p className="text-red-500 text-sm">{formik.errors.badroomNumber}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-1">
@@ -238,6 +277,9 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
             onBlur={formik.handleBlur}
             className="w-full outline-none bg-white border-[1.5px] border-gray-400 focus:border-blue-700 focus:border-[2px] rounded-2xl p-2  transition-all duration-300 "
           />
+          {(formik.touched.bedNumber || formik.submitCount > 0) && formik.errors.bedNumber && (
+            <p className="text-red-500 text-sm">{formik.errors.bedNumber}</p>
+          )}
         </div>
 
         {/* <div className="flex flex-col gap-1">
