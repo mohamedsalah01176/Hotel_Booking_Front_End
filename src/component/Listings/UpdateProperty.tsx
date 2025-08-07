@@ -204,7 +204,17 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
               }}
           />
           {(formik.touched.services || formik.submitCount > 0) && formik.errors.services && (
-            <p className="text-red-500 text-sm">{formik.errors.services}</p>
+            <>
+              {typeof formik.errors.services === "string" && (
+                <p className="text-red-500 text-sm">{formik.errors.services}</p>
+              )}
+              {Array.isArray(formik.errors.services) &&
+                formik.errors.services.map((err, index) =>
+                  typeof err === "string" ? (
+                    <p key={index} className="text-red-500 text-sm">{err}</p>
+                  ) : null
+                )}
+            </>
           )}
         </div>
 
@@ -219,18 +229,8 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
             onBlur={formik.handleBlur}
             className="w-full outline-none bg-white border-[1.5px] border-gray-400 focus:border-blue-700 focus:border-[2px] rounded-2xl p-2  transition-all duration-300 "
           />
-          {(formik.touched.services || formik.submitCount > 0) && formik.errors.services && (
-            <>
-              {typeof formik.errors.services === "string" && (
-                <p className="text-red-500 text-sm">{formik.errors.services}</p>
-              )}
-              {Array.isArray(formik.errors.services) &&
-                formik.errors.services.map((err, index) =>
-                  typeof err === "string" ? (
-                    <p key={index} className="text-red-500 text-sm">{err}</p>
-                  ) : null
-                )}
-            </>
+          {(formik.touched.guestNumber || formik.submitCount > 0) && formik.errors.guestNumber && (
+            <p className="text-red-500 text-sm">{formik.errors.guestNumber}</p>
           )}
         </div>
 
