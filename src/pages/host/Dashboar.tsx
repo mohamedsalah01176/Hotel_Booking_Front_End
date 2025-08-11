@@ -1,6 +1,6 @@
-import image from "../assets/mainDashboard.avif";
+import image from "../../assets/mainDashboard.avif";
 import { FiUsers } from "react-icons/fi";
-import Footer from "../component/Footer";
+import Footer from "../../component/Footer";
 import { Link } from "react-router";
 import { FaRegShareSquare } from "react-icons/fa";
 import { BsCashCoin } from "react-icons/bs";

@@ -2,15 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { format, eachDayOfInterval, startOfMonth, endOfMonth } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { TokenContext } from "../util/TokenContext";
+import { TokenContext } from "../../util/TokenContext";
 // import { GenerateDatesRange } from "../util/GenerateDatesRange";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { jwtDecode } from "jwt-decode";
 import { useTranslation } from "react-i18next";
-import CodeNumber from "../component/CodeNumber";
-import ChangeStatusCode from "../component/ChangeStatusCode";
-import ConfirmMessage from "../component/Calender/ConfirmMessage";
+import CodeNumber from "../../component/CodeNumber";
+import ChangeStatusCode from "../../component/ChangeStatusCode";
+import ConfirmMessage from "../../component/Calender/ConfirmMessage";
 
 const generateMonthDays = (monthDate: Date) => {
   const start = startOfMonth(monthDate);
@@ -21,7 +21,7 @@ const generateMonthDays = (monthDate: Date) => {
 
 
 const Calender = () => {
-  const propertyId="68824206bef74a19eb7bbdc9";
+  const {propertyId}=useParams();
   const [openSendCode,setOpenSendCode]=useState<string>("");
   const {t,i18n}=useTranslation()
   const [month, setMonth] = useState(new Date());
@@ -148,7 +148,7 @@ const Calender = () => {
         <ChangeStatusCode setOpenCode={setOpenSendCode} phone={property.admin.phone} />:
         null
         }
-        {openConfirm && <ConfirmMessage t={t} i18n={i18n} nigthCount={selectedDates.length} nigthPrice={data?.data?.nightPrice} setOpenConfirm={setOpenConfirm} propertyId={propertyId} range={selectedDates}/>}
+        {openConfirm && <ConfirmMessage t={t} i18n={i18n} nigthCount={selectedDates.length} nigthPrice={data?.data?.nightPrice} setOpenConfirm={setOpenConfirm} propertyId={propertyId as string} range={selectedDates}/>}
         <div className="w-full max-w-4xl">
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 px-2 sm:px-0">

@@ -4,13 +4,13 @@ import { useNavigate } from "react-router";
 import { useContext, useState, } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { type AxiosResponse } from "axios";
-import { TokenContext } from "../util/TokenContext";
-import type { IProperty } from "../interface/property";
-import ListingForLargeScreen from "../component/Listings/ListingForLargeScreen";
-import ListingForMobile from "../component/Listings/ListingForMobile";
-import CommonLoader from "../component/Loaders/commonLoader/CommonLoader";
+import { TokenContext } from "../../util/TokenContext";
+import type { IProperty } from "../../interface/property";
+import ListingForLargeScreen from "../../component/Listings/ListingForLargeScreen";
+import ListingForMobile from "../../component/Listings/ListingForMobile";
+import CommonLoader from "../../component/Loaders/commonLoader/CommonLoader";
 import { toast } from "react-toastify";
-import UpdateProperty from "../component/Listings/UpdateProperty";
+import UpdateProperty from "../../component/Listings/UpdateProperty";
 
 const Listings = () => {
   const nav=useNavigate();

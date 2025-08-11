@@ -16,12 +16,13 @@ const ResetPassword=lazy(()=>import("./pages/ResetPassword"));
 
 import {QueryClient , QueryClientProvider} from "@tanstack/react-query"
 import ProviderContext from './context/ProviderContext';
-import Dashboar from './pages/Dashboar';
+import Dashboar from './pages/host/Dashboar';
 import LayoutHost from './Layout/LayoutHost';
-import AddListing from './pages/AddListing';
-import Listings from './pages/Listings';
-import Customers from './pages/Customers';
-import Calender from './pages/Calender';
+import AddListing from './pages/host/AddListing';
+import Listings from './pages/host/Listings';
+import Customers from './pages/host/Customers';
+import Calender from './pages/host/Calender';
+import Setting from './pages/Setting';
 
 
 
@@ -35,6 +36,7 @@ function App() {
       {path:"login",element:<Login/>},
       {path:"resetPassword",element:<ResetPassword/>},
       {path:"propertyDetails/:id",element:<PropertyDetails/>},
+      {path:"setting",element:<Setting/>},
       {path:"*",element:<NotFound/>,}
     ]},
     {path:"dashboard",element:<LayoutHost/>,children:[
@@ -42,7 +44,7 @@ function App() {
       {path:"addListing",element:<AddListing/>},
       {path:"listings",element:<Listings/>},
       {path:"customers",element:<Customers/>},
-      {path:"calender",element:<Calender/>},
+      {path:"calender/:propertyId",element:<Calender/>},
     ]}
   ])
 

@@ -32,9 +32,9 @@ const HorizontalCardSlider = ({ nameEn,nameAr }: { nameEn: string,nameAr:string 
     setSharedProperties(propertyResponse?.data?.data.properties as IProperty[])
   },[propertyResponse])
   const property = propertyResponse.data?.data.properties.filter(
-      (item) => item?.location?.cityEn?.toLowerCase() === nameEn && item?.category?.toLowerCase() === currentSection
+      (item) => item?.location?.cityEn?.toLowerCase() === nameEn?.toLowerCase() && item?.category?.toLowerCase() === currentSection?.toLowerCase()
     ) || [];
-
+    console.log(propertyResponse.data)
 
   if (propertyResponse.isLoading) {
     return <SliderLoader name={nameEn?.charAt(0).toUpperCase()} />;
