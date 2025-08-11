@@ -1,12 +1,8 @@
 @import "tailwindcss";
 @keyframes fade-in   { from {opacity:0} to {opacity:1} }
-@keyframes fade-out  { from {opacity:1} to {opacity:0} }
-
-
 
 
 .animate-fade-in  { animation: fade-in  .5s ease-out forwards; }
-.animate-fade-out { animation: fade-out .5s ease-in  forwards; }
 
 
  @keyframes shimmer {
@@ -26,3 +22,12 @@
 .isactive{
     left: 0px;
 }
+
+
+/* لإزالة الأسهم من input type="number" في جميع المتصفحات */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+

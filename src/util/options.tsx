@@ -1,0 +1,25 @@
+export const options = [
+  { value: 'WiFi', label: 'WiFi' },
+  { value: 'TV', label: 'TV' },
+  { value: 'Kitchen', label: 'Kitchen' },
+  { value: 'Washer', label: 'Washer' },
+  { value: 'Free parking on Premises', label: 'Free parking on Premises' },
+  { value: 'Paid parkiing on premises', label: 'Paid parkiing on premises' },
+  { value: 'Air Conditioning', label: 'Air Conditioning' },
+  { value: 'Dedicated workspace', label: 'Dedicated workspace' },
+  { value: 'Pool', label: 'Pool' },
+  { value: 'Hot tub', label: 'Hot tub' },
+  { value: 'BBQ grill', label: 'BBQ grill' },
+  { value: 'Outdoor diring area', label: 'Outdoor diring area' },
+  { value: 'Fire pit', label: 'Fire pit' },
+  { value: 'Piano', label: 'Piano' },
+  { value: 'Lake access', label: 'Lake access' },
+  { value: 'Exercise equipment', label: 'Exercise equipment' },
+  { value: 'Bash access', label: 'Bash access' },
+  { value: 'Sky-in/sky-out', label: 'Sky-in/sky-out' },
+  { value: 'Outdoor shower', label: 'Outdoor shower' },
+  { value: 'Smoke alarm', label: 'Smoke alarm' },
+  { value: 'First aid kit', label: 'First aid kit' },
+  { value: 'Fire extinguisher', label: 'Fire extinguisher' }
+];
+

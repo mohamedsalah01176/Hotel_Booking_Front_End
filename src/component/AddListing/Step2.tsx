@@ -1,7 +1,7 @@
 import image from "../../assets/explain2.webp"
 const Step2 = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center min-h-[70vh] pt-5 pb-10">
+    <div className="flex flex-col md:flex-row justify-between items-center min-h-[70vh] pt-5 pb-10 animate-fade-in">
       <div className="md:w-[50%]">
         <p className="font-medium">Step2</p>
         <h2 className="text-5xl font-semibold w-[100%] md:w-[80%] mt-4 mb-10">Make your place stand out</h2>

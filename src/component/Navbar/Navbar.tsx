@@ -54,7 +54,7 @@ const Navbar = () => {
     <div className="sticky top-0 left-0 w-full py-4 bg-[#f7f7f7] pt-7  z-10 border-b-2 border-[#e0dede7a]">
       <section className="flex justify-between items-start md:items-center w-[98%] md:w-[90%] mx-auto">
         <Link to={'/home'} className="text-xl sm:text-3xl font-semibold hover:scale-110 transition-all duration-300 outline-0">
-          <img loading="lazy" src={logoImage} alt="logo" className="w-[70px]" width={70} height={70}/>
+          <img loading="lazy" src={logoImage} alt="logo" className="w-[40px] md:w-[70px]" width={70} height={70}/>
         </Link>
         <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-7 md:gap-16">
           {url.pathname.includes("/dashboard")?

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet, useLocation } from "react-router"
 import Navbar from "../component/Navbar/Navbar";
+import { ToastContainer } from "react-toastify";
 
 const LayoutHost = () => {
     const {i18n}=useTranslation();
@@ -19,10 +20,11 @@ const LayoutHost = () => {
 
   return (
     <div dir={i18n.language === "en" ?"ltr":"rtl"} lang={i18n.language === "en" ?"en":"ar"}>
+      <ToastContainer
+        position={i18n.language === "ar" ? "top-left" : "top-right"}
+      />
       <Navbar/>
-      <div className="w-[90%] mx-auto">
-        <Outlet/>
-      </div>
+      <Outlet/>
     </div>
   )
 }

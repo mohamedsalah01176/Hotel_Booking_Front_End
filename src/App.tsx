@@ -21,6 +21,7 @@ import LayoutHost from './Layout/LayoutHost';
 import AddListing from './pages/AddListing';
 import Listings from './pages/Listings';
 import Customers from './pages/Customers';
+import Calender from './pages/Calender';
 
 
 
@@ -41,6 +42,7 @@ function App() {
       {path:"addListing",element:<AddListing/>},
       {path:"listings",element:<Listings/>},
       {path:"customers",element:<Customers/>},
+      {path:"calender",element:<Calender/>},
     ]}
   ])
 

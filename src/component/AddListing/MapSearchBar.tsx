@@ -7,7 +7,7 @@ import { GeoSearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 import { useMap } from "react-leaflet";
 import L from "leaflet";
 
-export const SearchBar = ({ setCoords }: { setCoords: (val: { lat: number; lng: number }) => void }) => {
+export const SearchBar = ({ setCoords }: {setCoords:(val:{ lat: number; lng: number,city:string,address:string } ) => void }) => {
   const map = useMap();
 
     useEffect(() =>{
@@ -29,7 +29,7 @@ export const SearchBar = ({ setCoords }: { setCoords: (val: { lat: number; lng: 
 
     map.on("geosearch/showlocation", (result: any) => {
       const { location } = result;
-      setCoords({ lat: location.y, lng: location.x });
+      setCoords({city:"",address:"",lat: location.y, lng: location.x });
     });
 
     return () => {

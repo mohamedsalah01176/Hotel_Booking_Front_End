@@ -44,8 +44,9 @@ const PropertyDetails = () => {
     >({
     queryKey:["SpecificProperty",id],
     queryFn:getSpecifcProperty,
+    staleTime:240000
   });
-
+  console.log(data)
   const handleAddReview=useCallback(async(data:{data:string,rate:number})=>{
     try{
       const res= await fetch(`${import.meta.env.VITE_BASE_URL}/api/review/${id}?lang=${i18n.language}`,{
@@ -71,14 +72,14 @@ const PropertyDetails = () => {
     console.log(data)
   },[])
 
-  const nigthCount=GenerateDatesRange([...range]as { startDate: Date; endDate: Date; }[]).length
+  const nigthReserved=GenerateDatesRange([...range]as { startDate: Date; endDate: Date; }[])
   
 
   const property=data?.data.property as IProperty;
   return (
     <section className="bg-[#f7f7f7] min-h-[190vh]">
       {openAddReview && <AddReview setOpenAddReview={setOpenAddReview} handleAddReview={handleAddReview}/>}
-      {openConfirm && <ConfirmMessage t={t} i18n={i18n} nigthCount={nigthCount} nigthPrice={property.nightPrice} setOpenConfirm={setOpenConfirm} propertyId={id as string} range={range} reserved={reserved} setReserved={setReserved}/>}
+      {openConfirm && <ConfirmMessage t={t} i18n={i18n} nigthCount={nigthReserved.length} nigthPrice={property.nightPrice} setOpenConfirm={setOpenConfirm} propertyId={id as string} range={nigthReserved} reserved={reserved} setReserved={setReserved}/>}
       
       <div className="w-[95%] md:w-[90%] mx-auto pt-7 ">
         {/* <h1 className="text-4xl font-semibold">{i18n.language === "en"? property?.titleEn : property?.titleAr}</h1> */}

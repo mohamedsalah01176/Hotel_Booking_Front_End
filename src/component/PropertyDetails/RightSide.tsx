@@ -12,7 +12,7 @@ import axios from 'axios';
 import ChangeStatusCode from '../ChangeStatusCode';
 import CodeNumber from '../CodeNumber';
 import { TokenContext } from '../../util/TokenContext';
-import { GenerateDatesRange } from '../../util/GenerateDatesRange';
+// import { GenerateDatesRange } from '../../util/GenerateDatesRange';
 import { isdateDisable } from '../../util/CkeckDisableDate';
 import { jwtDecode } from "jwt-decode";
 
@@ -91,8 +91,22 @@ const RightSide = ({i18n,property,t,propertyId,setOpenConfirm,reserved,range,set
         }
       })
       const data= await response.json();
-      const disableRangeDate:Date[]=GenerateDatesRange(data?.property?.reserveDates || []);
-      setDisAbleDates(disableRangeDate || [])
+      console.log(data,"ddddddddddddddddddd")
+      if (data?.property?.reserveDates?.length > 0) {
+        const allDates: Date[] = [];
+
+        for (let i = 0; i < data.property.reserveDates.length; i++) {
+          const datesArray = data.property.reserveDates[i].dates;
+
+          for (let j = 0; j < datesArray.length; j++) {
+            const date = new Date(datesArray[j]);
+            allDates.push(date);
+          }
+        }
+
+        setDisAbleDates(allDates); 
+        console.log("Disabled Dates:", allDates);
+      }
     })();
   },[token,reserved])
   return (      

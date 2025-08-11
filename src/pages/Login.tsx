@@ -1,7 +1,7 @@
 import { useFormik } from "formik"
 import image from "../assets/login.webp"
 import * as yup from "yup"
-import Spinner from "../component/Spinner";
+import Spinner from "../component/Loaders/Spinner";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router";
