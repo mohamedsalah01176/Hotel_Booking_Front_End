@@ -42,7 +42,7 @@ const Menue = ({i18n,setOpentMenue,token,handleLogout}:{i18n:{language:string},s
         <p className="text-black font-medium">{t("navbar.term")}</p>
       </Link>
       {url.pathname !== "/login" && url.pathname !== "/register" && token &&
-        <Link onClick={()=>setOpentMenue(false)} to={"/"} className={`flex justify-center gap-2 items-center p-2.5  rounded-xl hover:bg-gray-200 transition-all duration-300`}>
+        <Link onClick={()=>setOpentMenue(false)} to={"/setting"} className={`flex justify-center gap-2 items-center p-2.5  rounded-xl hover:bg-gray-200 transition-all duration-300`}>
           {/* <FaBars className="text-black "/> */}
           <p className="text-black font-medium">{t("navbar.setting")}</p>
         </Link>

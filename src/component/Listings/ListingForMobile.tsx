@@ -2,7 +2,10 @@ import { LiaExchangeAltSolid } from "react-icons/lia";
 import image from "../../assets/default.jpg"
 import { BiEditAlt } from "react-icons/bi"
 import type { IProperty } from "../../interface/property"
+import { FaRegCalendarCheck } from "react-icons/fa";
+import { useNavigate } from "react-router";
 const ListingForMobile = ({properties,searchProperties,ChangeActiveProperty,setUpdateProperty,setPropertyId}:{properties:IProperty[],searchProperties:IProperty[],ChangeActiveProperty:(val1:string,val2:boolean)=>void,setUpdateProperty:(val:boolean)=>void,setPropertyId:(val:string)=>void}) => {
+  const nav=useNavigate();
   return (
     <div className="mt-10 md:hidden">
       {searchProperties?.length>0?
@@ -23,6 +26,8 @@ const ListingForMobile = ({properties,searchProperties,ChangeActiveProperty,setU
                 <div> 
                   <BiEditAlt onClick={()=>{setUpdateProperty(true);setPropertyId(item._id as string)}} className="text-xl cursor-pointer hover:text-red-700 transition-all duration-300 font-medium inline-block mr-2"/>
                   <LiaExchangeAltSolid onClick={()=>ChangeActiveProperty(item._id as string,item.isActive)} className="text-2xl cursor-pointer hover:text-sky-700 transition-all duration-300 font-medium inline-block "/>
+                  <FaRegCalendarCheck onClick={()=>nav(`/dashboard/calender/${item._id}`)} className="text-2xl cursor-pointer hover:text-[#02717e] transition-all duration-300 font-medium inline-block "/>
+                
                 </div>
               </div>
             </div>
@@ -46,6 +51,7 @@ const ListingForMobile = ({properties,searchProperties,ChangeActiveProperty,setU
                 <div> 
                   <BiEditAlt onClick={()=>{setUpdateProperty(true);setPropertyId(item._id as string)}} className="text-xl cursor-pointer hover:text-red-700 transition-all duration-300 font-medium inline-block mr-2"/>
                   <LiaExchangeAltSolid onClick={()=>ChangeActiveProperty(item._id as string,item.isActive)} className="text-2xl cursor-pointer hover:text-sky-700 transition-all duration-300 font-medium inline-block "/>
+                  <FaRegCalendarCheck onClick={()=>nav(`/dashboard/calender/${item._id}`)} className="text-2xl cursor-pointer hover:text-[#02717e] transition-all duration-300 font-medium inline-block "/>
                 </div>
               </div>
             </div>
