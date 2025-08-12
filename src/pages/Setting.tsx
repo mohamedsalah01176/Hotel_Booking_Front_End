@@ -14,6 +14,8 @@ import { useTranslation } from "react-i18next";
 import { IoMdCheckmark } from "react-icons/io";
 import { toast } from "react-toastify";
 import Loader from "../component/Loaders/Loader";
+import CodeNumber from "../component/CodeNumber";
+import ChangeStatusCode from "../component/ChangeStatusCode";
 
 type UserUpdate = Partial<{
   name: string;
@@ -25,11 +27,16 @@ type UserUpdate = Partial<{
   image:string
 }>;
 const Setting = () => {
-  const {t,i18n}=useTranslation()
+  const {t,i18n}=useTranslation();
   const {token}=useContext(TokenContext);
   const fileInputRef=useRef<HTMLInputElement | null>(null);
-  const [tempImage,setTempImage]=useState('')
-  const queryClient=useQueryClient()
+  const [tempImage,setTempImage]=useState('');
+  const [openCode,setOpenCode]=useState<string>("");
+  const queryClient=useQueryClient();
+
+
+
+
   const getUserInformation=()=>{
     return axios.get(`${import.meta.env.VITE_BASE_URL}/api/setting`,{headers:{Authorization:`Bearer ${token}`}})
   }
@@ -134,6 +141,22 @@ const Setting = () => {
     fileInputRef.current?.click();
   }
 
+  const handleSendCode=async()=>{
+    const res=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/sendCode`,
+      {phone:userInformation.phone},
+      {
+        headers:{
+          'Content-Type':'application/json',
+        }
+      }
+    )
+    if(res.data.status === 'success'){
+      toast.success(t("register.messages.codeSentSuccess"));
+      setTimeout(()=>{
+        setOpenCode("sendCode");
+      },2000)
+    }
+  }
 
   if(isLoading){
     return <div className="min-h-[80vh] flex items-center justify-center">
@@ -142,6 +165,12 @@ const Setting = () => {
   }
   return (
     <div className="min-h-[80vh]  bg-[#f7f7f7]">
+      {openCode === "sendCode"?
+        <CodeNumber setOpenCode={setOpenCode} phone={formik.values.phone} />:
+        openCode === "changeStatus"?
+        <ChangeStatusCode setOpenCode={setOpenCode} phone={formik.values.phone} />:
+        null
+        }
       <div className="w-[85%] mx-auto bg-white p-5 rounded-xl">
         <h1 className="text-4xl text-[#02717e] text-center font-semibold pt-4 mb-10">Personal Setting</h1>
         <section className=" px-3 md:px-10">
@@ -175,7 +204,7 @@ const Setting = () => {
                 <div className="flex gap-3 items-center  mt-2 w-full">
                   <input readOnly={userInformation.phoneVerfy} id="phone" type="text" value={formik.values.phone} onChange={formik.handleChange} onBlur={formik.handleBlur} name="phone" placeholder="Your Phone" className={`border p-3 rounded-lg w-full  outline-0 border-[#02717e] ${userInformation.phoneVerfy && "text-gray-600 cursor-not-allowed"}`} />
                   {!userInformation.phoneVerfy &&
-                    <button className="text-white bg-[#02717e] px-4 py-2 rounded-xl cursor-pointer hover:bg-[#e77008] transition-all duration-300">Verify</button>
+                    <button onClick={handleSendCode} className="text-white bg-[#02717e] px-4 py-2 rounded-xl cursor-pointer hover:bg-[#e77008] transition-all duration-300">Verify</button>
                   }
                 </div>
                 {(formik.touched.phone && formik.errors.phone) && typeof formik.errors.phone === "string" &&

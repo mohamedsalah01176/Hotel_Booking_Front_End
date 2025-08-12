@@ -7,10 +7,10 @@ import  axios  from "axios"
 // import Spinner from "../../component/spinner"
 import { toast } from 'react-toastify';
 import Cookies  from "js-cookie"
-import Spinner from "../component/Loaders/Spinner"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router"
 import ChangeStatusCode from "../component/ChangeStatusCode"
+import Loader from "../component/Loaders/Loader"
 
 
 const Register = () => {
@@ -123,8 +123,8 @@ const Register = () => {
           </div>
         </div>
         <button type="submit" className="flex justify-center items-center gap-3 bg-gray-800 text-white w-[90%] mx-auto mt-5 p-2 rounded-2xl text-lg cursor-pointer hover:bg-gray-950 transition-all duration-300">
-          {formik.isSubmitting &&
-          <Spinner/>
+          {formik.isSubmitting && formik.dirty &&
+          <Loader/>
           }
           
           {t("register.buttons.submit")}
