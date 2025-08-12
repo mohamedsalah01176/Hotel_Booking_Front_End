@@ -8,9 +8,9 @@ import { TokenContext } from "../../util/TokenContext";
 import type { IProperty } from "../../interface/property";
 import ListingForLargeScreen from "../../component/Listings/ListingForLargeScreen";
 import ListingForMobile from "../../component/Listings/ListingForMobile";
-import CommonLoader from "../../component/Loaders/commonLoader/CommonLoader";
 import { toast } from "react-toastify";
 import UpdateProperty from "../../component/Listings/UpdateProperty";
+import Spinner from "../../component/Loaders/Spinner";
 
 const Listings = () => {
   const nav=useNavigate();
@@ -30,8 +30,8 @@ const Listings = () => {
   });
   const properties=data?.data.properties ??[]
   if(properties.length<=0){
-    return<div className="min-h-[80vh] flex flex-col items-center py-10 w-[90%] mx-auto">
-      <CommonLoader/>
+    return <div className="min-h-[80vh] flex items-center justify-center">
+      <Spinner/>
     </div> 
   }
 
