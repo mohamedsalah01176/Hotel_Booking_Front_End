@@ -27,7 +27,7 @@ type UserUpdate = Partial<{
 const Setting = () => {
   const {t,i18n}=useTranslation()
   const {token}=useContext(TokenContext);
-  const fileInputRef=useRef(null);
+  const fileInputRef=useRef<HTMLInputElement | null>(null);
   const [tempImage,setTempImage]=useState('')
   const queryClient=useQueryClient()
   const getUserInformation=()=>{
@@ -92,9 +92,9 @@ const Setting = () => {
         const formData=new FormData();
         for(const key in updateObject){
           const typedKey = key as keyof typeof updateObject;
-          const value = updateObject[typedKey];
-          if (value instanceof File) {
-            formData.append(key, value as File);
+          const value = updateObject[typedKey] as unknown;
+          if (typeof value === "object" && value instanceof File) {
+            formData.append(key, value);
           } else {
             formData.append(key, String(value));
           }
@@ -108,10 +108,15 @@ const Setting = () => {
             toast.success(i18n.language === "en"?response.data.messageEn :response.data.messageAr)
           }
         }
-      }catch(errors){
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      }catch(errors:any) {
         console.log(errors)
-        toast.error(i18n.language === "en"?errors?.response.data.messageEn :errors.response.data.messageAr)
+        toast.error(i18n.language === "en"
+          ? errors?.response.data.messageEn
+          : errors.response.data.messageAr
+        )
       }
+
     }
   })
 
