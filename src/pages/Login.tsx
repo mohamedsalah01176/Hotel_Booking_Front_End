@@ -1,13 +1,13 @@
 import { useFormik } from "formik"
 import image from "../assets/login.webp"
 import * as yup from "yup"
-import Spinner from "../component/Loaders/Spinner";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router";
 import cooke from "js-cookie";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import Loader from "../component/Loaders/Loader";
 
 
 
@@ -121,7 +121,7 @@ const Login = () => {
         
         <button type="submit" className="flex justify-center items-center gap-3 bg-gray-800 text-white w-[90%] mx-auto mt-5 p-2 rounded-2xl text-lg cursor-pointer hover:bg-gray-950 transition-all duration-300">
           {formik.isSubmitting &&
-          <Spinner/>
+          <Loader/>
         }
           {t("login.buttons.submit")}
         </button>
@@ -138,7 +138,7 @@ const Login = () => {
 
             <button onClick={handleForgetPasswordForm} type="button" className={`${emailOfForgetPasswordValidation.includes("Not")?"mt-3":"mt-7"} px-7 flex justify-center items-center gap-3 bg-gray-800 text-white  p-2 rounded-2xl text-lg cursor-pointer hover:bg-gray-950 transition-all duration-300`}>
               {isloading &&
-              <Spinner/>
+              <Loader/>
               }
               {t("login.buttons.send")}
             </button>
