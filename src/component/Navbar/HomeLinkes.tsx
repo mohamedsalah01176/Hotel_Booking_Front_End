@@ -7,6 +7,7 @@ import { GeneralContext } from "../../util/GeneralContext"
 const HomeLinkes = ({t}:{t:TFunction}) => {
     const {currentSection,setCurrentSection}=useContext(GeneralContext)
   return (
+    
     <div  className="flex items-center justify-center  gap-2 sm:gap-7 cursor-pointer sm:w-[350px] ">
       <div onClick={()=>setCurrentSection("home")} className="flex items-center gap-1 relative overflow-hidden group">
         <img loading="lazy" src={homeImage} alt="Homes" width={35} height={35} className="group-hover:scale-110 pb-2  transition-all duration-300"/>
