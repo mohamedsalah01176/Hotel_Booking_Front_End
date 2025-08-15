@@ -95,12 +95,18 @@ const ContactUs = () => {
         </div>
         <div className="min-h-[10vh] my-14">
           <h2 className="text-4xl text-center font-semibold mb-10">Frequently Assked Questions</h2>
-          {questions?.map((item:IQuestions,index:number)=>
+          {questions.length>0?
+          questions.map((item:IQuestions,index:number)=>
             <div className="mt-10" key={index}>
               <h3 className={`text-xl font-medium ${i18n.language === "en"?"border-l-4 pl-4":"border-r-4 pr-4"}  border-[#02717e]  py-4 bg-[#e7e7e769]`}><span className="text-4xl text-[#02717e] font-semibold pr-2">Q.</span>{i18n.language === "en"?item.questionEn:item.questionAr}</h3>
               <p className={`  ${i18n.language === "en"?"border-l-4 pl-4":"border-r-4 pr-4"} border-gray-500 py-4 mt-2 text-gray-700`}> <span className="text-4xl font-semibold pr-2">A.</span>{i18n.language === "en"?item.answerEn:item.answerAr}</p>
             </div>
-          )}
+          )
+          :
+          <p className="text-center text-gray-500">
+            No questions available.
+          </p>
+          }
         </div>
       </div>
     </div>
