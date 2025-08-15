@@ -5,4 +5,5 @@ export interface JwtPayload {
   name?: string;
   phoneVerfy?:boolean;
   image?:string;
+  phone?:string;
 } 

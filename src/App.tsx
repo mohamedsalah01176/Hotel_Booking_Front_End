@@ -23,6 +23,7 @@ import Listings from './pages/host/Listings';
 import Customers from './pages/host/Customers';
 import Calender from './pages/host/Calender';
 import Setting from './pages/Setting';
+import ContactUs from './pages/ContactUs';
 
 
 
@@ -37,6 +38,7 @@ function App() {
       {path:"resetPassword",element:<ResetPassword/>},
       {path:"propertyDetails/:id",element:<PropertyDetails/>},
       {path:"setting",element:<Setting/>},
+      {path:"contactUs",element:<ContactUs/>},
       {path:"*",element:<NotFound/>,}
     ]},
     {path:"dashboard",element:<LayoutHost/>,children:[
