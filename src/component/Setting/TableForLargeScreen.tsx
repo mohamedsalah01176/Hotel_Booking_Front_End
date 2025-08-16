@@ -3,32 +3,16 @@ import { useTranslation } from "react-i18next"
 import image from "../../assets/default.jpg"
 import type { IPropertyWithReserves } from "../../interface/ReserveDate"
 import { useNavigate } from "react-router"
-import axios from "axios"
-import { toast } from "react-toastify"
-import { useQueryClient } from "@tanstack/react-query"
 
-const TableForLargeScreen = ({properties,token}:{properties:IPropertyWithReserves[],token:string}) => {
+const TableForLargeScreen = ({properties,handleDeleteProperty}:{properties:IPropertyWithReserves[],handleDeleteProperty:(e:React.MouseEvent<HTMLButtonElement>,dateId:string)=>void}) => {
   const {t,i18n}=useTranslation()
   const nav=useNavigate();
-  const queryClient=useQueryClient()
 
   const handleGoToProperty=(propertyId:string)=>{
     nav(`/propertyDetails/${propertyId}`)
   }
 
-  const handleDeleteProperty=async(e: React.MouseEvent<HTMLButtonElement>,dateId:string)=>{
-    e.stopPropagation()
-    try{
-      const res=await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/reservedDates/${dateId}`,{headers:{"Authorization":`Bearer ${token}`}});
-      console.log(res);
-      await queryClient.invalidateQueries({queryKey:["booking"]})
-      if(res.data.status === "success"){
-        toast.success("Reverved Date Deleted")
-      }
-    }catch(errors){
-      console.log(errors)
-    }
-  }
+  
   return (
     <table className="mt-10 w-full hidden md:table">
         <thead>
@@ -66,7 +50,8 @@ const TableForLargeScreen = ({properties,token}:{properties:IPropertyWithReserve
                     <p className={`inline-block ${i18n.language === "en" ? "ml-3" : "mr-3"} text-lg font-medium`}>
                       {i18n.language == "en"
                         ? item?.property.titleEn?.split(" ").slice(0, 3).join(" ")
-                        : item?.property.titleAr?.split(" ").slice(0, 3).join(" ")}
+                        : item?.property.titleAr?.split(" ").slice(0, 3).join(" ")
+                      }
                     </p>
                   </td>
                   <td className="pr-2">{item?.property.admin.phone}</td>
@@ -74,11 +59,11 @@ const TableForLargeScreen = ({properties,token}:{properties:IPropertyWithReserve
                   <td className="">{endDate.toLocaleDateString()}</td>
                   <td className="pl-2">
                     {isExpired ? (
-                      <span className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded-full">Ended</span>
+                      <span className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded-full">{t("setting.status.ended")}</span>
                     ) : isDuring ? (
-                      <span className="px-3 py-1 text-sm bg-green-100 text-green-700 rounded-full">During</span>
+                      <span className="px-3 py-1 text-sm bg-green-100 text-green-700 rounded-full">{t("setting.status.during")}</span>
                     ) : (
-                      <span className="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-full">Upcoming</span>
+                      <span className="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-full">{t("setting.status.upcoming")}</span>
                     )}
                   </td>
                   <td>

@@ -229,6 +229,11 @@
       "startDate": "تاريخ البداية",
       "endDate": "تاريخ النهاية",
       "cancelReservation": "إلغاء"
-    }
+    },
+    "status": {
+    "ended": "منتهية",
+    "during": "جارية",
+    "upcoming": "قادمة"
+  }
   }
 }

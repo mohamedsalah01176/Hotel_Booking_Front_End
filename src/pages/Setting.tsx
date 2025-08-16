@@ -16,11 +16,11 @@ import { toast } from "react-toastify";
 import Loader from "../component/Loaders/Loader";
 import CodeNumber from "../component/CodeNumber";
 import ChangeStatusCode from "../component/ChangeStatusCode";
-import TableForLargeScreen from "../component/Setting/tableForLargeScreen";
 import { MdClose } from "react-icons/md";
 import type { IPropertyWithReserves } from "../interface/ReserveDate";
 import ListingFotMobile from "../component/Setting/ListingFotMobile";
 import { useNavigate } from "react-router";
+import TableForLargeScreen from "../component/Setting/tableForLargeScreen";
 
 type UserUpdate = Partial<{
   name: string;
@@ -181,8 +181,22 @@ const Setting = () => {
       })
     : [];
 
-      console.log(query.data)
-  if(isLoading){
+
+const handleDeleteProperty=async(e: React.MouseEvent<HTMLButtonElement>,dateId:string)=>{
+    e.stopPropagation()
+    try{
+      const res=await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/reservedDates/${dateId}`,{headers:{"Authorization":`Bearer ${token}`}});
+      console.log(res);
+      await queryClient.invalidateQueries({queryKey:["booking"]})
+      if(res.data.status === "success"){
+        toast.success("Reverved Date Deleted")
+      }
+    }catch(errors){
+      console.log(errors)
+    }
+  }
+
+    if(isLoading){
     return <div className="min-h-[80vh] flex items-center justify-center">
       <Spinner/>
     </div> 
@@ -195,7 +209,7 @@ const Setting = () => {
         <ChangeStatusCode setOpenCode={setOpenCode} phone={formik.values.phone} />:
         null
         }
-      <div className="w-[85%] mx-auto bg-white p-5 rounded-xl">
+      <div className="w-full sm:w-[85%] mx-auto bg-white p-5 rounded-xl">
         <h1 className="text-4xl text-[#02717e] text-center font-semibold pt-4 mb-10">{t("setting.title")}</h1>
         <section className=" px-3 md:px-10">
           <div className="relative mx-auto w-fit">
@@ -271,8 +285,8 @@ const Setting = () => {
             <h2 className="text-3xl font-medium text-[#02717e] text-center mb-7 mt-7">{t("setting.reservations.title")}</h2>
             {properties.length>0?
             <>
-              <TableForLargeScreen properties={properties} token={token}/>
-              <ListingFotMobile properties={properties}/>
+              <TableForLargeScreen properties={properties} handleDeleteProperty={handleDeleteProperty}/>
+              <ListingFotMobile properties={properties}  handleDeleteProperty={handleDeleteProperty}/>
             </>
             :
             <div className="flex flex-col items-center justify-center text-center py-16">
