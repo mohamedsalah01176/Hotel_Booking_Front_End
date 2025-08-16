@@ -3,7 +3,7 @@
   "notFound":"لا توجد {{name}} متاحة حاليًا",
   "navbar": {
     "homes": "البيوت",
-    "departments": "الشقق",
+    "partments": "الشقق",
     "become_host": "انضم كمضيف",
     "contactUs": "اتصل بنا / الأسئلة الشائعة",
     "setting": "الإعدادات",
@@ -190,7 +190,50 @@
       "rating": "التقييم",
       "monthsHosting": "عدد الأشهر في الاستضافة"
     }
-
-
-}
+  },
+  "setting": {
+    "title": "الإعدادات الشخصية",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "oldPassword": "كلمة المرور القديمة",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "saveChanges": "حفظ التغييرات",
+    "verify": "تأكيد",
+    "verified": "مؤكد",
+    "notVerified": "غير مؤكد",
+    "errors": {
+      "nameRequired": "الاسم مطلوب",
+      "nameMin": "الاسم يجب أن يكون على الأقل حرفين",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phoneInvalid": "رقم الهاتف غير صالح",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "صيغة البريد الإلكتروني غير صالحة",
+      "passwordRequired": "كلمة المرور مطلوبة",
+      "passwordPattern": "كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل وتشمل حرف كبير وصغير ورقم"
+    },
+    "messages": {
+      "codeSentSuccess": "تم إرسال رمز التحقق بنجاح"
+    },
+    "reservations": {
+      "title": "حجوزاتي",
+      "emptyTitle": "لا توجد حجوزات بعد",
+      "emptySubtitle": "ابدأ الاستكشاف واحجز إقامتك الأولى!",
+      "explore": "تصفح العقارات"
+    },
+    "table": {
+      "listing": "القائمة",
+      "phone": "الهاتف",
+      "status": "الحالة",
+      "startDate": "تاريخ البداية",
+      "endDate": "تاريخ النهاية",
+      "cancelReservation": "إلغاء"
+    },
+    "status": {
+    "ended": "منتهية",
+    "during": "جارية",
+    "upcoming": "قادمة"
+  }
+  }
 }
