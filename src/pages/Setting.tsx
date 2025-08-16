@@ -20,7 +20,7 @@ import { MdClose } from "react-icons/md";
 import type { IPropertyWithReserves } from "../interface/ReserveDate";
 import ListingFotMobile from "../component/Setting/ListingFotMobile";
 import { useNavigate } from "react-router";
-import TableForLargeScreen from "../component/Setting/tableForLargeScreen";
+import TableForLargeScreen from "../component/Setting/ListingForLargeScreen";
 
 type UserUpdate = Partial<{
   name: string;
