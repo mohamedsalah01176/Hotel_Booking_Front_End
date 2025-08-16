@@ -4,9 +4,11 @@ import type { IProperty } from "../../interface/property";
 import { LiaExchangeAltSolid } from "react-icons/lia";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import { useNavigate } from "react-router";
+// import { useTranslation } from "react-i18next";
 
 const ListingForLargeScreen = ({properties,searchProperties,ChangeActiveProperty,setUpdateProperty,setPropertyId}:{properties:IProperty[],searchProperties:IProperty[],ChangeActiveProperty:(val1:string,val2:boolean)=>void ,setUpdateProperty:(val:boolean)=>void,setPropertyId:(val:string)=>void}) => {
   const nav=useNavigate();
+  // const {t}=useTranslation()
   return (
     <table className="mt-10 w-full hidden md:table">
         <thead>

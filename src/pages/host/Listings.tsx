@@ -24,12 +24,12 @@ const Listings = () => {
   const getPropertiesForAdmin=()=>{
     return axios.get(`${import.meta.env.VITE_BASE_URL}/api/propertyForAdmin`,{headers:{"Authorization":`Bearer ${token}`}});
   }
-  const {data}=useQuery<AxiosResponse<{ properties: IProperty[] }>, Error>({
+  const {data,isLoading}=useQuery<AxiosResponse<{ properties: IProperty[] }>, Error>({
     queryKey:["propertiesForAdmin"],
     queryFn:getPropertiesForAdmin
   });
   const properties=data?.data.properties ??[]
-  if(properties.length<=0){
+  if(isLoading){
     return <div className="min-h-[80vh] flex items-center justify-center">
       <Spinner/>
     </div> 
@@ -83,9 +83,24 @@ const Listings = () => {
           </div>
         </div>
       </div>
-      <ListingForLargeScreen properties={properties} searchProperties={searchProperties} ChangeActiveProperty={ChangeActiveProperty} setUpdateProperty={setUpdateProperty} setPropertyId={setPropertyId}/>
-      <ListingForMobile properties={properties} searchProperties={searchProperties}  ChangeActiveProperty={ChangeActiveProperty} setUpdateProperty={setUpdateProperty} setPropertyId={setPropertyId}/>
-      {openUpdateProperty && <UpdateProperty setUpdateProperty={setUpdateProperty} propertyId={propertId}/>}
+      { (properties?.length>0 || searchProperties?.length>0)?
+      <>
+        <ListingForLargeScreen properties={properties} searchProperties={searchProperties} ChangeActiveProperty={ChangeActiveProperty} setUpdateProperty={setUpdateProperty} setPropertyId={setPropertyId}/>
+        <ListingForMobile properties={properties} searchProperties={searchProperties}  ChangeActiveProperty={ChangeActiveProperty} setUpdateProperty={setUpdateProperty} setPropertyId={setPropertyId}/>
+        {openUpdateProperty && <UpdateProperty setUpdateProperty={setUpdateProperty} propertyId={propertId}/>}
+      </>
+      :
+        <div className="flex flex-col items-center justify-center py-16 text-gray-500">
+        <p className="text-lg font-medium">No listings found</p>
+        <p className="text-sm text-gray-400 mt-1">Try adjusting your search or add a new property</p>
+        <button
+          onClick={() => nav("/dashboard/addListing")}
+          className="mt-4 px-4 py-2 bg-[#02717e] text-white rounded-xl hover:bg-[#e77008] transition-all duration-300 cursor-pointer"
+        >
+          Add New Property
+        </button>
+      </div>
+      }
     </div>
   )
 }

@@ -29,7 +29,8 @@ const ContactUs = () => {
   }
   const {data}=useQuery({
     queryKey:["getAllQuestions"],
-    queryFn:getAllQuestions
+    queryFn:getAllQuestions,
+    staleTime:3 * 60 * 60 * 1000
   })
   const questions=data?.data.questions
   
@@ -95,7 +96,7 @@ const ContactUs = () => {
         </div>
         <div className="min-h-[10vh] my-14">
           <h2 className="text-4xl text-center font-semibold mb-10">Frequently Assked Questions</h2>
-          {questions.length>0?
+          {questions?.length>0?
           questions.map((item:IQuestions,index:number)=>
             <div className="mt-10" key={index}>
               <h3 className={`text-xl font-medium ${i18n.language === "en"?"border-l-4 pl-4":"border-r-4 pr-4"}  border-[#02717e]  py-4 bg-[#e7e7e769]`}><span className="text-4xl text-[#02717e] font-semibold pr-2">Q.</span>{i18n.language === "en"?item.questionEn:item.questionAr}</h3>

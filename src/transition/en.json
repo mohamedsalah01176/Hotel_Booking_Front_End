@@ -3,7 +3,7 @@
   "notFound":"No {{name}} Found",
   "navbar": {
     "homes": "Homes",
-    "departments": "Deparments",
+    "partments": "Parments",
     "contactUs":"Contact Us/FAQ",
     "setting":"Setting",
     "term":"Term&Privacy",
@@ -187,7 +187,46 @@
       "rating": "Rating",
       "monthsHosting": "Months hosting"
     }
-
+  },
+  "setting":{
+    "title": "Personal Setting",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "saveChanges": "Save Changes",
+    "verify": "Verify",
+    "verified": "Verified",
+    "notVerified": "Not Verified",
+    "errors": {
+      "nameRequired": "Name is required",
+      "nameMin": "Name must be at least 2 characters",
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Invalid phone number",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email format",
+      "passwordRequired": "Password is required",
+      "passwordPattern": "Password must contain at least 8 characters, including uppercase, lowercase and numbers"
+    },
+    "messages": {
+      "codeSentSuccess": "Verification code sent successfully"
+    },
+    "reservations": {
+      "title": "My Reservations",
+      "emptyTitle": "No reservations yet",
+      "emptySubtitle": "Start exploring and book your first stay!",
+      "explore": "Explore Listings"
+    },
+    "table": {
+      "listing": "Listing",
+      "phone": "Phone",
+      "status": "Status",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "cancelReservation": "Cancel"
+    }
   }
 }
 
