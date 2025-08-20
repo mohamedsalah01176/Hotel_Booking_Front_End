@@ -1,8 +1,13 @@
 import image from "../../assets/R (1).jpg";
 import type {  TFunction  } from "i18next";
 import type { IAdmin } from "../../interface/property";
+import { differenceInMonths, differenceInYears } from "date-fns";
 
 const ShowHost = ({admin,t}:{admin:IAdmin,t:TFunction}) => {
+  const createdAt = admin?.createdAt ? new Date(admin.createdAt) : new Date();
+  const years = differenceInYears(new Date(), createdAt);
+  const monthsTotal = differenceInMonths(new Date(), createdAt);
+  const months = monthsTotal % 12;
   return (
       <div className=" pb-24 ">
         <h2 className="text-2xl font-semibold">{t("propertyDetails.host.meetHost")}</h2>
@@ -24,8 +29,17 @@ const ShowHost = ({admin,t}:{admin:IAdmin,t:TFunction}) => {
                 <div className="bg-gray-300 w-full h-[2px] my-3"></div>
               </div>
               <div className="w-[120px]">
-                <p className="text-xl font-bold text-center">11</p>
-                <p className="text-sm font-medium text-center">{t("propertyDetails.reviews.monthsHosting")}</p>
+                {years>=1?
+                <>
+                  <p className="text-xl font-bold text-center">{years}</p>
+                  <p className="text-sm font-medium text-center">{t("propertyDetails.reviews.monthsHosting")}</p>
+                </>
+                :
+                <>
+                  <p className="text-xl font-bold text-center">{months}</p>
+                  <p className="text-sm font-medium text-center">{t("propertyDetails.reviews.monthsHosting")}</p>
+                </>
+                }
               </div>
             </div>
           </section>

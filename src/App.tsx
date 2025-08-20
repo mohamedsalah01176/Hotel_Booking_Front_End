@@ -24,6 +24,7 @@ import Customers from './pages/host/Customers';
 import Calender from './pages/host/Calender';
 import Setting from './pages/Setting';
 import ContactUs from './pages/ContactUs';
+import SearchResult from './pages/SearchResult';
 
 
 
@@ -39,6 +40,7 @@ function App() {
       {path:"propertyDetails/:id",element:<PropertyDetails/>},
       {path:"setting",element:<Setting/>},
       {path:"contactUs",element:<ContactUs/>},
+      {path:"searchResults",element:<SearchResult/>},
       {path:"*",element:<NotFound/>,}
     ]},
     {path:"dashboard",element:<LayoutHost/>,children:[

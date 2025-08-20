@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 const PropertyCard = ({item}:{item:IProperty}) => {
   const {t,i18n}=useTranslation();
   return (
-    <Link to={`/propertyDetails/${item._id}`} key={item._id} className="pr-3 block ">
+    <Link to={`/propertyDetails/${item._id}`} key={item._id} className="pr-3 block animate-fade-in ">
       <div className="relative rounded-xl overflow-hidden">
         <img
           loading="lazy"

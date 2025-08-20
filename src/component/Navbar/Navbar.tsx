@@ -26,16 +26,14 @@ const Navbar = () => {
     setOpentMenue(false)
   },[setToken])
 
-
   useEffect(() => {
     const saved = localStorage.getItem("lang") || "en";
     setLanguage(saved);
     i18n.changeLanguage(saved);
-
+    
   }, [i18n,language]);
   useEffect(()=>{
     const tokenCookie=Cookie.get("token");
-    console.log(tokenCookie)
     if(tokenCookie){
       setToken(tokenCookie);
     }
@@ -51,12 +49,12 @@ const Navbar = () => {
 
 
   return (
-    <div className="sticky top-0 left-0 w-full py-4 bg-[#f7f7f7] pt-7  z-10 border-b-2 border-[#e0dede7a]">
-      <section className="flex justify-between items-start md:items-center w-[98%] md:w-[90%] mx-auto">
+    <div className=" top-0 left-0 w-full py-4 bg-[#f7f7f7] pt-7  z-10 border-b-2 border-[#e0dede7a] min-h-[10vh]">
+      <section className="fixed  bg-[#f7f7f7] top-0 left-0 z-50 py-3 px-1 md:px-7  flex justify-between items-center md:items-center w-full mx-auto">
         <Link to={'/home'} className="text-xl sm:text-3xl font-semibold hover:scale-110 transition-all duration-300 outline-0">
           <img loading="lazy" src={logoImage} alt="logo" className="w-[40px] md:w-[70px]" width={70} height={70}/>
         </Link>
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-7 md:gap-16">
+        <div className="flex z-50 flex-col sm:flex-row justify-between items-center gap-2 sm:gap-7 md:gap-16">
           {url.pathname.includes("/dashboard")?
           <DashboardLinks />
           :

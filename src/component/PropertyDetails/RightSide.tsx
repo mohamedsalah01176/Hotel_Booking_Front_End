@@ -84,13 +84,12 @@ const RightSide = ({i18n,property,t,propertyId,setOpenConfirm,reserved,range,set
 
   useEffect(()=>{
     (async()=>{
-      const response=await fetch(`${import.meta.env.VITE_BASE_URL}/api/reserve/${propertyId}`,{
-        method:"GET",
+      const {data}=await axios.get(`${import.meta.env.VITE_BASE_URL}/api/reserve/${propertyId}`,{
         headers:{
           "Authorization": `Bearer ${token}`
         }
       })
-      const data= await response.json();
+      
       console.log(data,"ddddddddddddddddddd")
       if (data?.property?.reserveDates?.length > 0) {
         const allDates: Date[] = [];
