@@ -27,9 +27,9 @@ const Footer = () => {
         <section className="text-center ">
           <h2 className="text-xl font-medium mb-5">{t("footer.socialTitle")}</h2>
           <div className="flex gap-2 text-center justify-center">
-            <a href="#" title="facebook"><FaFacebook className="text-2xl text-[#e77008] hover:text-[#02717e] hover:scale-105 transition-all duration-300"/></a>
-            <a href="#" title="instagram"><FaInstagram className="text-2xl text-[#e77008] hover:text-[#02717e] hover:scale-105 transition-all duration-300"/></a>
-            <a href="#" title="whatsApp"><FaWhatsapp className="text-2xl text-[#e77008] hover:text-[#02717e] hover:scale-105 transition-all duration-300"/></a>
+            <a href="#" title="facebook"><FaFacebook className="text-2xl text-[#02717e] hover:text-[#e77008] hover:scale-105 transition-all duration-300"/></a>
+            <a href="#" title="instagram"><FaInstagram className="text-2xl text-[#02717e] hover:text-[#e77008] hover:scale-105 transition-all duration-300"/></a>
+            <a href="#" title="whatsApp"><FaWhatsapp className="text-2xl text-[#02717e] hover:text-[#e77008] hover:scale-105 transition-all duration-300"/></a>
           </div>
         </section>
         <section className={`text-center ${i18n.language === "en"?"md:text-left":"md:text-right"} `}>

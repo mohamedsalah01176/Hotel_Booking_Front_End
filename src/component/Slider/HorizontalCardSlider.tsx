@@ -8,17 +8,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import "./style.css"
 import { useTranslation } from "react-i18next";
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useMemo } from "react";
 import { GeneralContext } from "../../util/GeneralContext";
 
 
-const HorizontalCardSlider = ({ nameEn,nameAr }: { nameEn: string,nameAr:string }) => {
+const HorizontalCardSlider = ({ nameEn,nameAr,filteredProperties }: { nameEn: string,nameAr:string,filteredProperties:IProperty[] }) => {
   const {t,i18n}= useTranslation();
-  const {currentSection ,setSharedProperties }=useContext(GeneralContext);
-
-  function getProperties() {
+  const {currentSection,setSharedProperties }=useContext(GeneralContext);
+  
+  const getProperties = useCallback(() => {
     return axios.get(`${import.meta.env.VITE_BASE_URL}/api/property`);
-  }
+  }, []);
   const propertyResponse = useQuery<
     AxiosResponse<{ properties: IProperty[] }>,
     Error
@@ -27,14 +27,21 @@ const HorizontalCardSlider = ({ nameEn,nameAr }: { nameEn: string,nameAr:string 
     queryFn: getProperties,
     staleTime: 240000,
   });
+  useEffect(() => {
+    if (propertyResponse.data?.data.properties) {
+      setSharedProperties(propertyResponse.data.data.properties);
+    }
+  }, [propertyResponse.data?.data.properties]);
   
-  useEffect(()=>{
-    setSharedProperties(propertyResponse?.data?.data.properties as IProperty[])
-  },[propertyResponse])
-  const property = propertyResponse.data?.data.properties.filter(
-      (item) => item?.location?.cityEn?.toLowerCase() === nameEn?.toLowerCase() && item?.category?.toLowerCase() === currentSection?.toLowerCase()
+  const property = useMemo(() => {
+    console.log(filteredProperties,"sortedeeeeeeeeeeeeeeeeeeeeeeeeee")
+    const source:IProperty[]=filteredProperties.length>0?filteredProperties:propertyResponse.data?.data.properties as IProperty[];
+    return source?.filter(
+      (item) =>
+        item?.location?.cityEn?.toLowerCase() === nameEn?.toLowerCase() &&
+        item?.category?.toLowerCase() === currentSection?.toLowerCase()
     ) || [];
-    console.log(propertyResponse.data)
+  }, [propertyResponse.data?.data.properties,filteredProperties, nameEn, currentSection]);
 
   if (propertyResponse.isLoading) {
     return <SliderLoader name={nameEn?.charAt(0).toUpperCase()} />;
@@ -43,7 +50,7 @@ const HorizontalCardSlider = ({ nameEn,nameAr }: { nameEn: string,nameAr:string 
   return (
     <>
     {property.length>0 &&
-      <div className="px-4 md:px-8 my-10 animate-fade-in">
+      <div className="px-4 md:px-8 mt-8  animate-fade-in">
         <h2 className="text-xl font-bold mb-4">
           {t("home.popularHomes",{name:i18n.language === "en"?nameEn?.charAt(0).toUpperCase()+nameEn?.slice(1):nameAr})} <span className="text-rose-500">›</span>
         </h2>

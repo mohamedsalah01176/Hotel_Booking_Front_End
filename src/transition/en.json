@@ -24,14 +24,16 @@
     "placeholder": "Your Email",
     "subscribe": "Subscribe"
   },
-  "search": {
+  "search":  {
     "where": "Where",
-    "destination": "Search destinations",
-    "check_in": "Check in",
-    "check_out": "Check out",
-    "add_dates": "Add Dates",
-    "who": "Who",
-    "guests": "Add guests"
+    "destination": "Destination",
+    "date": "Date",
+    "datePlaceholder": "Select date",
+    "guests": "Guests",
+    "guestsPlaceholder": "Number of guests",
+    "button": "Search",
+    "noResults": "No results found",
+    "typingHint": "Start typing a city…"
   },
   "register": {
     "title": "Register",
@@ -141,13 +143,14 @@
     "resend_code": "Resend code"
   },
   "home":{
-    "price_summary": "{{price}} 1500 SYP / night • ★ {{rate}}",
+    "price_summary": "{{price}} SYP / night • ★ {{rate}}",
     "popularHomes": "Popular homes in {{name}}"
   },
   "propertyDetails":{
     "subTitle":"{{guest}} guests - 1 bedroom - 2 beds - 1 bath",
     "hostedBy":"Hosted by {{name}}",
     "superhostWithDuration": "Superhost · {{years}} years hosting",
+    "superhostWithMonths": "Superhost for {{months}} months",
     "whatPlaceOffers": "What this place offers",
     "rareFind": "Rare find! This place is usually booked",
     "price": "{{price}} SYP",
@@ -185,7 +188,8 @@
     "reviews": {
       "title": "Reviews",
       "rating": "Rating",
-      "monthsHosting": "Months hosting"
+      "monthsHosting": "Months hosting",
+      "yearsHosting": "Years hosting"
     }
   },
   "setting":{
@@ -228,10 +232,60 @@
       "cancelReservation": "Cancel"
     },
     "status": {
-    "ended": "Ended",
-    "during": "During",
-    "upcoming": "Upcoming"
+      "ended": "Ended",
+      "during": "During",
+      "upcoming": "Upcoming"
+    }
+  },
+  "contactUs":{
+    "collaborate": "Let's Collaborate",
+    "description": "Discover your perfect stay with [Website Name] — your ultimate hotel booking platform. Browse a wide selection of hotels worldwide, compare prices, and find exclusive deals to fit every budget. Enjoy real-time availability, verified reviews, and instant booking confirmation. Whether it’s a luxury getaway, business trip, or weekend escape, [Website Name] makes planning your stay seamless, easy, and stress-free.",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "sayOpinion": "Say Your Opinion",
+    "name": "Name",
+    "emailLabel": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "submit": "Submit",
+    "faq": "Frequently Asked Questions",
+    "noQuestions": "No questions available",
+    "questionLabel": "Q.",
+    "answerLabel": "A.",
+    "messageSent": "Message sent successfully!",
+    "errors":{
+      "nameMin": "Name must be at least 3 characters",
+      "nameMax": "Name must be less than 50 characters",
+      "nameRequired": "Name is required",
+      "emailInvalid": "Invalid email address",
+      "emailRequired": "Email is required",
+      "phoneInvalid": "Enter a valid phone number",
+      "phoneRequired": "Phone is required",
+      "messageMin": "Message must be at least 10 characters",
+      "messageMax": "Message must be less than 500 characters",
+      "messageRequired": "Message is required",
+      "submit": "Submit",
+      "messageSent": "Message sent successfully!",
+      "error": "Something went wrong. Please try again."
+    }
+  },
+  "searchResults": {
+    "title": "Result Of Search",
+    "notFound": "No Hotels Found",
+    "backHome": "Back to Home"
+  },
+  "filter": {
+    "price": "Price",
+    "from": "From",
+    "to": "To",
+    "apply": "Apply",
+    "errorMaxLessThanMin": "Max price cannot be less than Min price",
+    "sortBy": "Sort by",
+    "highToLow": "High to Low",
+    "lowToHigh": "Low to High",
+    "mostBooked": "Most Booked",
+    "highestRated": "Highest Rated"
   }
-  }
+
 }
 

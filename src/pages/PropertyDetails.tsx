@@ -6,10 +6,10 @@ import ImagesContainer from "../component/PropertyDetails/ImagesContainer";
 import Reviews from "../component/PropertyDetails/Reviews";
 import HotalLocation from "../component/PropertyDetails/HotalLocation";
 import ShowHost from "../component/PropertyDetails/ShowHost";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import axios, { type AxiosResponse } from "axios";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { IProperty } from "../interface/property";
 import AddReview from "../component/PropertyDetails/AddReview";
@@ -31,6 +31,7 @@ const PropertyDetails = () => {
     endDate:new Date(new Date().setDate(new Date().getDate() + 2)),
     key:"selection"
   }]);
+const queryClient = useQueryClient();
 
 
 
@@ -59,6 +60,7 @@ const PropertyDetails = () => {
       const dataRes=await res.json()
       if(dataRes.status === "success"){
         toast.success(dataRes.message);
+        queryClient.invalidateQueries({ queryKey: ["SpecificProperty", id] });
         setTimeout(()=>{
           setOpenAddReview(false);
         },1000)
@@ -69,14 +71,15 @@ const PropertyDetails = () => {
       console.log(errors)
     }
     console.log(data)
-  },[])
-
-  const nigthReserved=GenerateDatesRange([...range]as { startDate: Date; endDate: Date; }[])
-  console.log(nigthReserved,"nigthReserved")
-  console.log(range,"range")
-  
-
+  },[id, i18n.language, token])
   const property=data?.data.property as IProperty;
+  console.log(property)
+  
+  
+  const nigthReserved = useMemo(() => 
+    GenerateDatesRange([...range] as { startDate: Date; endDate: Date; }[]), 
+  [range]);
+  
   return (
     <section className="bg-[#f7f7f7] min-h-[190vh]">
       {openAddReview && <AddReview setOpenAddReview={setOpenAddReview} handleAddReview={handleAddReview}/>}

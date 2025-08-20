@@ -6,11 +6,11 @@ import { useState } from "react"
 import  axios  from "axios"
 // import Spinner from "../../component/spinner"
 import { toast } from 'react-toastify';
-import Cookies  from "js-cookie"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router"
 import ChangeStatusCode from "../component/ChangeStatusCode"
 import Loader from "../component/Loaders/Loader"
+import Cookies from "js-cookie";
 
 
 const Register = () => {
@@ -37,14 +37,10 @@ const Register = () => {
       try{
         const registerRes=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/register`,
             values,
-            {
-            headers:{
-              'Content-Type':'application/json',
-            }
-          }
+            { withCredentials: true }
         )
         if(registerRes.data.status === "success"){
-          Cookies.set("token",registerRes.data.token,{expires:60})
+          // Cookies.set("token",registerRes.data.token,{expires:60})
           const res=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/sendCode`,
             {phone:values.phone},
             {
@@ -55,6 +51,11 @@ const Register = () => {
           )
           if(res.data.status === 'success'){
             toast.success(t("register.messages.codeSentSuccess"));
+            Cookies.set("token", res.data.token, {
+              expires: 15, 
+              secure: true,
+              sameSite: "strict"
+            });
             setTimeout(()=>{
               setOpenCode("sendCode");
             },2000)

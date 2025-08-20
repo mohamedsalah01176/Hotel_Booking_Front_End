@@ -4,10 +4,10 @@ import * as yup from "yup"
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router";
-import cooke from "js-cookie";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import Loader from "../component/Loaders/Loader";
+import Cookies from "js-cookie";
 
 
 
@@ -36,15 +36,15 @@ const Login = () => {
       try{
         const res=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/login`,
           values,
-          {
-            headers:{
-              "Content-Type":"application/json"
-            }
-          }
+          { withCredentials: true }
         )
         if(res.data.status === "success"){
-          cooke.set("token",res.data.token,{expires:60})
           toast.success(t("login.messages.loginSuccess") )
+          Cookies.set("token", res.data.token, {
+              expires: 15, 
+              secure: true,
+              sameSite: "strict"
+            });
           setTimeout(()=>{
             nav('/home')
           },1500)
