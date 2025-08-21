@@ -29,19 +29,31 @@ const SearchBar = () => {
     staleTime: 5400000,
   })
 
-  const disableDates =data?.data.disableDates?.flatMap((item:[]) =>
-    item?.flat()
-  );
-  console.log(disableDates,"sssssssss")
+  const disableDates =data?.data.disableDates.flatMap((item:{disableDates:[],propertyId:string})=>([{propertyId:item.propertyId,...item.disableDates}]));
+  console.log(data?.data.disableDates,"llllllllllllll")
   const handleSearch=(val:string,type:string)=>{
     if(type === "where"){
       const searchProperty=sharedProperties?.filter((item:IProperty)=>item.location.city.toLowerCase().includes(val) );
       setsearchProperty(searchProperty);
     }else if(type === "date"){
       console.log(new Date(val).getDate())
-      const searchProperty=disableDates?.filter((item:{dates:Date[]})=>!item.dates.some(d =>  new Date(d).toISOString().split("T")[0] === new Date(val).toISOString().split("T")[0]));
-      console.log(searchProperty)
-      // setsearchProperty(searchProperty);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const dates=disableDates?.filter((item: any) =>
+        !item[0].dates.some(
+          (d:string) =>
+            new Date(d).toISOString().split("T")[0] ===
+            new Date(val).toISOString().split("T")[0]
+        )
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ).map((item:any) => ({
+        propertyId: item.propertyId,
+        dates: item[0].dates
+      }));
+
+      console.log(dates,"llllllllllllll")
+      const searchProperty=sharedProperties.filter((paretItem)=>dates.some((childItem:{propertyId:string})=>childItem.propertyId === paretItem._id))
+      console.log(searchProperty,"llllllllllllll")
+      setsearchProperty(searchProperty);
       
     }else if(type === "guests" ){
       const searchProperty=sharedProperties?.filter((item:IProperty)=>item.guestNumber<= Number(val));

@@ -15,6 +15,7 @@ import { toast } from "react-toastify"
 import axios from "axios"
 import { useTranslation } from "react-i18next"
 import { TokenContext } from "../../util/TokenContext"
+import Spinner from "../../component/Loaders/Spinner"
 
 const AddListing = () => {
   const nav=useNavigate();
@@ -29,9 +30,11 @@ const AddListing = () => {
   const [placeContain,setPlaceContain]=useState({geust:1,badrooms:1,beds:1,bathrooms:1});
   const [service,setService]=useState<string[]>([]);
   const [images,setImages]=useState<File[]>([]);
-  
+  const [isLoading,setLoading]=useState(false)
+  console.log(coords)
   const handleCreateHost=async()=>{
     try{
+      setLoading(true)
       const formateData=new FormData();
       formateData.append("title",title)
       formateData.append("category",category)
@@ -54,16 +57,24 @@ const AddListing = () => {
       });
       console.log(formateData)
       const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/property?lang=${i18n.language}`,formateData,{headers:{Authorization:`Bearer ${token}`,"Content-Type": "multipart/form-data",}});
-      
       if(response.data.status === "success"){
         toast.success("Operation completed successfully")
+        setLoading(false)
+        nav("/dashboard/listings")
         setTimeout(()=>{
-          nav("/dashboard/listings")
-        },2000)
+        },1500)
       }
-    }catch(err){
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }catch(err:any){
+      toast.error(err.response?.data?.errors?.errors?.[0] || "Something went wrong");
       console.log(err);
     }
+  }
+
+   if(isLoading){
+    return <div className="min-h-[80vh] flex items-center justify-center">
+      <Spinner/>
+    </div> 
   }
   return (
     <div className=" pb-5 min-h-[72vh] w-[90%] mx-auto">
@@ -121,7 +132,7 @@ const AddListing = () => {
             <button disabled={!category} onClick={()=>setCurrectComponenet(val=>val+1)} className={`text-lg  text-white px-7 py-2 rounded-xl  transition-all duration-300  ${category === "" ? "cursor-no-drop  bg-[#e770088f]":"cursor-pointer hover:bg-[#02717e] bg-[#e77008]"}`}>Next</button>
             :
             currectComponenet === 2?
-            <button disabled={!coords?.lat} onClick={()=>setCurrectComponenet(val=>val+1)} className={`text-lg  text-white px-7 py-2 rounded-xl  transition-all duration-300  ${!coords?.lat ? "cursor-no-drop  bg-[#e770088f]":"cursor-pointer hover:bg-[#02717e] bg-[#e77008]"}`}>Next</button>
+            <button disabled={!coords?.lat} onClick={()=>setCurrectComponenet(val=>val+1)} className={`text-lg  text-white px-7 py-2 rounded-xl  transition-all duration-300  ${!coords?.city || !coords.address ? "cursor-no-drop  bg-[#e770088f]":"cursor-pointer hover:bg-[#02717e] bg-[#e77008]"}`}>Next</button>
             :
             currectComponenet === 3?
             <button disabled={!placeContain?.geust} onClick={()=>setCurrectComponenet(val=>val+1)} className={`text-lg  text-white px-7 py-2 rounded-xl  transition-all duration-300  ${!placeContain?.geust ? "cursor-no-drop  bg-[#e770088f]":"cursor-pointer hover:bg-[#02717e] bg-[#e77008]"}`}>Next</button>

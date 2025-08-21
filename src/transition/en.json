@@ -144,7 +144,9 @@
   },
   "home":{
     "price_summary": "{{price}} SYP / night • ★ {{rate}}",
-    "popularHomes": "Popular homes in {{name}}"
+    "popularHomes": "Popular homes in {{name}}",
+    "dangerous_area": "Not Save Area",
+    "safe_area": "Safe Area"
   },
   "propertyDetails":{
     "subTitle":"{{guest}} guests - 1 bedroom - 2 beds - 1 bath",
@@ -167,7 +169,9 @@
     "mustRegister":"You must register first",
     "mustVerifyPhone": "You must verify your phone number first.",     
     "nights": "For {{count}} Night",
-    "total":"Total:",  
+    "total":"Total:",
+    "dangerousTooltip": "This area may be unsafe",
+    "safeTooltip": "This area is considered safe",  
     "confirm":{
       "title":"Confirm Reservation",
       "message":"Your reservation will be confirmed, and you will pay the amount upon delivery. Do you want to proceed?",
