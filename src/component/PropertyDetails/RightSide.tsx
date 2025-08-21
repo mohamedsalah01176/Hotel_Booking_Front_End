@@ -116,10 +116,22 @@ const RightSide = ({i18n,property,t,propertyId,setOpenConfirm,reserved,range,set
         <ChangeStatusCode setOpenCode={setOpenSendCode} phone={property.admin.phone} />:
         null
         }
-      <div className="bg-white p-7 shadow-xl rounded-xl flex gap-3 ">
+        
+        {!property?.isDangerousPlace ? (
+          <div className="bg-white p-7 shadow-xl rounded-xl flex gap-3">
+            <IoDiamond className="text-xl text-[#f67808]" />
+            <p>{t("propertyDetails.safeTooltip")}</p>
+          </div>
+        ) : (
+          <div className="bg-red-100 p-7 shadow-xl rounded-xl flex gap-3">
+            <IoDiamond className="text-xl text-red-700" />
+            <p>{t("propertyDetails.dangerousTooltip")}</p>
+          </div>
+        )}
+      {/* <div className="bg-white p-7 shadow-xl rounded-xl flex gap-3 ">
         <IoDiamond className="text-xl text-[#f67808] "/>
         <p>{t("propertyDetails.rareFind")}</p>
-      </div>
+      </div> */}
       <div className="p-5 bg-white mt-7 rounded-2xl shadow-xl max-w-[350px] mx-auto">
         <p className="underline text-2xl font-medium">{t("propertyDetails.price",{price:formattedPrice})}</p>
         <p className="text-gray-700 pb-2">{t("propertyDetails.forNights")}</p>

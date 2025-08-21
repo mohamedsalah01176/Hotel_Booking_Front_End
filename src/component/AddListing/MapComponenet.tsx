@@ -23,45 +23,84 @@ const MapComponenet = ({coords,setCoords}:{coords:{ lat: number; lng: number,cit
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setCoords({
-          city:"",
-          address:"",
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
+      async (position) => {
+        try {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+
+          // call reverse geocoding API
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&accept-language=${i18n.language}`
+          );
+          const data = await response.json();
+
+          const city =
+            (data.address.state ? data.address.state.replace(" Governorate", "") : "") ||
+            data.address.city ||
+            data.address.town ||
+            data.address.village ||
+            "";
+
+          const address =
+            data.address.neighbourhood ||
+            data.address.suburb ||
+            data.address.city_district ||
+            data.address.road ||
+            "";
+
+          setCoords({
+            city,
+            address,
+            lat,
+            lng,
+          });
+
+        } catch (error) {
+          console.error("Reverse geocoding error:", error);
+        }
       },
       (err) => {
         console.log("Location error:", err);
       }
     );
-  }, []);
+  }, [i18n.language]);
   
-useEffect(() => {
-  if (coords) {
-    const fetchAddress = async () => {
-      try {
-        const response = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.lat}&lon=${coords.lng}&accept-language=${i18n.language}`
-        );
-        const data = await response.json();
+  useEffect(() => {
+    if (coords) {
+      const fetchAddress = async () => {
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords.lat}&lon=${coords.lng}&accept-language=${i18n.language}`
+          );
+          const data = await response.json();
 
-        const city = data.display_name?.split(",")[data.display_name?.split(",").length-1] || "";
-        const address = data.display_name?.split(",").slice(1, 3).join(",") || "";
+        const city =
+          (data.address.state ? data.address.state.replace(" Governorate", "") : "") ||
+          data.address.city ||
+          data.address.town ||
+          data.address.village ||
+          "";
 
-        if (coords.city !== city || coords.address !== address) {
-          setCoords({ ...coords, city, address });
+          const address =
+            data.address.village ||
+            data.address.suburb ||
+            data.address.city_district ||
+            data.address.road ||
+            "";
+
+          if (coords.city !== city || coords.address !== address) {
+            setCoords({ ...coords, city, address });
+          }
+          console.log(data.display_name)
+          console.log(city,"city")
+          console.log(address,"adress")
+        } catch (err) {
+          console.error("Failed to fetch address:", err);
         }
-        console.log(data.display_name)
-        console.log(city,"city")
-        console.log(address,"adress")
-      } catch (err) {
-        console.error("Failed to fetch address:", err);
-      }
-    };
-    fetchAddress();
-  }
-}, [coords?.lat, coords?.lng,setCoords, i18n.language]);
+      };
+      fetchAddress();
+    }
+  }, [coords?.lat, coords?.lng,setCoords, i18n.language]);
   if (!coords) return <p className="text-center">Getting your location...</p>;
   console.log(coords)
   return (

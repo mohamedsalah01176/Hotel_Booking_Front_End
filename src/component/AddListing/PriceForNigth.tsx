@@ -24,7 +24,7 @@ const PriceForNigth = ({price,setPrice}:{price:number,setPrice:(val:number)=>voi
           <p className="text-6xl font-bold">$</p>
           <input value={inputValue} onChange={handleChange} type="text" className="text-6xl font-bold outline-none w-[200px] mx-auto  overflow-hidden"  title="price"/>
         </div>
-          <p className="text-gray-500 mt-2">Guest price before taxes ${(price + 285).toLocaleString()}</p>
+          <p className="text-gray-500 mt-2">Guest price before taxes ${(price + (.10 * price)).toLocaleString()}</p>
       </div>
     </div>
   )

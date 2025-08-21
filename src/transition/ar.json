@@ -147,7 +147,9 @@
   },
   "home":{
     "price_summary": "{{price}} ل.س / الليلة • ★ {{rate}}",
-    "popularHomes": "أشهر الأماكن للإقامة في {{name}}"
+    "popularHomes": "أشهر الأماكن للإقامة في {{name}}",
+    "dangerous_area": "منطقة ليست آمنة",
+    "safe_area": "منطقة آمنة"
   },
   "propertyDetails": {
     "subTitle": "{{guest}} ضيف - 1 غرفة نوم - 2 سرير - 1 حمام ",
@@ -171,6 +173,8 @@
     "mustVerifyPhone": "يجب عليك تفعيل رقم هاتفك أولاً.",
     "nights": "لمدة {{count}} ليلة",
     "total":"الإجمالي:",
+    "dangerousTooltip": "هذه المنطقة قد تكون غير آمنة",
+    "safeTooltip": "هذه المنطقة تعتبر آمنة",
     "confirm": {
       "title": "تأكيد الحجز",
       "message": "سيتم تأكيد الحجز، وستدفع المبلغ عند الاستلام. هل تريد المتابعة؟",

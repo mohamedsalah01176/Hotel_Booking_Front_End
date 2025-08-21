@@ -8,6 +8,22 @@ const Location = ({coords,setCoords}:{coords:{ lat: number; lng: number,city:str
         <p className="text-gray-600 mt-1 mb-10">Your address is only shared with guests after they have made a reservation.</p>
       </div>
       <MapComponenet coords={coords} setCoords={setCoords}/>
+      {coords && (
+        <div className="mt-6 bg-white shadow-md rounded-xl p-4 w-[300px] md:w-[500px] text-center">
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">Selected Location</h3>
+          <p className="text-gray-700">
+            <span className="font-medium">City/State: </span>
+            {coords.city || "Not detected"}
+          </p>
+          <p className="text-gray-700">
+            <span className="font-medium">Address: </span>
+            {coords.address || "Not detected"}
+          </p>
+          <p className="text-gray-500 text-sm mt-2">
+            Lat: {coords.lat.toFixed(4)}, Lng: {coords.lng.toFixed(4)}
+          </p>
+        </div>
+      )}
     </div>
   )
 }

@@ -1,6 +1,8 @@
 import { Link } from "react-router"
 import type { IProperty } from "../interface/property"
 import { useTranslation } from "react-i18next"
+import { LuShieldAlert } from "react-icons/lu";
+import { BsShieldCheck } from "react-icons/bs";
 
 const PropertyCard = ({item}:{item:IProperty}) => {
   const {t,i18n}=useTranslation();
@@ -15,9 +17,17 @@ const PropertyCard = ({item}:{item:IProperty}) => {
           width={170}
           height={180}
         />
-        {/* <span className="absolute top-2 left-2 bg-white text-xs font-semibold rounded-full px-3 py-1 shadow">
-          Guest favorite
-        </span> */}
+        {!item.isDangerousPlace ?
+          <div className={` absolute top-2 ${i18n.language === "en" ?"left-2":"right-2"}  flex items-center gap-2 px-3 py-1.5 bg-green-100 text-green-700 rounded-2xl shadow-md`}>
+            <BsShieldCheck className="w-4 h-4" />
+            <span className="font-medium text-[12px]">{t("home.safe_area")}</span>
+          </div>
+        :
+          <div className={`absolute top-2 ${i18n.language === "en" ?"left-2":"right-2"}  flex items-center gap-2 px-3 py-1.5 bg-red-100 text-red-700 rounded-2xl shadow-md`}>
+          <LuShieldAlert className="w-4 h-4" />
+          <span className="font-semibold text-[12px]">{t("home.dangerous_area")}</span>
+        </div>
+        }
       </div>
       <div className="mt-2  text-sm ">
         <h3 className="font-medium ">{i18n.language === "en"?item?.titleEn:item?.titleAr}</h3>

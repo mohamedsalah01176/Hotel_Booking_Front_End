@@ -27,12 +27,30 @@ const Home = () => {
     return <GeneralLoader/>
   }
 
+  const capitalize = (str: string) =>{
+    const arr= str && str.trim()?.split(" ");
+    console.log(arr,"kkkkkkkkkkk")
+    if( arr?.length<2){
+      return str && str?.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }else{
+      let str2=""
+      for(let i=0;i<arr?.length;i++){
+        if(i=== arr.length-1){
+          str2+=arr[i].charAt(0).toUpperCase()+arr[i].slice(1).toLowerCase();
+        }else{
+          str2+=arr[i].charAt(0).toUpperCase()+arr[i].slice(1).toLowerCase()+" ";
+        }
+      }
+      console.log(str2,"string")
+      return str2
+    }
+  }
 
   return (
     <div className="pt-3 pb-14">
       {cities?.map((item)=>{
         return(
-          <HorizontalCardSlider nameEn={item.nameEn} nameAr={item.nameAr}  key={item._id} filteredProperties={filteredProperties} />
+          <HorizontalCardSlider nameEn={capitalize(item.nameEn)} nameAr={item.nameAr}  key={item._id} filteredProperties={filteredProperties} />
         )
       })}
       <Filter properties={filteredProperties} setFilteredProperties={setFilteredProperties}/>
