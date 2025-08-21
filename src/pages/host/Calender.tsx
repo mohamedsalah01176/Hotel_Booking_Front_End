@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { format, eachDayOfInterval, startOfMonth, endOfMonth } from "date-fns";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { TokenContext } from "../../util/TokenContext";
 // import { GenerateDatesRange } from "../util/GenerateDatesRange";
@@ -11,6 +11,10 @@ import { useTranslation } from "react-i18next";
 import CodeNumber from "../../component/CodeNumber";
 import ChangeStatusCode from "../../component/ChangeStatusCode";
 import ConfirmMessage from "../../component/Calender/ConfirmMessage";
+import TableForLargeScreen from "../../component/Setting/ListingForLargeScreen";
+import type { IPropertyWithReserves } from "../../interface/ReserveDate";
+import ListingFotMobile from "../../component/Setting/ListingFotMobile";
+import { FaRegCalendarCheck } from "react-icons/fa";
 
 const generateMonthDays = (monthDate: Date) => {
   const start = startOfMonth(monthDate);
@@ -33,6 +37,7 @@ const Calender = () => {
   const emptyStart = Array.from({ length: startWeekDay });
   const nav = useNavigate();
   const [openConfirm,setOpenConfirm]=useState(false);
+  const queryClient=useQueryClient();
 
 
   const goToPrevMonth = () =>
@@ -53,7 +58,20 @@ const Calender = () => {
     queryKey: ["calender"],
     queryFn: getAllDates,
   });
-  const property=data?.data?.property
+  const property=data?.data?.property;
+  const properties1 = property
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ? property.reserveDates.sort((a:any, b:any) => {
+        const lastDateA = new Date(a?.dates[a?.dates.length - 1] || 0).getTime();
+        const lastDateB = new Date(b?.dates[b?.dates.length - 1] || 0).getTime();
+
+        return lastDateA - lastDateB;
+      })
+    : [];
+    const properties:IPropertyWithReserves[]=properties1.length>0 ? [{property:property?.property,reserveDates:properties1}]:[]
+    console.log(property,"lllllllll")
+    console.log(properties1,"kkkkkkkkkk")
+    console.log(properties,"222222222")
   useEffect(() => {
     
     if (property?.reserveDates?.length > 0) {
@@ -71,7 +89,6 @@ const Calender = () => {
         setDisableDates(allDates); 
         console.log("Disabled Dates:", allDates);
       }
-      console.log(data)
   }, [data]);
 
   const isDateDisabled = (date: Date) => {
@@ -138,10 +155,22 @@ const Calender = () => {
       console.log(errors)
     }
   }
-  console.log(selectedDates);
 
+  const handleDeleteProperty=async(e: React.MouseEvent<HTMLButtonElement>,dateId:string)=>{
+    e.stopPropagation()
+    try{
+      const res=await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/reservedDates/${dateId}`,{headers:{"Authorization":`Bearer ${token}`}});
+      console.log(res);
+      await queryClient.invalidateQueries({queryKey:["booking"]})
+      if(res.data.status === "success"){
+        toast.success("Reverved Date Deleted")
+      }
+    }catch(errors){
+      console.log(errors)
+    }
+  }
   return (
-      <div className="min-h-screen bg-white flex justify-center px-2 sm:px-4 py-6 sm:py-10">
+      <div className="min-h-screen bg-white flex flex-col justify-center px-2 sm:px-4 py-6 sm:py-10">
         {openSendCode === "sendCode"?
         <CodeNumber setOpenCode={setOpenSendCode} phone={property.admin.phone} />:
         openSendCode === "changeStatus"?
@@ -233,7 +262,19 @@ const Calender = () => {
             })}
           </div>
         </div>
-        
+        <h3 className="text-2xl font-medium text-gray-700 text-center mt-10">{t("setting.reservations.title")}</h3>
+        {properties.length>0?
+            <>
+              <TableForLargeScreen properties={properties} handleDeleteProperty={handleDeleteProperty}/>
+              <ListingFotMobile properties={properties}  handleDeleteProperty={handleDeleteProperty}/>
+            </>
+            :
+            <div className="flex flex-col items-center justify-center text-center py-16">
+              <FaRegCalendarCheck className="text-6xl text-gray-400 mb-4" />
+              <h3 className="text-2xl font-medium text-gray-700">{t("setting.reservations.emptyTitle")}</h3>
+              <p className="text-gray-500 mt-2">{t("setting.reservations.emptySubtitleHost")}</p>
+            </div>
+            }
       </div>
   );
 };

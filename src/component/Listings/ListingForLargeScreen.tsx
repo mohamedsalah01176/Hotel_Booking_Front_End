@@ -25,6 +25,7 @@ const ListingForLargeScreen = ({properties,searchProperties,ChangeActiveProperty
           {searchProperties.length>0?
             searchProperties?.map((item)=>{
               return(
+                
               <tr key={item._id} className="hover:bg-[#e8e7e730] transition-all duration-300 mt-10  border-b border-gray-200">
                 <td className="pt-5 pb-2 pl-4 rounded-xl w-[290px]">
                   <img loading="lazy" src={item.images[0] || image} alt="image" className="rounded-xl w-[60px] h-[60px] inline-block" />
@@ -60,11 +61,15 @@ const ListingForLargeScreen = ({properties,searchProperties,ChangeActiveProperty
                   <p className="inline-block ml-3 text-lg font-medium">{item.title}</p>
                 </td>
                 <td className="pr-2">{item.category}</td>
-                <td className="max-w-[200px]">{item.location.address}</td> 
+                <td className="max-w-[200px]">{item.location.city+" - "+item.location.address}</td> 
                 <td className="rounded-xl">
                   {item.isActive ?
                     <span className="px-3 py-1 text-sm bg-green-100 text-green-800 rounded-full">
                       Active
+                    </span>
+                  : item.isConfirmed === false?
+                    <span className="px-3 py-1 text-sm bg-yellow-100 text-yellow-800 rounded-full">
+                      Pendding
                     </span>
                   :
                     <span className="px-3 py-1 text-sm bg-red-100 text-red-800 rounded-full">
@@ -74,8 +79,13 @@ const ListingForLargeScreen = ({properties,searchProperties,ChangeActiveProperty
                 </td>
                 <td className="pr-2 text-center">
                   <BiEditAlt onClick={()=>{setUpdateProperty(true);setPropertyId(item._id as string)}} className="text-2xl cursor-pointer hover:text-green-700 transition-all duration-300 font-medium inline-block mr-2"/>
-                  <LiaExchangeAltSolid onClick={()=>ChangeActiveProperty(item._id as string,item.isActive)} className="text-2xl cursor-pointer hover:text-sky-700 transition-all duration-300 font-medium inline-block mr-2"/>
-                  <FaRegCalendarCheck  onClick={()=>nav(`/dashboard/calender/${item._id}`)} className="text-2xl cursor-pointer hover:text-[#02717e] transition-all duration-300 font-medium inline-block "/>
+                    {item.isConfirmed &&
+                      <>
+                        <LiaExchangeAltSolid onClick={()=>ChangeActiveProperty(item._id as string,item.isActive)} className="text-2xl cursor-pointer hover:text-sky-700 transition-all duration-300 font-medium inline-block mr-2"/>
+                        <FaRegCalendarCheck  onClick={()=>nav(`/dashboard/calender/${item._id}`)} className="text-2xl cursor-pointer hover:text-[#02717e] transition-all duration-300 font-medium inline-block "/>
+                      </>
+                    }
+                    
                 </td>
               </tr>
               )}

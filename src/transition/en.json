@@ -225,6 +225,7 @@
       "title": "My Reservations",
       "emptyTitle": "No reservations yet",
       "emptySubtitle": "Start exploring and book your first stay!",
+      "emptySubtitleHost": "You don’t have any reservations from guests yet. Once travelers book your property, they will appear here.",
       "explore": "Explore Listings"
     },
     "table": {

@@ -83,4 +83,5 @@ export interface IProperty {
     };
   };
   isDangerousPlace:boolean;
+  isConfirmed:boolean;
 }
