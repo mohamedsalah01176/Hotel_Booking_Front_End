@@ -17,7 +17,7 @@ const PropertyCard = ({item}:{item:IProperty}) => {
           width={170}
           height={180}
         />
-        {!item.isDangerousPlace ?
+        {item.isDangerousPlace === false ?
           <div className={` absolute top-2 ${i18n.language === "en" ?"left-2":"right-2"}  flex items-center gap-2 px-3 py-1.5 bg-green-100 text-green-700 rounded-2xl shadow-md`}>
             <BsShieldCheck className="w-4 h-4" />
             <span className="font-medium text-[12px]">{t("home.safe_area")}</span>

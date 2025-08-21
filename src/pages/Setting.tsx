@@ -171,18 +171,19 @@ const Setting = () => {
     queryKey:["booking"],
     queryFn:getReserveForUser
   });
-  console.log(data);
+  console.log(query.data?.data?.properties);
   const properties = query.data?.data?.properties
     ? query.data.data.properties.sort((a: IPropertyWithReserves, b: IPropertyWithReserves) => {
         const lastDateA = new Date(a.reserveDates[0]?.dates[a.reserveDates[0]?.dates.length - 1] || 0).getTime();
         const lastDateB = new Date(b.reserveDates[0]?.dates[b.reserveDates[0]?.dates.length - 1] || 0).getTime();
 
-        return lastDateB - lastDateA;
+        return lastDateA - lastDateB;
       })
     : [];
 
+    console.log(properties)
 
-const handleDeleteProperty=async(e: React.MouseEvent<HTMLButtonElement>,dateId:string)=>{
+  const handleDeleteProperty=async(e: React.MouseEvent<HTMLButtonElement>,dateId:string)=>{
     e.stopPropagation()
     try{
       const res=await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/reservedDates/${dateId}`,{headers:{"Authorization":`Bearer ${token}`}});

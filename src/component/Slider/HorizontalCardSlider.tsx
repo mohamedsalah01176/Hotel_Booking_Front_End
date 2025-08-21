@@ -34,15 +34,15 @@ const HorizontalCardSlider = ({ nameEn,nameAr,filteredProperties }: { nameEn: st
   }, [propertyResponse.data?.data.properties]);
   
   const property = useMemo(() => {
-    console.log(filteredProperties,"sortedeeeeeeeeeeeeeeeeeeeeeeeeee")
     const source:IProperty[]=filteredProperties.length>0?filteredProperties:propertyResponse.data?.data.properties as IProperty[];
     return source?.filter(
       (item) =>
         item?.location?.cityEn?.toLowerCase() === nameEn?.toLowerCase() &&
-        item?.category?.toLowerCase() === currentSection?.toLowerCase()
+      item?.category?.toLowerCase() === currentSection?.toLowerCase()
     ) || [];
   }, [propertyResponse.data?.data.properties,filteredProperties, nameEn, currentSection]);
-
+  
+  console.log(property,"ssssssssssss")
   if (propertyResponse.isLoading) {
     return <SliderLoader name={nameEn?.charAt(0).toUpperCase()} />;
   }
@@ -90,6 +90,7 @@ const HorizontalCardSlider = ({ nameEn,nameAr,filteredProperties }: { nameEn: st
         }}
         >
           {property.map((item) => (
+            
             <SwiperSlide key={item._id}>
               <PropertyCard item={item} />
             </SwiperSlide>

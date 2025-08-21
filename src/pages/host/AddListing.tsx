@@ -58,11 +58,11 @@ const AddListing = () => {
       console.log(formateData)
       const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/property?lang=${i18n.language}`,formateData,{headers:{Authorization:`Bearer ${token}`,"Content-Type": "multipart/form-data",}});
       if(response.data.status === "success"){
-        toast.success("Operation completed successfully")
+        toast.success("Your property has been submitted and is waiting for manager review.")
         setLoading(false)
         nav("/dashboard/listings")
         setTimeout(()=>{
-        },1500)
+        },2000)
       }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }catch(err:any){

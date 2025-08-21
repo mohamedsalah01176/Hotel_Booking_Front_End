@@ -47,7 +47,7 @@ const Home = () => {
   }
 
   return (
-    <div className="pt-3 pb-14">
+    <div className="pt-3 pb-14 min-h-[50vh]">
       {cities?.map((item)=>{
         return(
           <HorizontalCardSlider nameEn={capitalize(item.nameEn)} nameAr={item.nameAr}  key={item._id} filteredProperties={filteredProperties} />
