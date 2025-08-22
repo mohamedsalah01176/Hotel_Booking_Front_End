@@ -4,8 +4,10 @@ import { BiEditAlt } from "react-icons/bi"
 import type { IProperty } from "../../interface/property"
 import { FaRegCalendarCheck } from "react-icons/fa";
 import { useNavigate } from "react-router";
-const ListingForMobile = ({properties,searchProperties,ChangeActiveProperty,setUpdateProperty,setPropertyId}:{properties:IProperty[],searchProperties:IProperty[],ChangeActiveProperty:(val1:string,val2:boolean)=>void,setUpdateProperty:(val:boolean)=>void,setPropertyId:(val:string)=>void}) => {
+import { useTranslation } from "react-i18next";
+const ListingForMobile = ({properties,searchProperties,ChangeActiveProperty,setUpdateProperty,setShowPopup,setPropertyId}:{properties:IProperty[],searchProperties:IProperty[],ChangeActiveProperty:(val1:string,val2:boolean)=>void,setUpdateProperty:(val:boolean)=>void,setShowPopup:(val:boolean)=>void,setPropertyId:(val:string)=>void}) => {
   const nav=useNavigate();
+  const {t,i18n}=useTranslation();
   return (
     <div className="mt-10 md:hidden">
       {searchProperties?.length>0?
@@ -15,18 +17,18 @@ const ListingForMobile = ({properties,searchProperties,ChangeActiveProperty,setU
               <div className="relative">
                 <img loading="lazy" src={item.images[0] || image} alt="product Image" className="w-[100px] h-[100px] rounded-xl" />
                 {item.isActive ?
-                    <div className="absolute top-2 right-1 text-[10px] bg-green-100 text-green-800 p-1 rounded-4xl">Active</div>
+                    <div className="absolute top-2 right-1 text-[10px] bg-green-100 text-green-800 p-1 rounded-4xl">{t("listing.status.active")}</div>
                   : item.isConfirmed === false?
-                    <div className="absolute top-2 right-1 text-[10px] bg-yellow-100 text-yellow-800 p-1 rounded-4xl">Pendding</div>
+                    <div className="absolute top-2 right-1 text-[10px] bg-yellow-100 text-yellow-800 p-1 rounded-4xl">{t("listing.status.pending")}</div>
                   :
-                    <div className="absolute top-2 right-1 text-[10px] bg-red-100 text-red-800 p-1 rounded-4xl">Stoped</div>
+                    <div className="absolute top-2 right-1 text-[10px] bg-red-100 text-red-800 p-1 rounded-4xl">{t("listing.status.stopped")}</div>
                   }
               </div>
               <div>
-                <h2 className="text-xl font-medium">{item.title}</h2>
-                <p className="text-gray-600">{item.location.city+" - "+item.location.address}</p>
+                <h2 className="text-xl font-medium">{i18n.language === "en"?item.titleEn:item.titleAr}</h2>
+                <p className="text-gray-600">{i18n.language === "en"?item.location.cityEn+" - "+item.location.addressEn:item.location.cityAr+" - "+item.location.addressAr}</p>
                 <div> 
-                  <BiEditAlt onClick={()=>{setUpdateProperty(true);setPropertyId(item._id as string)}} className="text-xl cursor-pointer hover:text-red-700 transition-all duration-300 font-medium inline-block mr-2"/>
+                  <BiEditAlt onClick={()=>{setShowPopup(true);setUpdateProperty(true);setPropertyId(item._id as string)}} className="text-xl cursor-pointer hover:text-red-700 transition-all duration-300 font-medium inline-block mr-2"/>
                   {item.isConfirmed &&
                     <>
                       <LiaExchangeAltSolid onClick={()=>ChangeActiveProperty(item._id as string,item.isActive)} className="text-2xl cursor-pointer hover:text-sky-700 transition-all duration-300 font-medium inline-block mr-2"/>
@@ -45,19 +47,25 @@ const ListingForMobile = ({properties,searchProperties,ChangeActiveProperty,setU
             <div key={item._id} className="flex items-center gap-3 mb-6 hover:bg-[#e8e7e730] transition-all duration-300 ">
               <div className="relative">
                 <img loading="lazy" src={item.images[0] || image} alt="product Image" className="w-[100px] h-[100px] rounded-xl" />
-                {item.isActive ?
-                    <div className="absolute top-2 right-1 text-[10px] bg-green-100 text-green-800 p-1 rounded-4xl">Active</div>
+                  {item.isActive ?
+                    <div className="absolute top-2 right-1 text-[10px] bg-green-100 text-green-800 p-1 rounded-4xl">{t("listing.status.active")}</div>
+                  : item.isConfirmed === false?
+                    <div className="absolute top-2 right-1 text-[10px] bg-yellow-100 text-yellow-800 p-1 rounded-4xl">{t("listing.status.pending")}</div>
                   :
-                  <div className="absolute top-2 right-1 text-[10px] bg-red-100 text-red-800 p-1 rounded-4xl">Stoped</div>
+                    <div className="absolute top-2 right-1 text-[10px] bg-red-100 text-red-800 p-1 rounded-4xl">{t("listing.status.stopped")}</div>
                   }
               </div>
               <div>
-                <h2 className="text-xl font-medium">{item.title}</h2>
-                <p className="text-gray-600">{item.location.address}</p>
+                <h2 className="text-xl font-medium">{i18n.language === "en"?item.titleEn:item.titleAr}</h2>
+                <p className="text-gray-600">{i18n.language === "en"?item.location.cityEn+" - "+item.location.addressEn:item.location.cityAr+" - "+item.location.addressAr}</p>
                 <div> 
-                  <BiEditAlt onClick={()=>{setUpdateProperty(true);setPropertyId(item._id as string)}} className="text-xl cursor-pointer hover:text-red-700 transition-all duration-300 font-medium inline-block mr-2"/>
-                  <LiaExchangeAltSolid onClick={()=>ChangeActiveProperty(item._id as string,item.isActive)} className="text-2xl cursor-pointer hover:text-sky-700 transition-all duration-300 font-medium inline-block "/>
-                  <FaRegCalendarCheck onClick={()=>nav(`/dashboard/calender/${item._id}`)} className="text-2xl cursor-pointer hover:text-[#02717e] transition-all duration-300 font-medium inline-block "/>
+                  <BiEditAlt onClick={()=>{setShowPopup(true);setUpdateProperty(true);setPropertyId(item._id as string)}} className="text-xl cursor-pointer hover:text-red-700 transition-all duration-300 font-medium inline-block mr-2"/>
+                  {item.isConfirmed &&
+                    <>
+                      <LiaExchangeAltSolid onClick={()=>ChangeActiveProperty(item._id as string,item.isActive)} className="text-2xl cursor-pointer hover:text-sky-700 transition-all duration-300 font-medium inline-block mr-2"/>
+                      <FaRegCalendarCheck onClick={()=>nav(`/dashboard/calender/${item._id}`)} className="text-2xl cursor-pointer hover:text-[#02717e] transition-all duration-300 font-medium inline-block "/>
+                    </>
+                  }
                 </div>
               </div>
             </div>

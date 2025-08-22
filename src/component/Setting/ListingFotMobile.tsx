@@ -1,8 +1,9 @@
 import image from "../../assets/default.jpg"
+import defaultUserImage from "../../assets/defaultUser.png"
 import { useNavigate } from "react-router";
 import type { IPropertyWithReserves } from "../../interface/ReserveDate";
 import { useTranslation } from "react-i18next";
-const ListingFotMobile = ({properties,handleDeleteProperty}:{properties:IPropertyWithReserves[],handleDeleteProperty:(e:React.MouseEvent<HTMLButtonElement>,dateId:string)=>void}) => {
+const ListingFotMobile = ({properties,handleDeleteProperty,type}:{properties:IPropertyWithReserves[],handleDeleteProperty:(e:React.MouseEvent<HTMLButtonElement>,dateId:string)=>void,type:string}) => {
   const nav=useNavigate();
   const {t,i18n}=useTranslation();
   return (
@@ -19,12 +20,21 @@ const ListingFotMobile = ({properties,handleDeleteProperty}:{properties:IPropert
                   className="cursor-pointer flex items-center gap-3 mb-6 hover:bg-[#e8e7e730] transition-all duration-300 w-full">
 
                   <div className="relative">
+                    {type === "calender"?
+                    <img 
+                      loading="lazy" 
+                      src={item.property.admin.image || defaultUserImage} 
+                      alt="product Image" 
+                      className="w-[130px] h-[130px] rounded-xl" 
+                    />
+                    :
                     <img 
                       loading="lazy" 
                       src={item.property.images[0] || image} 
                       alt="product Image" 
                       className="w-[130px] h-[130px] rounded-xl" 
                     />
+                    }
                     {isExpired ? (
                       <div className="absolute top-2 right-1 text-[10px] bg-red-100 text-red-800 px-2 py-1 rounded-2xl">{t("setting.status.ended")}</div>
                     ) : isDuring ? (
@@ -35,12 +45,18 @@ const ListingFotMobile = ({properties,handleDeleteProperty}:{properties:IPropert
                   </div>
 
                   <div>
+                    {type === "calender" ?
+                    <h2 className="text-[19px] font-medium">
+                      {item?.property.admin.name}
+                    </h2>
+                    :
                     <h2 className="text-[19px] font-medium">
                       {i18n.language == "en"
                         ? item?.property.titleEn?.split(" ").slice(0, 3).join(" ")
                         : item?.property.titleAr?.split(" ").slice(0, 3).join(" ")
                       }
                     </h2>
+                    }
 
                     <div className="flex flex-col sm:flex-row justify-between sm:items-center sm:w-[300px] mt-2">
                       <p className="text-sm text-gray-700">

@@ -16,15 +16,18 @@ interface IProps {
   setReserved: (val: boolean) => void;
   nigthCount:number;
   nigthPrice:number;
+  setCustomLoading: (val: boolean) => void;
 }
-const ConfirmMessage = ({t,i18n,setOpenConfirm,propertyId,range,reserved,setReserved,nigthCount,nigthPrice}:IProps) => {
+const ConfirmMessage = ({t,i18n,setOpenConfirm,propertyId,range,reserved,setReserved,nigthCount,nigthPrice,setCustomLoading}:IProps) => {
   const {token}=useContext(TokenContext);
   const formattedPrice = new Intl.NumberFormat(i18n.language === "ar" ? "ar-EG" : "en-US").format(nigthCount*nigthPrice);
   const confirm=async()=>{
+    setCustomLoading(true)
     try{
       const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/reserve/${propertyId}`,{dates:range},{headers:{Authorization:`Bearer ${token}`}});
-        console.log(response)
-        if(response.data.status === "success"){
+      console.log(response)
+      if(response.data.status === "success"){
+          setCustomLoading(false)
           toast.success(response.data.message);
           setReserved(!reserved)
           setOpenConfirm(false)
@@ -38,7 +41,7 @@ const ConfirmMessage = ({t,i18n,setOpenConfirm,propertyId,range,reserved,setRese
     }
   }
   return (
-    <div className='fixed w-full h-full bg-black/20 flex justify-center items-center z-20 animate-fade-in translate-y-[-10%]'>
+    <div className='fixed w-full h-full bg-black/20 flex justify-center items-center z-10 animate-fade-in translate-y-[-10%]'>
       <div className="bg-white px-7 py-14 w-[300px] md:w-[600px] min-h-[200px] relative rounded-xl">
         <h2 className="text-center text-2xl font-semibold">{t("propertyDetails.confirm.title")}</h2>
         <p className="text-xl font-normal my-7 text-center">{t("propertyDetails.confirm.message")}</p>

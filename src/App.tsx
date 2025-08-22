@@ -25,6 +25,7 @@ import Calender from './pages/host/Calender';
 import Setting from './pages/Setting';
 import ContactUs from './pages/ContactUs';
 import SearchResult from './pages/SearchResult';
+import PrivacyAndTerm from './pages/PrivacyAndTerm';
 
 
 
@@ -41,6 +42,7 @@ function App() {
       {path:"setting",element:<Setting/>},
       {path:"contactUs",element:<ContactUs/>},
       {path:"searchResults",element:<SearchResult/>},
+      {path:"privacyTerm",element:<PrivacyAndTerm/>},
       {path:"*",element:<NotFound/>,}
     ]},
     {path:"dashboard",element:<LayoutHost/>,children:[

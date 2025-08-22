@@ -18,6 +18,7 @@ import { TokenContext } from "../util/TokenContext";
 import ConfirmMessage from "../component/PropertyDetails/ConfirmMessage";
 import type { Range } from "react-date-range";
 import { GenerateDatesRange } from "../util/GenerateDatesRange";
+import Spinner from "../component/Loaders/Spinner";
 
 const PropertyDetails = () => {
   const {t,i18n}=useTranslation()
@@ -25,6 +26,7 @@ const PropertyDetails = () => {
   const [openAddReview,setOpenAddReview]=useState(false);
   const [openConfirm,setOpenConfirm]=useState(false);
   const {token}=useContext(TokenContext);
+  const [customLoading,setCustomLoading]=useState(false)
   const [reserved,setReserved]=useState(false)
   const [range,setRange]=useState<Range[]>([{
     startDate:new Date(),
@@ -79,11 +81,11 @@ const queryClient = useQueryClient();
   const nigthReserved = useMemo(() => 
     GenerateDatesRange([...range] as { startDate: Date; endDate: Date; }[]), 
   [range]);
-  
+  console.log(customLoading)
   return (
     <section className="bg-[#f7f7f7] min-h-[190vh]">
       {openAddReview && <AddReview setOpenAddReview={setOpenAddReview} handleAddReview={handleAddReview}/>}
-      {openConfirm && <ConfirmMessage t={t} i18n={i18n} nigthCount={nigthReserved.length} nigthPrice={property.nightPrice} setOpenConfirm={setOpenConfirm} propertyId={id as string} range={nigthReserved} reserved={reserved} setReserved={setReserved}/>}
+      {openConfirm && <ConfirmMessage setCustomLoading={setCustomLoading} t={t} i18n={i18n} nigthCount={nigthReserved.length} nigthPrice={property.nightPrice} setOpenConfirm={setOpenConfirm} propertyId={id as string} range={nigthReserved} reserved={reserved} setReserved={setReserved}/>}
       
       <div className="w-[95%] md:w-[90%] mx-auto pt-7 ">
         {/* <h1 className="text-4xl font-semibold">{i18n.language === "en"? property?.titleEn : property?.titleAr}</h1> */}
@@ -102,6 +104,9 @@ const queryClient = useQueryClient();
         <div className="bg-gray-300 w-full h-[2px] my-10"></div>
         <ShowHost admin={property?.admin} t={t}/>
       </div>
+      { customLoading && <div className="fixed w-full h-full flex items-center justify-center bg-black/10 z-30">
+          <Spinner/>
+        </div> }
     </section>
   )
 }

@@ -1,29 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import defaultUserImage from "../../assets/defaultUser.png";
 import type { i18n as i18nType, TFunction } from "i18next";
 import type { IReview } from "../../interface/property";
 import ShowAllReview from "./ShowAllReview";
+import { TokenContext } from "../../util/TokenContext";
 
-const Reviews = ({
-  token,
-  i18n,
-  reviews,
-  t,
-  setOpenAddReview,
-}: {
-  token: string;
-  reviews: IReview[];
-  i18n: i18nType;
-  t: TFunction;
-  setOpenAddReview: (val: boolean) => void;
-}) => {
+const Reviews = ({token,i18n,reviews,t,setOpenAddReview,}: {token: string;reviews: IReview[];i18n: i18nType;t: TFunction;setOpenAddReview: (val: boolean) => void;}) => {
   const [openAllReviews, setOpenAllReviews] = useState(false);
-
+  const {decode}=useContext(TokenContext);
   if (reviews?.length <= 0) {
     return (
       <div className="py-12 bg-white p-7 rounded-xl text-center flex-col">
         <p className="text-3xl">{t("propertyDetails.notReview")}</p>
-        {token !== "" && (
+        {token !== "" && decode.role === "user" && (
           <button
             onClick={() => setOpenAddReview(true)}
             className="p-3 block mx-auto mt-7 bg-[#02717e] text-white rounded-xl text-lg cursor-pointer hover:bg-[#294a4c] transition-all duration-300"

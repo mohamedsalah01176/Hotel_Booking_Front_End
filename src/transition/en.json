@@ -290,7 +290,204 @@
     "lowToHigh": "Low to High",
     "mostBooked": "Most Booked",
     "highestRated": "Highest Rated"
+  },
+  "privacy": {
+    "termsPrivacy": {
+      "title": "Terms & Privacy Policy",
+      "lastUpdated": "Last updated: August 22, 2025",
+      "terms": {
+        "title": "1. Terms of Service",
+        "intro": "By using our website and booking services, you agree to comply with these Terms. Please read them carefully before making any reservation.",
+        "list": {
+          "1": "By using our website and booking services, you agree to comply with these Terms & Conditions.",
+          "2": "You must provide accurate and correct information when making any booking. Any mistake in the entered data is the user’s responsibility.",
+          "3": "All bookings are subject to our cancellation policy, and any refunds will be processed according to the stated rules.",
+          "4": "We reserve the right to suspend or terminate accounts that violate these Terms or misuse the service.",
+          "5": "<strong>External Transactions:</strong> The website is not responsible for any financial or service-related dealings that occur outside the platform, including direct agreements with property owners or third parties.",
+          "6": "<strong>Unsafe Areas:</strong> Users are solely responsible for bookings made in high-risk or unsafe regions. The website does not guarantee the safety of surrounding areas, and we strongly advise reviewing official travel advisories before making a booking.",
+          "7": "<strong>Technical Issues:</strong> The website is not liable for temporary downtime, technical errors, or interruptions caused by circumstances beyond our control, such as server or internet failures.",
+          "8": "<strong>Changes to Terms:</strong> We may update these Terms from time to time. The updated version will be published on this page with the date of the latest revision.",
+          "9": "<strong>Governing Law:</strong> These Terms are governed by the laws of the Syrian Arab Republic, and any disputes will be resolved before the competent courts in Syria."
+        }
+      },
+      "privacy": {
+        "title": "2. Privacy Policy",
+        "intro": "We respect your privacy. This policy explains how we collect, use, and safeguard your information.",
+        "list": {
+          "1": "<strong>Information We Collect:</strong> Account details, booking information, payment data, and technical information such as IP address and usage logs.",
+          "2": "<strong>How We Use Data:</strong> To confirm bookings, provide support, improve services, and communicate offers or updates.",
+          "3": "<strong>Data Sharing:</strong> We do not share your personal data with external parties except with trusted payment providers or when required by law.",
+          "4": "<strong>Your Rights:</strong> You may request access, correction, or deletion of your personal data by contacting us.",
+          "5": "<strong>Cookies:</strong> We use cookies to improve user experience and analyze performance. You can manage cookies through your browser settings.",
+          "6": "<strong>Children:</strong> Our services are not directed to children under 16. We do not knowingly collect data from minors."
+        }
+      },
+      "contact": {
+        "title": "3. Contact Us",
+        "desc": "If you have any questions regarding these Terms or our Privacy Policy, please contact us at:",
+        "email": "mohammedsalah182002@gmail.com"
+      }
+    }
+  },
+  "addListing": {
+    "back": "Back",
+    "getStart": "Get Started",
+    "next": "Next",
+    "createHost": "Create Host",
+    "success": "Your property has been submitted and is waiting for manager review.",
+    "error": "Something went wrong",
+    "explain": {
+      "title": "It's easy to get started on My Hotel",
+      "step1_title": "1 Tell us about your place",
+      "step1_desc": "Share some basic info, like where it is and how many guests can stay",
+      "step2_title": "2 Make it stand out",
+      "step2_desc": "Add 5 or more photos plus a title and description—we’ll help you out.",
+      "step3_title": "3 Finish up and publish",
+      "step3_desc": "Choose a starting price, verify a few details, then publish your listing."
+    },
+    "addPhotos": {
+      "title": "Add some photos of your house",
+      "desc": "You will need 5 photos to get started. You can add more or make changes later.",
+      "addBtn": "Add Photo",
+      "error": "Please select at least 5 images",
+      "success": "Images uploaded successfully!",
+      "showImages": "Show Images",
+      "all_photos": "All Photos"
+    },
+    "typeOfPlace": {
+      "title": "What type of place will guests have?",
+      "home_title": "A Home",
+      "home_desc": "Guests have the whole place to themselves.",
+      "apartment_title": "An Apartment",
+      "apartment_desc": "Guests have their own apartment in a home or hotal, plus access to shared spaces."
+    },
+    "location": {
+      "title": "Where's your place located?",
+      "desc": "Your address is only shared with guests after they have made a reservation.",
+      "selected_title": "Selected Location",
+      "city": "City/State",
+      "address": "Address",
+      "not_detected": "Not detected",
+      "latlng": "Lat: {{lat}}, Lng: {{lng}}",
+      "map": {
+        "loading": "Getting your location...",
+        "youAreHere": "You are here 👋"
+      }
+    },
+    "placeContains": {
+      "title": "Share some basics about your place",
+      "desc": "You will add more details later, like bed types.",
+      "guest": "Guests",
+      "bedrooms": "Bedrooms",
+      "beds": "Beds",
+      "bathrooms": "Bathrooms"
+    },
+    "step2": {
+      "label": "Step 2",
+      "title": "Make your place stand out",
+      "desc": "In this step, you will add some of the amenities your place offers, plus 5 or more photos, you will create a title and description."
+    },
+    "step3": {
+      "label": "Step 3",
+      "title": "Finish up and publish",
+      "desc": "Finally, you'll choose booking settings, set up pricing, and publish your listing."
+    },
+    "services": {
+      "title": "Tell guests what your place has to offer",
+      "subtitle": "You can add more amenities after you publish your listing",
+      "favorites": "What about these guest favorites?",
+      "standout": "Do you have any standout amenities?",
+      "safety": "Do you have any of these safety items?",
+      "items": {
+        "wifi": "WiFi",
+        "tv": "TV",
+        "kitchen": "Kitchen",
+        "washer": "Washer",
+        "free_parking": "Free parking on premises",
+        "paid_parking": "Paid parking on premises",
+        "ac": "Air Conditioning",
+        "workspace": "Dedicated workspace",
+        "pool": "Pool",
+        "hot_tub": "Hot tub",
+        "bbq": "BBQ grill",
+        "outdoor_dining": "Outdoor dining area",
+        "fire_pit": "Fire pit",
+        "piano": "Piano",
+        "lake": "Lake access",
+        "gym": "Exercise equipment",
+        "beach": "Beach access",
+        "ski": "Ski-in/Ski-out",
+        "outdoor_shower": "Outdoor shower",
+        "smoke_alarm": "Smoke alarm",
+        "first_aid": "First aid kit",
+        "fire_extinguisher": "Fire extinguisher"
+      }
+    },
+    "price_for_night": {
+      "title": "Set a night price",
+      "desc": "Choose a price per night for your property. You can always update it later based on demand or season.",
+      "guest_price": "Guest price before taxes ${{price}}",
+      "currency":"SYP"
+    },
+    "description": {
+      "title": "Create your description",
+      "subtitle": "Share what makes your place special"
+    },
+    "title": {
+      "heading": "Now, let's give your place a title",
+      "subtitle": "Short titles work best. Have fun with it — you can always change it later",
+      "defaultCategory": "house"
+    }
+  },
+  "listing": {
+    "title": "Your Listings",
+    "searchPlaceholder": "You have {{count}} properties",
+    "emptyTitle": "No listings found",
+    "emptySubtitle": "Try adjusting your search or add a new property",
+    "addButton": "Add New Property",
+    "toast": {
+      "active": "Property is Active",
+      "stopped": "Property is Stopped",
+      "error": "Something went wrong while updating the property status"
+    },
+    "headers": {
+      "listing": "Listing",
+      "type": "Type",
+      "location": "Location",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "stopped": "Stopped",
+      "pending": "Pending"
+    }
+  },
+  "dashboard": {
+    "hero": {
+      "h1a": "Add an apartment or house,",
+      "h1b": "help grow our community",
+      "ctaStart": "Add a new place",
+      "ctaView": "View Your Listings",
+      "note": "Support yourself or your friends by joining and listing spaces. Together we can build a trusted hosting community."
+    },
+    "how": {
+      "title": "How it works",
+      "step1Title": "Add an apartment or house",
+      "step1Text": "You can list your property to host guests, whether it’s a house, apartment, or another type of place.",
+      "step2Title": "Complete the listing details",
+      "step2Text": "Make sure to include all information and photos so your place looks its best.",
+      "step3Title": "Publish your place",
+      "step3Text": "Once your listing is published, you’ll start attracting guests and helping them discover new stays."
+    },
+    "actions": {
+      "listings": "Your Listings",
+      "addListing": "Add Listing"
+    },
+    "ui": {
+      "en": "English",
+      "ar": "العربية"
+    }
   }
-
 }
 

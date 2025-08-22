@@ -112,7 +112,7 @@ const UpdateProperty = ({setUpdateProperty,propertyId}:{setUpdateProperty:(val:b
     }
   }
   return (
-    <div  className="fixed top-[56%]  left-[50%] py-5 px-10 -translate-[50%] bg-[#f7f7f7] rounded-2xl min-h-[70vh] min-w-[90%] md:min-w-[700px] ">
+    <div  className="fixed top-[56%]  left-[50%] py-5 px-10 -translate-[50%] bg-[#f7f7f7] rounded-2xl min-h-[70vh] min-w-[90%] md:min-w-[700px] z-0">
       <h2 className="text-center text-2xl font-medium text-[#02717e] mb-5">Upadata Property</h2>
       <button title="close" onClick={()=>setUpdateProperty(false)} className="absolute top-5 right-5 text-3xl font-medium text-red-700 transition-all duration-500 hover:rotate-180 cursor-pointer"><IoClose/> </button>
       <form onSubmit={formik.handleSubmit} className="">
