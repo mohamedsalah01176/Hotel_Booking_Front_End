@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next"
 import image from "../../assets/default.jpg"
 import type { IPropertyWithReserves } from "../../interface/ReserveDate"
 import { useNavigate } from "react-router"
-
-const TableForLargeScreen = ({properties,handleDeleteProperty}:{properties:IPropertyWithReserves[],handleDeleteProperty:(e:React.MouseEvent<HTMLButtonElement>,dateId:string)=>void}) => {
+import defaultUserImage from "../../assets/defaultUser.png"
+const TableForLargeScreen = ({properties,handleDeleteProperty,type}:{properties:IPropertyWithReserves[],handleDeleteProperty:(e:React.MouseEvent<HTMLButtonElement>,dateId:string)=>void,type:string}) => {
   const {t,i18n}=useTranslation()
   const nav=useNavigate();
 
@@ -40,20 +40,34 @@ const TableForLargeScreen = ({properties,handleDeleteProperty}:{properties:IProp
                   key={`${item?.property._id}-${idx}`}
                   className="cursor-pointer hover:bg-[#e8e7e730] transition-all duration-300 mt-10 border-b border-gray-200"
                 >
-                  <td className={`pt-5 pb-2 ${i18n.language === "en" ? "pl-4" : "pr-4"} rounded-xl w-[290px]`}>
-                    <img
-                      loading="lazy"
-                      src={item?.property.images[0] || image}
-                      alt="image"
-                      className="rounded-xl w-[60px] h-[60px] inline-block"
-                    />
-                    <p className={`inline-block ${i18n.language === "en" ? "ml-3" : "mr-3"} text-lg font-medium`}>
-                      {i18n.language == "en"
-                        ? item?.property.titleEn?.split(" ").slice(0, 3).join(" ")
-                        : item?.property.titleAr?.split(" ").slice(0, 3).join(" ")
-                      }
-                    </p>
-                  </td>
+                  {type === "calender" ?
+                    <td className={`pt-5 pb-2 ${i18n.language === "en" ? "pl-4" : "pr-4"} rounded-xl w-[290px]`}>
+                      <img
+                        loading="lazy"
+                        src={item?.property.admin.image || defaultUserImage}
+                        alt="image"
+                        className="rounded-xl w-[60px] h-[60px] inline-block"
+                      />
+                      <p className={`inline-block ${i18n.language === "en" ? "ml-3" : "mr-3"} text-lg font-medium`}>
+                        {item?.property.admin.name}
+                      </p>
+                    </td>
+                  :
+                    <td className={`pt-5 pb-2 ${i18n.language === "en" ? "pl-4" : "pr-4"} rounded-xl max-w-[250px]`}>
+                      <img
+                        loading="lazy"
+                        src={item?.property.images[0] || image}
+                        alt="image"
+                        className="rounded-xl w-[60px] h-[60px] inline-block"
+                      />
+                      <p className={`inline-block ${i18n.language === "en" ? "ml-3" : "mr-3"} text-lg font-medium`}>
+                        {i18n.language == "en"
+                          ? item?.property.titleEn?.split(" ").slice(0, 3).join(" ")
+                          : item?.property.titleAr?.split(" ").slice(0, 3).join(" ")
+                        }
+                      </p>
+                    </td>
+                  }
                   <td className="pr-2">{item?.property.admin.phone}</td>
                   <td className="pr-2">{startDate.toLocaleDateString()}</td>
                   <td className="">{endDate.toLocaleDateString()}</td>

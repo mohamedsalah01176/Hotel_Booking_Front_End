@@ -1,11 +1,13 @@
+import { useTranslation } from 'react-i18next'
 import { FaTrash } from 'react-icons/fa'
 
 const ShowImages = ({images,setOpenImages,deleteImage}:{images:File[] | string [],setOpenImages:(val:boolean)=>void,deleteImage?:(val:string)=>void}) => {
+  const {t}=useTranslation()
   return (
-     <div className="bg-black/20 fixed top-0 left-0 flex justify-center items-center h-full w-full animate-fade-in z-10">
+    <div className="bg-black/20 fixed top-0 left-0 flex justify-center items-center h-full w-full animate-fade-in z-10">
         {images.length > 0 && (
           <div className="mt-10  bg-white p-7 rounded-xl relative ">
-            <h2 className="text-center text-3xl font-medium mb-2 ">All Photos</h2>
+            <h2 className="text-center text-3xl font-medium mb-2 ">{t("addListing.addPhotos.all_photos")}</h2>
             <div onClick={()=>setOpenImages(false)} className="absolute top-7 right-10 text-2xl text-red-600 font-semibold cursor-pointer hover:rotate-180 transition-all duration-500">X</div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6 h-[400px] w-full p-4 overflow-y-scroll">
               {images.map((file, index) => (

@@ -4,8 +4,11 @@ import type { IProperty } from "../../interface/property";
 import PlaceOffer from "./PlaceOffer";
 import type { i18n as i18nType  } from "i18next";
 import type { TFunction } from "i18next";
+import { useState } from "react";
 
 const LeftSide = ({i18n,property,t}:{property:IProperty,i18n:i18nType,t:TFunction}) => {
+  const [showServices,setShowServices]=useState(false)
+  const services=property?.services?.slice(0,6)
   const createdAt = property?.admin?.createdAt ? new Date(property.admin.createdAt) : new Date();
   const years = differenceInYears(new Date(), createdAt);
   const monthsTotal = differenceInMonths(new Date(), createdAt);
@@ -32,11 +35,19 @@ const LeftSide = ({i18n,property,t}:{property:IProperty,i18n:i18nType,t:TFunctio
         <div className="bg-gray-300 w-full h-[2px] my-10"></div>
         <h2 className="text-3xl font-semibold">{t("propertyDetails.whatPlaceOffers")}</h2>
         <div className="grid grid-cols-2"> 
-          { property?.services.length>0?
-              property?.services.map((service ,index :number)=><PlaceOffer title={i18n.language === "ar" ? service.serviceAr : service.serviceEn} key={index}/>)
+          { services?.length>0?
+              services?.map((service ,index :number)=><PlaceOffer serviceEn={service.serviceEn as string} title={i18n.language === "ar" ? service.serviceAr : service.serviceEn} key={index}/>)
             :
               <p className="text-gray-500 italic">{i18n.language === "en"?"No services available":"لا توجد خدمات متاحة"}</p>
           }
+          {property?.services?.length>=6 && !showServices && <button onClick={()=>setShowServices(true)} className="text-white bg-[#02717e] px-5 py-2 w-fit mt-5 rounded-xl text-lg cursor-pointer hover:bg-[#e77008] transition-all duration-300">{i18n.language === "en"?"More":"المزيد"}</button>}
+          {showServices && property.services?.slice(6).map((service, index) => (
+            <PlaceOffer
+              key={`extra-${index}`}
+              serviceEn={service.serviceEn as string}
+              title={i18n.language === "ar" ? service.serviceAr : service.serviceEn}
+            />
+          ))}
         </div>
       </div>
   )

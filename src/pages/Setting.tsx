@@ -286,8 +286,8 @@ const Setting = () => {
             <h2 className="text-3xl font-medium text-[#02717e] text-center mb-7 mt-7">{t("setting.reservations.title")}</h2>
             {properties.length>0?
             <>
-              <TableForLargeScreen properties={properties} handleDeleteProperty={handleDeleteProperty}/>
-              <ListingFotMobile properties={properties}  handleDeleteProperty={handleDeleteProperty}/>
+              <TableForLargeScreen type="setting" properties={properties} handleDeleteProperty={handleDeleteProperty}/>
+              <ListingFotMobile type="setting" properties={properties}  handleDeleteProperty={handleDeleteProperty}/>
             </>
             :
             <div className="flex flex-col items-center justify-center text-center py-16">

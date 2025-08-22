@@ -14,17 +14,21 @@ interface IProps {
   range:Date [] ;
   nigthCount:number;
   nigthPrice:number;
+  setCustomLoading: (val: boolean) => void;
 }
-const ConfirmMessage = ({i18n,t,setOpenConfirm,propertyId,range,nigthCount,nigthPrice}:IProps) => {
+const ConfirmMessage = ({i18n,t,setOpenConfirm,propertyId,range,nigthCount,nigthPrice,setCustomLoading}:IProps) => {
   const queryClient=useQueryClient()
   const {token}=useContext(TokenContext);
   console.log(range)
   const formattedPrice = new Intl.NumberFormat(i18n.language === "ar" ? "ar-EG" : "en-US").format(nigthCount*nigthPrice);
-   const confirm=async()=>{
+  
+  const confirm=async()=>{
+    setCustomLoading(true)
     try{
       const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/reserve/${propertyId}`,{dates:range},{headers:{Authorization:`Bearer ${token}`}});
-        console.log(response)
-        if(response.data.status === "success"){
+      console.log(response)
+      if(response.data.status === "success"){
+          setCustomLoading(false)
           toast.success(response.data.message);
           await queryClient.invalidateQueries({queryKey:["calender"]})
           setOpenConfirm(false)

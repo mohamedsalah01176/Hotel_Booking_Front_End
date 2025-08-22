@@ -1,18 +1,25 @@
-import image from "../../assets/explain3.webp"
+import image from "../../assets/explain3.webp";
+import { useTranslation } from "react-i18next";
 
 const Step3 = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col md:flex-row justify-between items-center min-h-[70vh] pt-5 pb-10 animate-fade-in">
       <div className="md:w-[50%]">
-        <p className="font-medium">Step3</p>
-        <h2 className="text-5xl font-semibold w-[100%] md:w-[80%] mt-4 mb-10">Finish up and publish</h2>
-        <p className="text-gray-700  md:w-[90%] text-lg">Finally, you<sup>,</sup>ll choose booking setting, setup pricing, and publish your listing</p>
+        <p className="font-medium">{t("addListing.step3.label")}</p>
+        <h2 className="text-5xl font-semibold w-[100%] md:w-[80%] mt-4 mb-10">
+          {t("addListing.step3.title")}
+        </h2>
+        <p className="text-gray-700 md:w-[90%] text-lg">
+          {t("addListing.step3.desc")}
+        </p>
       </div>
       <div className="md:w-[35%]">
-        <img loading="lazy" src={image} alt="step2" className="w-full"/>
+        <img loading="lazy" src={image} alt="step3" className="w-full" />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Step3
+export default Step3;

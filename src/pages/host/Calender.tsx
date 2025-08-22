@@ -15,6 +15,7 @@ import TableForLargeScreen from "../../component/Setting/ListingForLargeScreen";
 import type { IPropertyWithReserves } from "../../interface/ReserveDate";
 import ListingFotMobile from "../../component/Setting/ListingFotMobile";
 import { FaRegCalendarCheck } from "react-icons/fa";
+import Spinner from "../../component/Loaders/Spinner";
 
 const generateMonthDays = (monthDate: Date) => {
   const start = startOfMonth(monthDate);
@@ -38,6 +39,7 @@ const Calender = () => {
   const nav = useNavigate();
   const [openConfirm,setOpenConfirm]=useState(false);
   const queryClient=useQueryClient();
+  const [customLoading, setCustomLoading] = useState(false);
 
 
   const goToPrevMonth = () =>
@@ -55,7 +57,7 @@ const Calender = () => {
   };
 
   const { data } = useQuery({
-    queryKey: ["calender"],
+    queryKey: ["calendar", propertyId],
     queryFn: getAllDates,
   });
   const property=data?.data?.property;
@@ -69,9 +71,7 @@ const Calender = () => {
       })
     : [];
     const properties:IPropertyWithReserves[]=properties1.length>0 ? [{property:property?.property,reserveDates:properties1}]:[]
-    console.log(property,"lllllllll")
-    console.log(properties1,"kkkkkkkkkk")
-    console.log(properties,"222222222")
+
   useEffect(() => {
     
     if (property?.reserveDates?.length > 0) {
@@ -157,12 +157,15 @@ const Calender = () => {
   }
 
   const handleDeleteProperty=async(e: React.MouseEvent<HTMLButtonElement>,dateId:string)=>{
-    e.stopPropagation()
+    e.stopPropagation();
+    setCustomLoading(true)
     try{
       const res=await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/reservedDates/${dateId}`,{headers:{"Authorization":`Bearer ${token}`}});
       console.log(res);
-      await queryClient.invalidateQueries({queryKey:["booking"]})
+      await queryClient.invalidateQueries({queryKey:["calendar", propertyId]});
+      await queryClient.invalidateQueries({queryKey:["booking"]});
       if(res.data.status === "success"){
+        setCustomLoading(false)
         toast.success("Reverved Date Deleted")
       }
     }catch(errors){
@@ -171,15 +174,17 @@ const Calender = () => {
   }
   return (
       <div className="min-h-screen bg-white flex flex-col justify-center px-2 sm:px-4 py-6 sm:py-10">
+        
         {openSendCode === "sendCode"?
         <CodeNumber setOpenCode={setOpenSendCode} phone={property.admin.phone} />:
         openSendCode === "changeStatus"?
         <ChangeStatusCode setOpenCode={setOpenSendCode} phone={property.admin.phone} />:
         null
         }
-        {openConfirm && <ConfirmMessage t={t} i18n={i18n} nigthCount={selectedDates.length} nigthPrice={data?.data?.nightPrice} setOpenConfirm={setOpenConfirm} propertyId={propertyId as string} range={selectedDates}/>}
-        <div className="w-full max-w-4xl">
-          {/* Header */}
+        {openConfirm && <ConfirmMessage setCustomLoading={setCustomLoading} t={t} i18n={i18n} nigthCount={selectedDates.length} nigthPrice={data?.data?.nightPrice} setOpenConfirm={setOpenConfirm} propertyId={propertyId as string} range={selectedDates}/>}
+        
+
+        <div className="w-full max-w-4xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 px-2 sm:px-0">
           <h1 className="text-2xl sm:text-3xl font-bold text-center sm:text-left">
             {format(month, "MMMM yyyy")}
@@ -199,7 +204,6 @@ const Calender = () => {
             </button>
           </div>
 
-          {/* أزرار التنقل */}
           <div className="flex justify-center sm:justify-end space-x-2">
             <button
               onClick={goToPrevMonth}
@@ -264,17 +268,20 @@ const Calender = () => {
         </div>
         <h3 className="text-2xl font-medium text-gray-700 text-center mt-10">{t("setting.reservations.title")}</h3>
         {properties.length>0?
-            <>
-              <TableForLargeScreen properties={properties} handleDeleteProperty={handleDeleteProperty}/>
-              <ListingFotMobile properties={properties}  handleDeleteProperty={handleDeleteProperty}/>
-            </>
+            <div className="w-[90%] mx-auto">
+              <TableForLargeScreen type="calender" properties={properties} handleDeleteProperty={handleDeleteProperty}/>
+              <ListingFotMobile type="calender"  properties={properties}  handleDeleteProperty={handleDeleteProperty}/>
+            </div>
             :
             <div className="flex flex-col items-center justify-center text-center py-16">
               <FaRegCalendarCheck className="text-6xl text-gray-400 mb-4" />
               <h3 className="text-2xl font-medium text-gray-700">{t("setting.reservations.emptyTitle")}</h3>
               <p className="text-gray-500 mt-2">{t("setting.reservations.emptySubtitleHost")}</p>
             </div>
-            }
+            } 
+            { customLoading && <div className="fixed w-full h-full flex items-center justify-center bg-black/10 z-20">
+              <Spinner/>
+            </div> }
       </div>
   );
 };

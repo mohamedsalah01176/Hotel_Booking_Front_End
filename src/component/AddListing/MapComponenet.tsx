@@ -4,7 +4,7 @@ import { SearchBar } from "./MapSearchBar";
 import { useTranslation } from "react-i18next";
 
 const MapComponenet = ({coords,setCoords}:{coords:{ lat: number; lng: number,city:string,address:string } | null ,setCoords:(val:{ lat: number; lng: number,city:string,address:string } )=>void}) => {
-  const {i18n}=useTranslation();
+  const {t,i18n}=useTranslation();
 
   const LocationMarker = ({ setCoords }: {setCoords:(val:{ lat: number; lng: number,city:string,address:string } ) => void }) => {
   useMapEvents({
@@ -101,7 +101,7 @@ const MapComponenet = ({coords,setCoords}:{coords:{ lat: number; lng: number,cit
       fetchAddress();
     }
   }, [coords?.lat, coords?.lng,setCoords, i18n.language]);
-  if (!coords) return <p className="text-center">Getting your location...</p>;
+  if (!coords) return <p className="text-center">{t("addListing.location.map.loading")}</p>;
   console.log(coords)
   return (
     <>
@@ -120,7 +120,7 @@ const MapComponenet = ({coords,setCoords}:{coords:{ lat: number; lng: number,cit
           <LocationMarker setCoords={setCoords} />
           <SearchBar  setCoords={setCoords}/>
           <Marker position={coords}>
-            <Popup>You are here 👋</Popup>
+            <Popup>{t("addListing.location.map.youAreHere")}</Popup>
           </Marker>
         </MapContainer>
       </div>
