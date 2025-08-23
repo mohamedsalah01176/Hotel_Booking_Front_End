@@ -1,4 +1,4 @@
-import {  useContext, useState } from "react"
+import { useContext, useState } from "react"
 import ExplainPage from "../../component/AddListing/ExplainPage"
 import TypeOfPlace from "../../component/AddListing/TypeOfPlace"
 import Location from "../../component/AddListing/Location"
@@ -71,11 +71,14 @@ const AddListing = () => {
     }
   }
 
-   if(isLoading){
+  
+
+  if(isLoading){
     return <div className="min-h-[80vh] flex items-center justify-center">
       <Spinner/>
     </div> 
   }
+
   return (
     <div className=" pb-5 min-h-[72vh] w-[90%] mx-auto">
       <div className=" pb-7">

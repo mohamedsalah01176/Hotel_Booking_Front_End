@@ -8,12 +8,6 @@ import transitionAR from "./transition/ar.json";
 import transitionEn from "./transition/en.json";
 import LayoutUser from './Layout/LayoutUser';
 import PropertyDetails from './pages/PropertyDetails';
-
-const NotFound=lazy(()=>import("./pages/NotFound"));
-const Register=lazy(()=>import("./pages/Register"));
-const Login=lazy(()=>import("./pages/Login"));
-const ResetPassword=lazy(()=>import("./pages/ResetPassword"));
-
 import {QueryClient , QueryClientProvider} from "@tanstack/react-query"
 import ProviderContext from './context/ProviderContext';
 import Dashboar from './pages/host/Dashboar';
@@ -22,11 +16,16 @@ import AddListing from './pages/host/AddListing';
 import Listings from './pages/host/Listings';
 import Customers from './pages/host/Customers';
 import Calender from './pages/host/Calender';
-import Setting from './pages/Setting';
-import ContactUs from './pages/ContactUs';
-import SearchResult from './pages/SearchResult';
-import PrivacyAndTerm from './pages/PrivacyAndTerm';
 
+
+const Register=lazy(()=>import("./pages/Register"));
+const Login=lazy(()=>import("./pages/Login"));
+const ResetPassword=lazy(()=>import("./pages/ResetPassword"));
+const NotFound=lazy(()=>import("./pages/NotFound"));
+const Setting=lazy(()=>import("./pages/Setting"));
+const PrivacyAndTerm=lazy(()=>import("./pages/PrivacyAndTerm"));
+const SearchResult=lazy(()=>import("./pages/SearchResult"));
+const ContactUs=lazy(()=>import("./pages/ContactUs"));
 
 
 function App() {

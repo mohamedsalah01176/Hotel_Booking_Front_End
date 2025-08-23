@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 
 const ListingForLargeScreen = ({properties,searchProperties,ChangeActiveProperty,setUpdateProperty,setShowPopup,setPropertyId}:{properties:IProperty[],searchProperties:IProperty[],ChangeActiveProperty:(val1:string,val2:boolean)=>void ,setUpdateProperty:(val:boolean)=>void,setShowPopup:(val:boolean)=>void,setPropertyId:(val:string)=>void}) => {
   const nav=useNavigate();
-  console.log(properties,"ppppppppppppp")
   const {t,i18n}=useTranslation()
   return (
     <table className="mt-10 w-full hidden md:table">

@@ -19,10 +19,6 @@ const DashboardLinks = () => {
         <h2 className="font-medium text-[12px] sm:text-[17px]">Listings</h2>
         <div className={`h-[3px] w-full bg-gray-700 absolute -bottom-0  ${pathname.includes("listings") ?"left-0":"-left-44"}  group-hover:left-0 transition-all duration-300`}></div>
       </NavLink>
-      {/* <NavLink to="calender"  className="flex  items-center  gap-1 relative min-w-fit overflow-hidden group cursor-pointer py-1 ">
-        <h2 className="font-medium text-[12px] sm:text-[17px]">Calendar</h2>
-        <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${pathname.includes("calender") ?"left-0":"-left-44"}  group-hover:left-0 transition-all duration-300`}></div>
-      </NavLink> */}
     </div> 
   )
 }

@@ -1,7 +1,7 @@
 import { IoAdd, IoSearch } from "react-icons/io5";
 import { useNavigate } from "react-router";
 
-import { useContext, useState, } from "react";
+import { useCallback, useContext, useMemo, useState, } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { type AxiosResponse } from "axios";
 import { TokenContext } from "../../util/TokenContext";
@@ -32,11 +32,11 @@ const Listings = () => {
     queryKey:["propertiesForAdmin"],
     queryFn:getPropertiesForAdmin,
     staleTime:30 * 60 * 1000  });
-  const properties=data?.data.properties ??[]
+  const properties=useMemo(()=>data?.data.properties ??[],[data?.data.properties])
   
 
 
-  const ChangeActiveProperty=async(propertId:string,isActive:boolean)=>{
+  const ChangeActiveProperty= useCallback(async(propertId:string,isActive:boolean)=>{
     setChangeLoading(true)
     try{
       if(isActive){
@@ -60,7 +60,7 @@ const Listings = () => {
       toast.error("Something went wrong while updating the property status")
       console.log(errors)
     }
-  }
+  },[token])
   
   const handleSearch=(e:React.ChangeEvent<HTMLInputElement>)=>{
     const searchText=e.target.value;

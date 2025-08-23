@@ -1,4 +1,4 @@
-import React, {  useRef, useState } from "react"
+import React, {  useCallback, useRef, useState } from "react"
 import { FaCamera } from "react-icons/fa"
 import ShowImages from "./ShowImages"
 import { useTranslation } from "react-i18next"
@@ -7,7 +7,8 @@ const AddPhotos = ({images,setImages}:{images:File[],setImages:(val:File[])=>voi
   const [openImages,setOpenImages]=useState(false)
   const fileInputRef=useRef<HTMLInputElement>(null)
   const {t}=useTranslation();
-  const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+
+  const handleChange=useCallback((e:React.ChangeEvent<HTMLInputElement>)=>{
     const files=e.target.files;
     if (!files) return;
     const selectedFiles = Array.from(files);
@@ -16,12 +17,12 @@ const AddPhotos = ({images,setImages}:{images:File[],setImages:(val:File[])=>voi
     if(selectedFiles.length>=5){
       setOpenImages(true)
     }
-  }
+  },[images])
   
-  const deleteImage=(name:string)=>{
+  const deleteImage=useCallback((name:string)=>{
     const update=images.filter(item=>item.name !== name)
     setImages(update)
-  }
+  },[images])
   return (
     <div className="py-10 h-[76vh] flex flex-col justify-center items-center animate-fade-in">
       <div className="md:w-[620px]">

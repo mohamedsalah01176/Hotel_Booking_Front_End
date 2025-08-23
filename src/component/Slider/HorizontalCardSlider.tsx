@@ -42,7 +42,6 @@ const HorizontalCardSlider = ({ nameEn,nameAr,filteredProperties }: { nameEn: st
     ) || [];
   }, [propertyResponse.data?.data.properties,filteredProperties, nameEn, currentSection]);
   
-  console.log(property,"ssssssssssss")
   if (propertyResponse.isLoading) {
     return <SliderLoader name={nameEn?.charAt(0).toUpperCase()} />;
   }

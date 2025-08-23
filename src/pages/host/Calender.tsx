@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { format, eachDayOfInterval, startOfMonth, endOfMonth } from "date-fns";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
@@ -61,7 +61,7 @@ const Calender = () => {
     queryFn: getAllDates,
   });
   const property=data?.data?.property;
-  const properties1 = property
+  const properties1 = useMemo(()=>property
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ? property.reserveDates.sort((a:any, b:any) => {
         const lastDateA = new Date(a?.dates[a?.dates.length - 1] || 0).getTime();
@@ -69,7 +69,7 @@ const Calender = () => {
 
         return lastDateA - lastDateB;
       })
-    : [];
+    : [],[property]);
     const properties:IPropertyWithReserves[]=properties1.length>0 ? [{property:property?.property,reserveDates:properties1}]:[]
 
   useEffect(() => {
@@ -91,7 +91,7 @@ const Calender = () => {
       }
   }, [data]);
 
-  const isDateDisabled = (date: Date) => {
+  const isDateDisabled =useCallback((date: Date) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -102,7 +102,7 @@ const Calender = () => {
     );
 
     return isBeforeToday || isReserved;
-  };
+  },[disableDates]);
 
   const toggleDateSelection = (date: Date) => {
     const isSelected = selectedDates.some(
@@ -156,7 +156,7 @@ const Calender = () => {
     }
   }
 
-  const handleDeleteProperty=async(e: React.MouseEvent<HTMLButtonElement>,dateId:string)=>{
+  const handleDeleteProperty=useCallback(async(e: React.MouseEvent<HTMLButtonElement>,dateId:string)=>{
     e.stopPropagation();
     setCustomLoading(true)
     try{
@@ -171,7 +171,7 @@ const Calender = () => {
     }catch(errors){
       console.log(errors)
     }
-  }
+  },[propertyId,token])
   return (
       <div className="min-h-screen bg-white flex flex-col justify-center px-2 sm:px-4 py-6 sm:py-10">
         
@@ -279,7 +279,7 @@ const Calender = () => {
               <p className="text-gray-500 mt-2">{t("setting.reservations.emptySubtitleHost")}</p>
             </div>
             } 
-            { customLoading && <div className="fixed w-full h-full flex items-center justify-center bg-black/10 z-20">
+            { customLoading && <div className="fixed top-22 left-0 w-full h-full flex items-center justify-center bg-black/10 z-20">
               <Spinner/>
             </div> }
       </div>

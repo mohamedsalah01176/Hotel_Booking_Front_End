@@ -81,7 +81,6 @@ const queryClient = useQueryClient();
   const nigthReserved = useMemo(() => 
     GenerateDatesRange([...range] as { startDate: Date; endDate: Date; }[]), 
   [range]);
-  console.log(customLoading)
   return (
     <section className="bg-[#f7f7f7] min-h-[190vh]">
       {openAddReview && <AddReview setOpenAddReview={setOpenAddReview} handleAddReview={handleAddReview}/>}
