@@ -19,9 +19,13 @@ import ConfirmMessage from "../component/PropertyDetails/ConfirmMessage";
 import type { Range } from "react-date-range";
 import { GenerateDatesRange } from "../util/GenerateDatesRange";
 import Spinner from "../component/Loaders/Spinner";
+import useTitle from "../customHook/PageTitle";
+import useMetaDescription from "../customHook/PageDescription";
 
 const PropertyDetails = () => {
   const {t,i18n}=useTranslation()
+  useTitle("Property Details");
+  useMetaDescription(t("seo.hotelDetails.description"));
   const {id}=useParams();
   const [openAddReview,setOpenAddReview]=useState(false);
   const [openConfirm,setOpenConfirm]=useState(false);

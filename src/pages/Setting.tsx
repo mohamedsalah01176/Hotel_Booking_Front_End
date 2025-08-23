@@ -21,6 +21,8 @@ import type { IPropertyWithReserves } from "../interface/ReserveDate";
 import ListingFotMobile from "../component/Setting/ListingFotMobile";
 import { useNavigate } from "react-router";
 import TableForLargeScreen from "../component/Setting/ListingForLargeScreen";
+import useTitle from "../customHook/PageTitle";
+import useMetaDescription from "../customHook/PageDescription";
 
 type UserUpdate = Partial<{
   name: string;
@@ -33,6 +35,8 @@ type UserUpdate = Partial<{
 }>;
 const Setting = () => {
   const {t,i18n}=useTranslation();
+  useTitle("Setting");
+  useMetaDescription(t("seo.settings.description"));
   const {token}=useContext(TokenContext);
   const fileInputRef=useRef<HTMLInputElement | null>(null);
   const [tempImage,setTempImage]=useState('');

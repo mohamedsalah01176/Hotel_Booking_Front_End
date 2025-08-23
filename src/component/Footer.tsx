@@ -41,7 +41,7 @@ const Footer = () => {
           </div>
         </section>
       </div>
-      <div className="bg-white p-3 text-center text-[17px] mt-10"> &copy; 2025 <span className="text-lg  font-semibold text-[#e77008]">Mohamed Dawod,</span> All Rights Reserved</div>
+      <div className="bg-white p-3 text-center text-[17px] mt-10"> &copy; 2025 <span className="text-lg  font-semibold text-[#e77008]">Mohamed Dawod,</span> {t("footer.copyright")}</div>
     </footer>
   )
 }

@@ -4,9 +4,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import type { IProperty } from "../interface/property";
 import Filter from "../component/Filter";
+import useTitle from "../customHook/PageTitle";
 
 
 const SearchResult = () => {
+  useTitle("Search Result")
   const { t } = useTranslation();
   const nav=useNavigate();
   const [searchResults,setSearchResults]=useState<IProperty[]>([])

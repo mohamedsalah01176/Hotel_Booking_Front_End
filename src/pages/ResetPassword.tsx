@@ -5,10 +5,12 @@ import Spinner from "../component/Loaders/Spinner";
 import { useTranslation } from "react-i18next";
 import {  useNavigate, useSearchParams } from "react-router";
 import image from "../assets/resetpassword.webp"
+import useTitle from "../customHook/PageTitle";
 
 
 
 const ResetPassword = () => {
+  useTitle("Reset Password")
   const [passwordValidation,setPasswordValidation]=useState<string>("");
   const [confirmPasswordValidation,setconfirmPasswordValidation]=useState<string>("");
   const [errorMessage,setErrorMessage]=useState<string>("");

@@ -16,8 +16,10 @@ import axios from "axios"
 import { useTranslation } from "react-i18next"
 import { TokenContext } from "../../util/TokenContext"
 import Spinner from "../../component/Loaders/Spinner"
+import useTitle from "../../customHook/PageTitle"
 
 const AddListing = () => {
+  useTitle("Add Listing")
   const nav=useNavigate();
   const {t,i18n}=useTranslation();
   const {token}=useContext(TokenContext)

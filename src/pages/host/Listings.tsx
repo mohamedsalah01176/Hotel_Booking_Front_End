@@ -13,8 +13,10 @@ import UpdateProperty from "../../component/Listings/UpdateProperty";
 import Spinner from "../../component/Loaders/Spinner";
 import { useTranslation } from "react-i18next";
 import PopupStrictLanguage from "../../component/AddListing/PopupStrictLanguage";
+import useTitle from "../../customHook/PageTitle";
 
 const Listings = () => {
+  useTitle("Listings")
   const nav=useNavigate();
   const {token}=useContext(TokenContext);
   const queryClient = useQueryClient();
