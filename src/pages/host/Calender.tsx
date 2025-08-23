@@ -16,6 +16,7 @@ import type { IPropertyWithReserves } from "../../interface/ReserveDate";
 import ListingFotMobile from "../../component/Setting/ListingFotMobile";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import Spinner from "../../component/Loaders/Spinner";
+import useTitle from "../../customHook/PageTitle";
 
 const generateMonthDays = (monthDate: Date) => {
   const start = startOfMonth(monthDate);
@@ -26,6 +27,7 @@ const generateMonthDays = (monthDate: Date) => {
 
 
 const Calender = () => {
+  useTitle("Calendar")
   const {propertyId}=useParams();
   const [openSendCode,setOpenSendCode]=useState<string>("");
   const {t,i18n}=useTranslation()

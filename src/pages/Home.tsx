@@ -6,13 +6,23 @@ import GeneralLoader from "../component/GeneralLoader/GeneralLoader";
 import Filter from "../component/Filter";
 import { useState } from "react";
 import type { IProperty } from "../interface/property";
+import useTitle from "../customHook/PageTitle";
+import { useTranslation } from "react-i18next";
+import useMetaDescription from "../customHook/PageDescription";
+import UseMetaPageKeyWordsAndAuther from "../customHook/PageKeyWordsAndAuther";
 
 
 
 
 
 const Home = () => {
-  
+  const {t}=useTranslation()
+  useTitle("DAMA INN");
+  useMetaDescription(t("seo.home.description"));
+  UseMetaPageKeyWordsAndAuther({
+    keywords: t("seo.home.keywords"),
+    author: t("seo.home.author")
+  })
   function getCities(){
     return axios.get(`${import.meta.env.VITE_BASE_URL}/api/city`)
   }

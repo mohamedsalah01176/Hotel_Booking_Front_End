@@ -8,11 +8,15 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import Loader from "../component/Loaders/Loader";
 import Cookies from "js-cookie";
+import useTitle from "../customHook/PageTitle";
+import useMetaDescription from "../customHook/PageDescription";
 
 
 
 const Login = () => {
   const {t,i18n}=useTranslation();
+  useTitle("Login");
+  useMetaDescription(t("seo.login.description"));
   const [showForgetField,setShowForgetField]=useState<boolean>(false);
   const [emailOfForgetPasswordValidation,setEmailOfForgetPasswordValidation]=useState<string>("");
   const [isloading,setisloading]=useState<boolean>(false);

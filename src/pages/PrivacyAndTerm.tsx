@@ -1,6 +1,8 @@
 import { useTranslation, Trans } from "react-i18next";
+import useTitle from "../customHook/PageTitle";
 
 const PrivacyAndTerm = () => {
+  useTitle("Privacy&Term")
   const { t } = useTranslation();
 
   return (

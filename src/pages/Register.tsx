@@ -11,11 +11,15 @@ import { Link } from "react-router"
 import ChangeStatusCode from "../component/ChangeStatusCode"
 import Loader from "../component/Loaders/Loader"
 import Cookies from "js-cookie";
+import useTitle from "../customHook/PageTitle"
+import useMetaDescription from "../customHook/PageDescription"
 
 
 const Register = () => {
-  const [openCode,setOpenCode]=useState<string>("");
   const {t,i18n}=useTranslation()
+  useTitle("Register");
+  useMetaDescription(t("seo.register.description"))
+  const [openCode,setOpenCode]=useState<string>("");
   
   const formik=useFormik({
     initialValues:{

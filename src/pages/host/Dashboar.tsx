@@ -5,8 +5,10 @@ import { Link } from "react-router";
 import { FaRegShareSquare } from "react-icons/fa";
 import { BsCashCoin } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
+import useTitle from "../../customHook/PageTitle";
 
 const Dashboard = () => {
+  useTitle("dashboard")
   const { t } = useTranslation();
 
   return (

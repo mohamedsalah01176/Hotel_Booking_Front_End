@@ -9,10 +9,15 @@
     "term":"Term&Privacy",
     "logout":"Logout",
     "home":"Home",
-    "dashboard":"Dashboard"
+    "dashboard":"Dashboard",
+    "dashboardLinks": {
+      "hostReferral": "Host Referral",
+      "addListing": "Add Listing",
+      "listings": "Listings"
+    }
   },
   "footer": {
-    "brandTitle": "My Hotel",
+    "brandTitle": "DAMA INN",
     "brandDescription": "Stylish, sustainable furniture for modern living.",
     "quickLinksTitle": "Quick Links",
     "home": "Home",
@@ -22,7 +27,8 @@
     "newsletterTitle": "Newsletter",
     "newsletterDescription": "Get special offers & updates.",
     "placeholder": "Your Email",
-    "subscribe": "Subscribe"
+    "subscribe": "Subscribe",
+    "copyright": "All Rights Reserved"
   },
   "search":  {
     "where": "Where",
@@ -487,6 +493,25 @@
     "ui": {
       "en": "English",
       "ar": "العربية"
+    }
+  },
+  "seo":{
+    "home": {
+      "description": "Discover the best hotels in Syria and book your stay easily.",
+      "keywords": "Hotels, Apartments, DAMA INN, Syria, Booking",
+      "author":"Mohamed Dawod"
+    },
+    "hotelDetails": {
+      "description": "Hotel details, amenities, and reviews."
+    },
+    "login": {
+      "description": "Log in to your account to access our services."
+    },
+    "register": {
+      "description": "Create a new account to enjoy a premium booking experience."
+    },
+    "settings": {
+      "description": "Edit your account settings and preferences."
     }
   }
 }

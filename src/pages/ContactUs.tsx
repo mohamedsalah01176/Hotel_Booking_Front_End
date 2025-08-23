@@ -9,11 +9,13 @@ import type { JwtPayload } from "../interface/user"
 import * as yup from "yup"
 import type { IQuestions } from "../interface/questions"
 import { toast } from "react-toastify"
+import useTitle from "../customHook/PageTitle"
 
 
 
 
 const ContactUs = () => {
+  useTitle("ContactUs")
   const [userDecode,setUserDecode]=useState<JwtPayload>();
   const {token}=useContext(TokenContext);
   const {t,i18n}=useTranslation()

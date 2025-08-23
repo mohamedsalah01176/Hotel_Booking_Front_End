@@ -10,10 +10,15 @@
     "term": "الشروط والخصوصية",
     "logout": "تسجيل الخروج",
     "home":"الصفحه الرئسيه",
-    "dashboard":"لوحة التحكم"
+    "dashboard":"لوحة التحكم",
+    "dashboardLinks": {
+      "hostReferral": "إحالة المضيف",
+      "addListing": "إضافة عقار",
+      "listings": "العقارات"
+    }
   },
   "footer": {
-    "brandTitle": "فندقي",
+    "brandTitle": "DAMA INN",
     "brandDescription": "أثاث أنيق ومستدام لحياة عصرية.",
     "quickLinksTitle": "روابط سريعة",
     "home": "الرئيسية",
@@ -23,7 +28,8 @@
     "newsletterTitle": "النشرة البريدية",
     "newsletterDescription": "احصل على عروض خاصة وتحديثات.",
     "placeholder": "بريدك الإلكتروني",
-    "subscribe": "اشترك"
+    "subscribe": "اشترك",
+    "copyright": "جميع الحقوق محفوظة"
   },
   "search": {
     "where": "إلى أين",
@@ -490,6 +496,25 @@
     "ui": {
       "en": "English",
       "ar": "العربية"
+    }
+  },
+  "seo":{
+    "home": {
+      "description": "اكتشف أفضل الفنادق في سوريا واحجز إقامتك بسهولة.",
+      "keywords": "فنادق, شقق مفروشة, DAMA INN, سوريا, حجز بيوت",
+      "author":"محمد داود"
+    },
+    "hotelDetails": {
+      "description": "تفاصيل الفندق، المرافق، والتقييمات."
+    },
+    "login": {
+      "description": "تسجيل الدخول إلى حسابك للوصول إلى خدماتنا."
+    },
+    "register": {
+      "description": "إنشاء حساب جديد للتمتع بتجربة حجز مميزة."
+    },
+    "settings": {
+      "description": "تعديل إعدادات حسابك وتفضيلاتك."
     }
   }
 

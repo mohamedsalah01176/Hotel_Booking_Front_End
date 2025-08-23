@@ -16,6 +16,7 @@ import AddListing from './pages/host/AddListing';
 import Listings from './pages/host/Listings';
 import Customers from './pages/host/Customers';
 import Calender from './pages/host/Calender';
+import useTitle from './customHook/PageTitle';
 
 
 const Register=lazy(()=>import("./pages/Register"));
@@ -29,6 +30,8 @@ const ContactUs=lazy(()=>import("./pages/ContactUs"));
 
 
 function App() {
+  useTitle("DAMA INN");
+
   const queryClient =new QueryClient()
   const router=createBrowserRouter([
     {path:"",element:<LayoutUser/>,children:[
@@ -52,8 +55,9 @@ function App() {
       {path:"calender/:propertyId",element:<Calender/>},
     ]}
   ])
-
-
+  const savedLang = localStorage.getItem("lang");
+  const browserLang = navigator.language.split("-")[0]; 
+  
 
   const resources={
     en:{
@@ -69,7 +73,7 @@ function App() {
   .init({
 
     resources,
-    lng: "en", 
+    lng: savedLang|| browserLang || "en", 
     fallbackLng: "en",
 
     interpolation: {
