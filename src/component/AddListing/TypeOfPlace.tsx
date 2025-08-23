@@ -16,7 +16,6 @@ const TypeOfPlace = ({
       <h2 className="text-3xl font-semibold">{t("addListing.typeOfPlace.title")}</h2>
 
       <div className="md:w-[600px]">
-        {/* Home */}
         <div
           onClick={() => setCategory("home")}
           className={`flex items-center justify-between gap-3 p-5 border-2 rounded-xl w-full mt-2 cursor-pointer transition-all duration-300
@@ -33,7 +32,6 @@ const TypeOfPlace = ({
           <IoHomeOutline className="text-3xl" />
         </div>
 
-        {/* Apartment */}
         <div
           onClick={() => setCategory("apartment")}
           className={`flex items-center justify-between gap-3 p-5 border-2 rounded-xl w-full mt-2 cursor-pointer transition-all duration-300

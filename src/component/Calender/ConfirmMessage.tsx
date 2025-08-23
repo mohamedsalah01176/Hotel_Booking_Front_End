@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { TFunction } from "i18next"
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { toast } from "react-toastify";
 import { TokenContext } from "../../util/TokenContext";
 import type { i18n as i18nType  } from "i18next";
@@ -19,8 +19,7 @@ interface IProps {
 const ConfirmMessage = ({i18n,t,setOpenConfirm,propertyId,range,nigthCount,nigthPrice,setCustomLoading}:IProps) => {
   const queryClient=useQueryClient()
   const {token}=useContext(TokenContext);
-  console.log(range)
-  const formattedPrice = new Intl.NumberFormat(i18n.language === "ar" ? "ar-EG" : "en-US").format(nigthCount*nigthPrice);
+  const formattedPrice =useMemo(()=> new Intl.NumberFormat(i18n.language === "ar" ? "ar-EG" : "en-US").format(nigthCount*nigthPrice),[nigthPrice]);
   
   const confirm=async()=>{
     setCustomLoading(true)
@@ -30,7 +29,7 @@ const ConfirmMessage = ({i18n,t,setOpenConfirm,propertyId,range,nigthCount,nigth
       if(response.data.status === "success"){
           setCustomLoading(false)
           toast.success(response.data.message);
-          await queryClient.invalidateQueries({queryKey:["calender"]})
+          await queryClient.invalidateQueries({queryKey:["calendar", propertyId]})
           setOpenConfirm(false)
         }
     }catch(error){
@@ -42,7 +41,7 @@ const ConfirmMessage = ({i18n,t,setOpenConfirm,propertyId,range,nigthCount,nigth
     }
   }
   return (
-    <div className='fixed w-full h-full bg-black/20 flex justify-center items-center z-20 animate-fade-in translate-y-[-10%]'>
+    <div className='fixed top-24 left-0 w-full min-h-full bg-black/20 flex justify-center items-center z-20 animate-fade-in translate-y-[-10%]'>
       <div className="bg-white px-7 py-14 w-[300px] md:w-[600px] min-h-[200px] relative rounded-xl">
         <h2 className="text-center text-2xl font-semibold">{t("propertyDetails.confirm.title")}</h2>
         <p className="text-xl font-normal my-7 text-center">{t("propertyDetails.confirm.message")}</p>

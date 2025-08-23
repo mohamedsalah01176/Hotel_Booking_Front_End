@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const PriceForNigth = ({price,setPrice}:{price:number,setPrice:(val:number)=>void}) => {
-    const [inputValue, setInputValue] = useState(price.toLocaleString());
-    const {t}=useTranslation();
+  const [inputValue, setInputValue] = useState(price.toLocaleString());
+  const {t}=useTranslation();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value.replace(/,/g, "");
     const numericValue = parseInt(rawValue);

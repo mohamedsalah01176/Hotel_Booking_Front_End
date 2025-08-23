@@ -7,7 +7,7 @@ const MapComponenet = ({coords,setCoords}:{coords:{ lat: number; lng: number,cit
   const {t,i18n}=useTranslation();
 
   const LocationMarker = ({ setCoords }: {setCoords:(val:{ lat: number; lng: number,city:string,address:string } ) => void }) => {
-  useMapEvents({
+    useMapEvents({
     click(e) {
       setCoords({
         city:"",
@@ -101,6 +101,7 @@ const MapComponenet = ({coords,setCoords}:{coords:{ lat: number; lng: number,cit
       fetchAddress();
     }
   }, [coords?.lat, coords?.lng,setCoords, i18n.language]);
+
   if (!coords) return <p className="text-center">{t("addListing.location.map.loading")}</p>;
   console.log(coords)
   return (

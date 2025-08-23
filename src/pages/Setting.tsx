@@ -5,7 +5,7 @@ import { MdEmail } from "react-icons/md";
 import { HiMiniLockClosed } from "react-icons/hi2";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useContext, useRef, useState } from "react";
+import { useCallback, useContext, useMemo, useRef, useState } from "react";
 import { TokenContext } from "../util/TokenContext";
 import Spinner from "../component/Loaders/Spinner";
 import { useFormik } from "formik";
@@ -172,18 +172,18 @@ const Setting = () => {
     queryFn:getReserveForUser
   });
   console.log(query.data?.data?.properties);
-  const properties = query.data?.data?.properties
+  const properties = useMemo(()=> query.data?.data?.properties
     ? query.data.data.properties.sort((a: IPropertyWithReserves, b: IPropertyWithReserves) => {
         const lastDateA = new Date(a.reserveDates[0]?.dates[a.reserveDates[0]?.dates.length - 1] || 0).getTime();
         const lastDateB = new Date(b.reserveDates[0]?.dates[b.reserveDates[0]?.dates.length - 1] || 0).getTime();
 
         return lastDateA - lastDateB;
       })
-    : [];
+    : [],[query.data?.data?.properties]);
 
     console.log(properties)
 
-  const handleDeleteProperty=async(e: React.MouseEvent<HTMLButtonElement>,dateId:string)=>{
+  const handleDeleteProperty=useCallback(async(e: React.MouseEvent<HTMLButtonElement>,dateId:string)=>{
     e.stopPropagation()
     try{
       const res=await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/reservedDates/${dateId}`,{headers:{"Authorization":`Bearer ${token}`}});
@@ -195,7 +195,7 @@ const Setting = () => {
     }catch(errors){
       console.log(errors)
     }
-  }
+  },[token])
 
     if(isLoading){
     return <div className="min-h-[80vh] flex items-center justify-center">
