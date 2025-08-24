@@ -11,4 +11,4 @@ interface ITokenContext {
   setDecode:(val:JwtPayload)=>void
 }
 
-export const TokenContext=createContext<ITokenContext>({token:"",setToken:()=>{},decode:{},setDecode:()=>{}});
+export const TokenContext=createContext<ITokenContext>({token:"",setToken:()=>{},decode:{createdAt:""},setDecode:()=>{}});
