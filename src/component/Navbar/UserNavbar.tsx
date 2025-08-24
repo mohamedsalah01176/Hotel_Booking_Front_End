@@ -7,14 +7,15 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router";
 import Menue from "./Menue";
-
+import homeImage from "../../assets/Home.webp"
+import departmentImage from "../../assets/experiences.webp"
 import logoImage from "../../assets/logo.webp"
 import { TokenContext } from "../../util/TokenContext";
-import HomeLinkes from "./HomeLinkes";
-import DashboardLinks from "./DashboardLinks";
+import { GeneralContext } from "../../util/GeneralContext";
 
-const Navbar = () => {
+const UserNavbar = () => {
   const [language,setLanguage]=useState<string>("");
+  const {currentSection,setCurrentSection}=useContext(GeneralContext)
   const {i18n}=useTranslation()
   const [openMenue,setOpentMenue]=useState<boolean>(false);
   const {t}=useTranslation()
@@ -55,11 +56,18 @@ const Navbar = () => {
           <img loading="lazy" src={logoImage} alt="logo" className="w-[40px] md:w-[70px]" width={70} height={70}/>
         </Link>
         <div className="flex z-50 flex-col sm:flex-row justify-between items-center gap-2 sm:gap-7 md:gap-16">
-          {url.pathname.includes("/dashboard")?
-          <DashboardLinks />
-          :
-          <HomeLinkes t={t}/>
-          }
+          <div  className="flex items-center justify-center  gap-2 sm:gap-7 cursor-pointer sm:w-[350px] ">
+            <div onClick={()=>setCurrentSection("home")} className="flex items-center gap-1 relative overflow-hidden group">
+              <img loading="lazy" src={homeImage} alt="Homes" width={35} height={35} className="group-hover:scale-110 pb-2  transition-all duration-300"/>
+              <h2 className="font-medium text-[12px] sm:text-[17px]">{t('navbar.homes')}</h2>
+              <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${currentSection === "home" ?"left-0":"-left-32"}  group-hover:left-0 transition-all duration-300`}></div>
+            </div>
+            <div onClick={()=>setCurrentSection("partment")} className="flex  items-center gap-1 relative overflow-hidden group cursor-pointer ">
+              <img loading="lazy" src={departmentImage} alt="Homes" width={35} height={35} className="group-hover:scale-110 pb-2 h transition-all duration-300" />
+              <h2 className="font-medium text-[12px] sm:text-[17px]">{t("navbar.partments")}</h2>
+              <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${currentSection === "partment" ?"left-0":"-left-44"} group-hover:left-0 transition-all duration-300`}></div>
+            </div>
+          </div>
           {!token?
             <div className="flex items-center ">
               <Link to={"/register"} className="text-black font-medium px-2  hover:scale-105 transition-all duration-300 underline italic">
@@ -95,4 +103,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default UserNavbar;

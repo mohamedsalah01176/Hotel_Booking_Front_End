@@ -27,8 +27,14 @@ const Menue = ({i18n,setOpentMenue,token,handleLogout}:{i18n:{language:string},s
           <p className="text-black font-medium">{t("navbar.home")}</p>
         </Link>
       }
-      {decode.role !== "user" && token &&
+      {decode.role === "host" && token &&
       <Link onClick={()=>setOpentMenue(false)} to={"/dashboard"} className={`flex justify-center gap-2 items-center p-2.5  rounded-xl hover:bg-gray-200 transition-all duration-300`}>
+        {/* <FaBars className="text-black "/> */}
+        <p className="text-black font-medium">{t("navbar.dashboard")}</p>
+      </Link>
+      }
+      {decode.role === "manager" && token &&
+      <Link onClick={()=>setOpentMenue(false)} to={"/managerDashboard"} className={`flex justify-center gap-2 items-center p-2.5  rounded-xl hover:bg-gray-200 transition-all duration-300`}>
         {/* <FaBars className="text-black "/> */}
         <p className="text-black font-medium">{t("navbar.dashboard")}</p>
       </Link>

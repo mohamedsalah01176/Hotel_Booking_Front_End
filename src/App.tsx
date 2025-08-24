@@ -17,7 +17,8 @@ import Listings from './pages/host/Listings';
 import Customers from './pages/host/Customers';
 import Calender from './pages/host/Calender';
 import useTitle from './customHook/PageTitle';
-
+import ProtectedRoute from './util/ProtectedRoute';
+import LayoutManager from './Layout/LayoutManager';
 
 const Register=lazy(()=>import("./pages/Register"));
 const Login=lazy(()=>import("./pages/Login"));
@@ -27,6 +28,12 @@ const Setting=lazy(()=>import("./pages/Setting"));
 const PrivacyAndTerm=lazy(()=>import("./pages/PrivacyAndTerm"));
 const SearchResult=lazy(()=>import("./pages/SearchResult"));
 const ContactUs=lazy(()=>import("./pages/ContactUs"));
+const Dashboard=lazy(()=>import("./pages/manager/Dashboard"));
+const Users=lazy(()=>import("./pages/manager/Users"));
+const ManagerListings=lazy(()=>import("./pages/manager/ManagerListings"));
+const Reservations=lazy(()=>import("./pages/manager/Reservations"));
+const Cities=lazy(()=>import("./pages/manager/Cities"));
+
 
 
 function App() {
@@ -47,12 +54,19 @@ function App() {
       {path:"privacyTerm",element:<PrivacyAndTerm/>},
       {path:"*",element:<NotFound/>,}
     ]},
-    {path:"dashboard",element:<LayoutHost/>,children:[
+    {path:"dashboard",element:<ProtectedRoute><LayoutHost/></ProtectedRoute>,children:[
       {path:"",element:<Dashboar/>},
       {path:"addListing",element:<AddListing/>},
       {path:"listings",element:<Listings/>},
       {path:"customers",element:<Customers/>},
       {path:"calender/:propertyId",element:<Calender/>},
+    ]},
+    {path:"managerDashboard",element:<ProtectedRoute><LayoutManager/></ProtectedRoute>,children:[
+      {path:"",element:<Dashboard/>},
+      {path:"users",element:<Users/>},
+      {path:"listings",element:<ManagerListings/>},
+      {path:"revervations",element:<Reservations/>},
+      {path:"cities",element:<Cities/>},
     ]}
   ])
   const savedLang = localStorage.getItem("lang");

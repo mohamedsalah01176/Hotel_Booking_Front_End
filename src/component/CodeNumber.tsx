@@ -11,7 +11,7 @@ const CodeNumber = ({setOpenCode,phone}:{setOpenCode:(d:string)=>void,phone:stri
   const [errorMessage,setrrorMessage]=useState("");
   const {t,i18n}=useTranslation();
   const {pathname} =useLocation();
-  console.log(pathname)
+  const nav=useNavigate();
   const router=useNavigate();
   const verfiyCode=async()=>{
     try{
@@ -48,10 +48,18 @@ const CodeNumber = ({setOpenCode,phone}:{setOpenCode:(d:string)=>void,phone:stri
       }
     }
   }
+
+  console.log(pathname)
+  const handleCloseContainer=()=>{
+    setOpenCode("");
+    if(pathname === "/register"){
+      nav("/home")
+    }
+  }
   return (
     <div className="z-10 fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] h-full w-full bg-gray-800/20 flex justify-center items-center animate-fade-in">
       <div className="relative bg-white pt-5 pb-1 rounded-xl w-[300px] sm:w-[500px] min-h-[250px] ">
-        <div onClick={()=>setOpenCode("")} className="border-b border-gray-800 px-4 pb-4 text-left">
+        <div onClick={handleCloseContainer} className="border-b border-gray-800 px-4 pb-4 text-left">
           <FaArrowLeftLong  className=" cursor-pointer hover:text-red-700  hover:-translate-x-2 transition-all duration-300 text-2xl mr-[93%]"/>
         </div>
         <div className="px-4 py-7">
