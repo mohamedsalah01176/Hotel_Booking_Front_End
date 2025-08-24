@@ -9,7 +9,7 @@ import type { JwtPayload } from "../interface/user";
 const ProviderContext = ({children}:{children:ReactNode}) => {
   const [currentSection,setCurrentSection]=useState<string>("home");
   const [token,setToken]=useState<string>("");
-  const [decode,setDecode]=useState<JwtPayload>({});
+  const [decode,setDecode]=useState<JwtPayload>({createdAt:""});
   const [searchResults,setSearchResults]=useState<IProperty[]>([]);
   const [sharedProperties,setSharedProperties]=useState<IProperty[]>([]);
 
