@@ -42,9 +42,14 @@ const Register = () => {
         const registerRes=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/register`,
             values,
             { withCredentials: true }
-        )
+        );
+        console.log(registerRes)
+        Cookies.set("token", registerRes.data.token, {
+          expires: 15, 
+          secure: true,
+          sameSite: "strict"
+        });
         if(registerRes.data.status === "success"){
-          // Cookies.set("token",registerRes.data.token,{expires:60})
           const res=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/sendCode`,
             {phone:values.phone},
             {
@@ -53,13 +58,9 @@ const Register = () => {
               }
             }
           )
+          console.log(res.data)
           if(res.data.status === 'success'){
             toast.success(t("register.messages.codeSentSuccess"));
-            Cookies.set("token", res.data.token, {
-              expires: 15, 
-              secure: true,
-              sameSite: "strict"
-            });
             setTimeout(()=>{
               setOpenCode("sendCode");
             },2000)
