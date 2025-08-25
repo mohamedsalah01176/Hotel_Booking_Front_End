@@ -33,6 +33,7 @@ const Users=lazy(()=>import("./pages/manager/Users"));
 const ManagerListings=lazy(()=>import("./pages/manager/ManagerListings"));
 const Reservations=lazy(()=>import("./pages/manager/Reservations"));
 const Cities=lazy(()=>import("./pages/manager/Cities"));
+const AddListingForManger=lazy(()=>import("./pages/manager/AddListing"));
 
 
 
@@ -64,6 +65,7 @@ function App() {
     {path:"managerDashboard",element:<ProtectedRoute><LayoutManager/></ProtectedRoute>,children:[
       {path:"",element:<Dashboard/>},
       {path:"users",element:<Users/>},
+      {path:"addlisting",element:<AddListingForManger/>},
       {path:"listings",element:<ManagerListings/>},
       {path:"revervations",element:<Reservations/>},
       {path:"cities",element:<Cities/>},

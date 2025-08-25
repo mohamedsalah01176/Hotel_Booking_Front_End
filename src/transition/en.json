@@ -14,6 +14,15 @@
       "hostReferral": "Host Referral",
       "addListing": "Add Listing",
       "listings": "Listings"
+    },
+    "manager": {
+      "dashboard": "Dashboard",
+      "listings": "Listings",
+      "cities": "Cities",
+      "users": "Users",
+      "reservations": "Reservations",
+      "register": "Register",
+      "login": "Login"
     }
   },
   "footer": {
@@ -51,7 +60,7 @@
       "password": "Password",
       "role": "Role",
       "user": "User",
-      "admin": "Admin"
+      "host": "Host"
     },
     "placeholders": {
       "fullName": "Please Enter Your Name",
@@ -512,6 +521,56 @@
     },
     "settings": {
       "description": "Edit your account settings and preferences."
+    }
+  },
+  "cities": {
+    "title": "Available Cities",
+    "searchPlaceholder": "You have {{count}} cities",
+    "deleted": "City Deleted",
+    "updateCity":{
+      "updateTitle": "Update City",
+      "updateSubtitle": "Edit the city details below",
+      "cityName": "City Name",
+      "safe": "Safe Place",
+      "dangerous": "Dangerous Place",
+      "deleted": "City deleted successfully",
+      "updated": "City updated successfully",
+      "updateFailed": "Failed to update city"
+    },
+    "common": {
+      "cancel": "Cancel",
+      "update": "Update"
+    },
+    "citiesTable": {
+      "zone": "Zone",
+      "name": "Name",
+      "hotels": "Number Of Hotels",
+      "action": "Action",
+      "delete": "Delete",
+      "update": "Update",
+      "safe": "Safe",
+      "danger": "Dangerous"
+    }
+  },
+  "users": {
+    "title": "Registered Users",
+    "search": "Search in {{count}} users...",
+    "toastDelete": "User Deleted Successfully",
+    "usersTable": {
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "created": "Created",
+      "role": "Role",
+      "action": "Action",
+      "host": "Host",
+      "user": "User",
+      "manager": "Manager",
+      "delete": "Delete",
+      "sec": "sec",
+      "min": "min",
+      "hr": "hr",
+      "day": "day"
     }
   }
 }

@@ -4,4 +4,5 @@ export interface ICity{
   nameEn:string;
   nameAr:string;
   numberOfHotel:number;
+  isDangerousPlace:boolean;
 }

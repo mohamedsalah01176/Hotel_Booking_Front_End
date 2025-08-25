@@ -34,7 +34,7 @@ const Register = () => {
       phone:yup.string().required(t("register.errors.phoneRequired")).matches(/^\+?[1-9]\d{6,14}$/, t("register.errors.phoneInvalid")),
       email:yup.string().email(t("register.errors.emailInvalid")).required(t("register.errors.emailRequired")),
       password:yup.string().required(t("register.errors.passwordRequired")).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/, t("register.errors.passwordPattern")),
-      role: yup.string().oneOf(["user", "admin"]).required(),
+      role: yup.string().oneOf(["user", "host"]).required(),
     }),
     onSubmit:async(values)=>{
       
@@ -68,6 +68,7 @@ const Register = () => {
         }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       }catch(errors:any){
+        console.log(errors)
         if(i18n.language === "en"){
           toast.error(errors.response.data.messageEn || t("login.messages.somethingWentWrong"))
         }else{
@@ -122,9 +123,9 @@ const Register = () => {
               <input checked={formik.values.role === 'user'} onChange={formik.handleChange} name="role" value={'user'} type="radio"  title="user" />
               {t("register.labels.user")}
             </label>
-            <label  title="admin" className="flex items-center gap-2 text-xl cursor-pointer font-medium">
-              <input checked={formik.values.role === 'admin'} onChange={formik.handleChange} name="role" value={'admin'} type="radio" title="admin" />
-              {t("register.labels.admin")}
+            <label  title="host" className="flex items-center gap-2 text-xl cursor-pointer font-medium">
+              <input checked={formik.values.role === 'host'} onChange={formik.handleChange} name="role" value={'host'} type="radio" title="host" />
+              {t("register.labels.host")}
             </label>
           </div>
         </div>

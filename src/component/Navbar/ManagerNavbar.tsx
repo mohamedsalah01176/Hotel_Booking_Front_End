@@ -1,11 +1,9 @@
-// import SearchBar from "./SearchBar";
-
 import { MdTranslate } from "react-icons/md";
 import { FaBars } from "react-icons/fa6";
 import Cookie from "js-cookie"
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, NavLink, useLocation } from "react-router";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
 import Menue from "./Menue";
 
 import logoImage from "../../assets/logo.webp"
@@ -16,12 +14,15 @@ const ManagerNavbar = () => {
   const [language,setLanguage]=useState<string>("");
   const {i18n}=useTranslation()
   const [openMenue,setOpentMenue]=useState<boolean>(false);
-  // const {t}=useTranslation()
+  const {t}=useTranslation()
+  const nav=useNavigate();
   const url =useLocation();
-  const {token,setToken}=useContext(TokenContext)
+  const {token,setToken}=useContext(TokenContext);
+
   const handleLogout =useCallback(()=>{
     Cookie.remove("token")
-    setToken("")
+    setToken("");
+    nav("/login");
     setOpentMenue(false)
   },[setToken])
 
@@ -53,39 +54,39 @@ const ManagerNavbar = () => {
             <div className="flex z-50 flex-col sm:flex-row justify-between items-center gap-2 sm:gap-7 md:gap-16">
               <div  className="flex items-center justify-center gap-2 sm:gap-7 cursor-pointer sm:w-[350px] ">
                 <NavLink to="/managerDashboard"  className="flex  items-center  gap-1 relative min-w-fit overflow-hidden group cursor-pointer py-1 ">
-                  <h2 className="font-medium text-[12px] sm:text-[17px]">Dashboard</h2>
+                  <h2 className="font-medium text-[12px] sm:text-[17px]">{t("navbar.manager.dashboard")}</h2>
                   <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${url.pathname === "/managerDashboard" ?"left-0":"-left-44"}  group-hover:left-0 transition-all duration-300`}></div>
                 </NavLink>
                 <NavLink to="listings"  className="flex  items-center  gap-1 relative min-w-fit overflow-hidden group cursor-pointer py-1 ">
-                  <h2 className="font-medium text-[12px] sm:text-[17px]">Listings</h2>
+                  <h2 className="font-medium text-[12px] sm:text-[17px]">{t("navbar.manager.listings")}</h2>
                   <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${url.pathname.includes("listings") ?"left-0":"-left-44"}  group-hover:left-0 transition-all duration-300`}></div>
                 </NavLink>
                 <NavLink to="cities"  className="flex items-center gap-1 relative min-w-fit overflow-hidden group py-1">
-                  <h2 className="font-medium text-[12px] sm:text-[17px]">Cities</h2>
+                  <h2 className="font-medium text-[12px] sm:text-[17px]">{t("navbar.manager.cities")}</h2>
                   <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${url.pathname.includes("cities") ?"left-0":"-left-44"} group-hover:left-0 transition-all duration-300`}></div>
                 </NavLink>
                 <NavLink to="users"  className="flex items-center gap-1 relative min-w-fit overflow-hidden group py-1">
-                  <h2 className="font-medium text-[12px] sm:text-[17px]">User</h2>
+                  <h2 className="font-medium text-[12px] sm:text-[17px]">{t("navbar.manager.users")}</h2>
                   <div className={`h-[3px] w-full bg-gray-700 absolute bottom-0 ${url.pathname.includes("users") ?"left-0":"-left-44"} group-hover:left-0 transition-all duration-300`}></div>
                 </NavLink>
                 <NavLink to="revervations" className="flex  items-center gap-1 relative min-w-fit overflow-hidden group cursor-pointer py-1">
-                  <h2 className="font-medium text-[12px] sm:text-[17px]">Revervations</h2>
+                  <h2 className="font-medium text-[12px] sm:text-[17px]">{t("navbar.manager.reservations")}</h2>
                   <div className={`h-[3px] w-full bg-gray-700 absolute -bottom-0  ${url.pathname.includes("revervations") ?"left-0":"-left-44"}  group-hover:left-0 transition-all duration-300`}></div>
                 </NavLink>
               </div>
-              {/* {!token?
+              {!token?
                 <div className="flex items-center ">
                   <Link to={"/register"} className="text-black font-medium px-2  hover:scale-105 transition-all duration-300 underline italic">
-                    {t("register.title")}
+                    {t("navbar.manager.register")}
                   </Link>
                   <div className="h-[25px] w-[3px] bg-black"></div>
                   <Link to={"/login"} className="text-black font-medium px-2  hover:scale-105 transition-all duration-300 underline italic">
-                    {t("login.title")}
+                    {t("navbar.manager.login")}
                   </Link>
                 </div>
                 :
                 null
-              } */}
+              }
             </div>
             <div className="flex items-center gap-2 sm:gap-7 ">
               <MdTranslate className="text-2xl cursor-pointer w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] rounded-full bg-[#f2f2f2] p-[7px] hover:scale-105 transition-all duration-300 " onClick={()=>toggleLanguage()}/>
