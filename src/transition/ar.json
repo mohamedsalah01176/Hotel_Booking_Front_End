@@ -15,6 +15,15 @@
       "hostReferral": "إحالة المضيف",
       "addListing": "إضافة عقار",
       "listings": "العقارات"
+    },
+    "manager": {
+      "dashboard": "لوحة التحكم",
+      "listings": "الإعلانات",
+      "cities": "المدن",
+      "users": "المستخدمون",
+      "reservations": "الحجوزات",
+      "register": "تسجيل",
+      "login": "تسجيل دخول"
     }
   },
   "footer": {
@@ -51,8 +60,8 @@
       "email": "البريد الإلكتروني",
       "password": "كلمة المرور",
       "role": "الدور",
-      "user": "مستخدم",
-      "admin": "مشرف"
+      "user": "ضيف",
+      "host": "مضيف"
     },
     "placeholders": {
       "fullName": "أدخل اسمك",
@@ -516,6 +525,55 @@
     "settings": {
       "description": "تعديل إعدادات حسابك وتفضيلاتك."
     }
+  },
+  "cities": {
+    "title": "المدن المتاحة",
+    "searchPlaceholder": "لديك {{count}} مدينة",
+    "deleted": "تم حذف المدينة",
+    "updateCity":{
+      "updateTitle": "تحديث المدينة",
+      "updateSubtitle": "قم بتعديل بيانات المدينة بالأسفل",
+      "cityName": "اسم المدينة",
+      "safe": "آمن",
+      "dangerous": "خطر",
+      "deleted": "تم حذف المدينة بنجاح",
+      "updated": "تم تحديث المدينة بنجاح",
+      "updateFailed": "فشل في تحديث المدينة"
+    },
+    "common": {
+      "cancel": "إلغاء",
+      "update": "تحديث"
+    },
+    "citiesTable": {
+      "zone": "المنطقة",
+      "name": "الاسم",
+      "hotels": "عدد الفنادق",
+      "action": "الإجراءات",
+      "delete": "حذف",
+      "update": "تحديث",
+      "safe": "آمنة",
+      "danger": "خطرة"
+    }
+  },
+  "users": {
+    "title": "المستخدمين المسجلين",
+    "search": "ابحث في {{count}} مستخدم...",
+    "toastDelete": "تم حذف المستخدم بنجاح",
+    "usersTable": {
+      "name": "الاسم",
+      "phone": "الهاتف",
+      "email": "البريد الإلكتروني",
+      "created": "تاريخ الإنشاء",
+      "role": "الدور",
+      "action": "الإجراء",
+      "host": "مضيف",
+      "user": "مستخدم",
+      "manager": "مدير",
+      "delete": "حذف",
+      "sec": "ث",
+      "min": "د",
+      "hr": "س",
+      "day": "يوم"
+    }
   }
-
 }

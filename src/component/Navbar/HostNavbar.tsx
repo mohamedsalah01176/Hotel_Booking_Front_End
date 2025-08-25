@@ -5,7 +5,7 @@ import { FaBars } from "react-icons/fa6";
 import Cookie from "js-cookie"
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, NavLink, useLocation } from "react-router";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
 import Menue from "./Menue";
 
 import logoImage from "../../assets/logo.webp"
@@ -18,11 +18,13 @@ const HostNavbar = () => {
   const [openMenue,setOpentMenue]=useState<boolean>(false);
   const {t}=useTranslation()
   const url =useLocation();
+  const nav=useNavigate();
   const {token,setToken}=useContext(TokenContext)
   const handleLogout =useCallback(()=>{
     Cookie.remove("token")
     setToken("")
-    setOpentMenue(false)
+    setOpentMenue(false);
+    nav("/login");
   },[setToken])
 
 
@@ -66,7 +68,7 @@ const HostNavbar = () => {
                   <div className={`h-[3px] w-full bg-gray-700 absolute -bottom-0  ${url.pathname.includes("listings") ?"left-0":"-left-44"}  group-hover:left-0 transition-all duration-300`}></div>
                 </NavLink>
               </div>
-              {/* {!token?
+              {!token?
                 <div className="flex items-center ">
                   <Link to={"/register"} className="text-black font-medium px-2  hover:scale-105 transition-all duration-300 underline italic">
                     {t("register.title")}
@@ -78,7 +80,7 @@ const HostNavbar = () => {
                 </div>
                 :
                 null
-              } */}
+              }
             </div>
             <div className="flex items-center gap-2 sm:gap-7 ">
               <MdTranslate className="text-2xl cursor-pointer w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] rounded-full bg-[#f2f2f2] p-[7px] hover:scale-105 transition-all duration-300 " onClick={()=>toggleLanguage()}/>

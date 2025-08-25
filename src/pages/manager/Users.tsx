@@ -8,9 +8,11 @@ import UsersForMobile from "../../component/ManagerDashboard/Users/UsersForMobil
 import Spinner from "../../component/Loaders/Spinner"
 import { IoSearch } from "react-icons/io5"
 import type { JwtPayload } from "../../interface/user"
+import { useTranslation } from "react-i18next"
 
 const Users = () => {
   const {token}=useContext(TokenContext);
+  const {t}=useTranslation()
   const [changeLoading,setChangeLoading]=useState(false);
   const queryClient=useQueryClient();
   const [searchUsers,setSearchUsers]=useState<JwtPayload[]>([]);
@@ -33,7 +35,7 @@ const Users = () => {
       if(res.data.status === "success"){
         setChangeLoading(false);
         await queryClient.invalidateQueries({queryKey:["users","id"], refetchType: "active" })
-        toast.success("User Deleted")
+        toast.success(t("users.toastDelete"))
       }
     }catch(errors){
       console.log(errors)
@@ -43,10 +45,10 @@ const Users = () => {
 
   const handleSearch=(e:React.ChangeEvent<HTMLInputElement>)=>{
     const searchText=e.target.value;
-    const filteredProperty=users.filter((item:JwtPayload)=>item.name?.includes(searchText)) as JwtPayload[];
+    const filteredProperty=users.filter((item:JwtPayload)=>item.name?.toLowerCase().includes(searchText.toLowerCase())) as JwtPayload[];
     if(!searchText){
       setSearchUsers(users)
-    }else{
+    }else if(filteredProperty.length<0){
       setSearchUsers(filteredProperty)
     }
   }
@@ -59,14 +61,14 @@ const Users = () => {
   }
   return (
     <div className="min-h-[80vh] w-full px-4 md:px-0 md:w-[95%] lg:w-[90%] mx-auto py-10">
-      { changeLoading && <div className="fixed w-full h-full top-0 left flex items-center justify-center bg-black/10">
+      { changeLoading && <div className="fixed w-full h-full top-0 left-0 flex items-center justify-center bg-black/10">
         <Spinner/>
       </div> }
       <div className="flex flex-col gap-y-5 md:flex-row justify-between w-full">
-        <h1 className="text-4xl font-semibold">Register Users</h1>
+        <h1 className="text-4xl font-semibold">{t("users.title")}</h1>
         <div className="flex justify-end items-center">
           <div className="h-[50px] px-4 rounded-full bg-[#dfdede4a] text-center p-2 cursor-pointer mr-3 flex items-center">
-            <input type="text" onChange={handleSearch} placeholder={`You have ${users.length} user`} className="outline-0" />
+            <input type="text" onChange={handleSearch} placeholder={t("users.search", { count: users.length })}  className="outline-0" />
             <IoSearch className="text-2xl"/>
           </div>
         </div>
